@@ -30,6 +30,11 @@ public class ChangeRotation
         turnOverEnable = false;
     }
 
+    public void ResetRotation()
+    {
+        direction = Direction.Right;
+    }
+
     public void ChangeDirection(float vec, GameObject obj)
     {
         if (direction == Direction.Right)

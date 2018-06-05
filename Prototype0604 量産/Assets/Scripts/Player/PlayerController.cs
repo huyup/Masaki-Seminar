@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour {
 
     float g_VeclocityX;
     bool duringRun = false;
+    bool canInput;
     bool canControlPlayer;
 
     public bool P_CanControlPlayer
@@ -46,27 +47,34 @@ public class PlayerController : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
         changeRotation = new ChangeRotation();
         canControlPlayer = true;
+        canInput = false;
     }
 
     public void ResetPlayer()
     {
         this.gameObject.transform.position = playerInitPos;
         this.gameObject.transform.eulerAngles = new Vector3(0, 90, 0);
-        rb.velocity = Vector3.zero;
         this.gameObject.SendMessage("ResetLife");
+
+        changeRotation.ResetRotation();
+        rb.velocity = Vector3.zero;
+        velocity = Vector3.zero;
+        
+        g_VeclocityX = 0;
+        canInput = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
         rb.useGravity = true;
         CheckisGrounded();
-        UpdateInput();
         UpdateAnimator();
+        UpdateInput();
     }
 
     void FixedUpdate()
     {
-        //クリア時
+        //クリア時のアニメーション
         if (!canControlPlayer)
         {
             transform.eulerAngles = new Vector3(0, 0, 0);
@@ -83,7 +91,7 @@ public class PlayerController : MonoBehaviour {
         velocity = new Vector3(g_VeclocityX, 0, 0);
         velocity *= Speed;       
 
-        if (!changeRotation.P_TurnOverEnable)
+        if (!changeRotation.P_TurnOverEnable && canInput)
             transform.localPosition += velocity * Time.fixedDeltaTime;
     }
 
@@ -104,7 +112,11 @@ public class PlayerController : MonoBehaviour {
     #region input animator更新
     void UpdateInput()
     {
-        g_VeclocityX = Input.GetAxis("Horizontal");
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
+            canInput = true;
+
+        if(canInput)
+            g_VeclocityX = Input.GetAxis("Horizontal");
         if (Input.GetButtonDown("Jump"))
         {
             if (isGround && !anim.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
