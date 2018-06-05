@@ -35,7 +35,7 @@ public class FallenNeedleScript : MonoBehaviour
     public void SetNeedleFallen()
     {
         GetComponent<Rigidbody>().isKinematic = false;
-        GetComponent<Rigidbody>().AddForce(0, Fallen_Veloc, 0);
+        GetComponent<Rigidbody>().AddForce(0, Fallen_Veloc, 0,ForceMode.VelocityChange);
         fallenEnable = false;
     }
 }

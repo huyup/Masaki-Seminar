@@ -1314,7 +1314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ec325f870ef4749ad71e8e378260e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trapEnable: 0
+  fallenEnable: 0
 --- !u!136 &516317161
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1933,7 +1933,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ec325f870ef4749ad71e8e378260e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trapEnable: 0
+  fallenEnable: 0
 --- !u!136 &905269645
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2138,7 +2138,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1301072422
+  randomSeed: -1858442337
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -5855,7 +5855,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -638410234
+  randomSeed: -1875525559
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -9204,6 +9204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf6d88c830e2286418b870ddb0dc6789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fallenEnable: 0
 --- !u!65 &1089255990
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10576,7 +10577,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1845141230
+  randomSeed: -1395985726
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -14470,7 +14471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ec325f870ef4749ad71e8e378260e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trapEnable: 0
+  fallenEnable: 0
 --- !u!136 &1774529040
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -15844,7 +15845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3e37aefbbcfc514e9bf3204469addc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Needle_FallenVeloc: -2
+  Needle_FallenVeloc: -3
   Stone_FallenVeloc: -3
   Stone_HitFloor_AddForce: -15
   FallenNeedle_To_Next_distance: 2
@@ -16016,6 +16017,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf6d88c830e2286418b870ddb0dc6789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fallenEnable: 0
 --- !u!65 &2128390546
 BoxCollider:
   m_ObjectHideFlags: 0

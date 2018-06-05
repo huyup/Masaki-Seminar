@@ -19,13 +19,18 @@ public class Stage2Script : MonoBehaviour
     GameObject stone;
 
     //パラメータ（エディタから編集可能）
-    public float Needle_FallenVeloc = -2;
+    public static string needleName = "床の針";
 
+
+    public static string stoneName = "落石";
     public float Stone_FallenVeloc = -3;
     public float Stone_HitFloor_AddForce = -15;
-    
+
+    public static string fallenNeedleName = "落ちる針";
+    public float FallenNeedle_FallenVeloc = -2;
     public float FallenNeedle_To_Next_distance = 2;
-    
+
+    public static string remoteFloorName = "遠距離操作の床";
     public float RemoteFloor1_MaxBottomY = -2;
     public float RemoteFloor2_MaxBottomY = -1;
     public float RemoteFloor_FallenVeloc = -0.02f;
@@ -53,7 +58,7 @@ public class Stage2Script : MonoBehaviour
         //パラメータ設定
         for (int i = 0; i < fallenNeedle_count; i++)
         {
-            fallenNeedle[i].GetComponent<FallenNeedleScript>().InitializeParameter(Needle_FallenVeloc);
+            fallenNeedle[i].GetComponent<FallenNeedleScript>().InitializeParameter(FallenNeedle_FallenVeloc);
         }
 
         remoteFloor[0].GetComponent<RemoteFloorScript>().InitializeParameter(RemoteFloor1_MaxBottomY, RemoteFloor_FallenVeloc);
@@ -101,7 +106,7 @@ public class Stage2Script : MonoBehaviour
 
             for (int i = 0; i < fallenNeedle_count; i++)
             {
-                fallenNeedle[i].GetComponent<FallenNeedleScript>().InitializeParameter(Needle_FallenVeloc);
+                fallenNeedle[i].GetComponent<FallenNeedleScript>().InitializeParameter(FallenNeedle_FallenVeloc);
             }
 
             remoteFloor[0].GetComponent<RemoteFloorScript>().InitializeParameter(RemoteFloor1_MaxBottomY, RemoteFloor_FallenVeloc);

@@ -7,7 +7,6 @@ using UnityEngine;
 /// </summary>
 public class RemoteFloorScript : MonoBehaviour
 {
-    Vector3 initPos;
     public bool fallenEnable;
     float MaxBottomY { get; set; }
     float FallenVeloc { get; set; }
