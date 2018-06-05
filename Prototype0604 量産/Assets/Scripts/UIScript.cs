@@ -4,30 +4,42 @@ using UnityEngine;
 using UnityEngine.UI;
 /// <summary>
 /// これはUI全般をコントロールするクラスです
-/// UI_TEXT二つが必要です。
 /// </summary>
-public class UIScript : MonoBehaviour {
+public class UIScript : MonoBehaviour
+{
+    //参照
+    GameObject lightOn_Button;
+    GameObject retry_Button;
+
+    GameObject worldLight;
+    GameObject player;
+
+    //コンポーネント
     public Text lightSwitch_Text;
     public Text playerlife_Text;
-    
-    private GameObject worldLight;
-    private GameObject player;
 
     public bool turnLightOn;
+
+    public static bool parameter_ChangeEnable = false;
     // Use this for initialization
-    void Start () {
-        turnLightOn = false;
+    void Start()
+    {
+        player = GameObject.Find("Player");
+        lightOn_Button = GameObject.Find("LightOn_Button");
+        retry_Button = GameObject.Find("Retry_Button");
 
         worldLight = GameObject.FindGameObjectWithTag("MainLight");
 
-        player = GameObject.Find("Player");
+
+        turnLightOn = false;
+
+        lightOn_Button.SetActive(false);
+        retry_Button.SetActive(false);
     }
-	
-	// Update is called once per frame
-	void Update () {
-        //ライフ数をテキストで表示
-        playerlife_Text.text = "Life:1 " + player.GetComponent<PlayerLifeControl>().lifeCount.ToString();
-        //Debug.Log(playerlife_Text.text);
+
+    // Update is called once per frame
+    void Update()
+    {
         //turnlightonフラグを頼って、ワールドライトの輝度を調整する
         if (!turnLightOn)
         {
@@ -41,16 +53,19 @@ public class UIScript : MonoBehaviour {
             worldLight.GetComponent<Light>().intensity = 2f;
             worldLight.GetComponent<Light>().color = Color.white;
         }
-        
-        if(Input.GetKeyDown(KeyCode.Alpha1)||Input.GetButtonDown("LightOn"))
+
+        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetButtonDown("LightOn"))
         {
             turnLightOn = !turnLightOn;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2)||Input.GetButtonDown("Retry"))
+        if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetButtonDown("Retry"))
         {
             player.GetComponent<PlayerLifeControl>().lifeCount = 0;
         }
-
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            parameter_ChangeEnable = !parameter_ChangeEnable;
+        }
     }
 
     /// <summary>
@@ -68,6 +83,6 @@ public class UIScript : MonoBehaviour {
     /// </summary>
     public void RetryFunction()
     {
-        player.GetComponent<PlayerLifeControl>().lifeCount=0;
+        player.GetComponent<PlayerLifeControl>().lifeCount = 0;
     }
 }

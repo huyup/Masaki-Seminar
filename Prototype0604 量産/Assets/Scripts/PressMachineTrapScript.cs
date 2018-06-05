@@ -2,89 +2,61 @@
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// これはプレス機の罠をコントロールする関数
+/// これは罠：プレス機をコントロールするクラス
+/// 作成者:huyup
 /// </summary>
 public class PressMachineTrapScript : MonoBehaviour
 {
-    //参照
-    GameObject parentObj;
-    GameObject eff_Disapear;
+    bool fallenEnable;
 
-
-    bool effPlayable = true;
-    public bool ghost_Trap_Visible=false;
+    float DistanceToTop { get; set; }
+    float DistanceToBottom { get; set; }
+    float FallenVeloc { get; set; }
+    float RaiseVeloc { get; set; }
 
     // Use this for initialization
     void Start()
     {
-        parentObj = transform.root.gameObject;
+    }
 
-        if (tag == "GhostTrap")
-        {
-            //ghost_Trap_Visible = PlayerPrefsX.GetBool("Visible" + gameObject.name);
-        }
-        eff_Disapear = GameObject.Find("Disapear");
+    public void InitializeParameter(float _DistanceToTop,float _DistanceToBottom,float _FallenVeloc,float _RaiseVeloc)
+    {
+        DistanceToTop = _DistanceToTop;
+        DistanceToBottom = _DistanceToBottom;
+        FallenVeloc = _FallenVeloc;
+        RaiseVeloc = _RaiseVeloc;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (tag == "GhostTrap")
+    }
+    /// <summary>
+    /// プレス機を上下運動させるメソッド
+    /// </summary>
+    public void SetTwoWaysTrap()
+    {
+        if (fallenEnable)
         {
-            if (ghost_Trap_Visible)
+            if (transform.position.y > DistanceToBottom)
             {
-                //子オブジェのRenderコンポーネントをTrueにする
-                foreach (Transform child in parentObj.transform)
-                {
-                    if (child.GetComponent<Renderer>() != null)
-                        child.GetComponent<Renderer>().enabled = true;
-                    foreach (Transform secondChild in child)
-                    {
-                        if (secondChild.GetComponent<Renderer>() != null)
-                            secondChild.GetComponent<Renderer>().enabled = true;
-                    }
-                }
-
+                transform.position -= new Vector3(0, FallenVeloc, 0);
             }
             else
             {
-                //子オブジェのRenderコンポーネントをFalseにする
-                foreach (Transform child in parentObj.transform)
-                {
-                    if (child.GetComponent<Renderer>() != null)
-                        child.GetComponent<Renderer>().enabled = false;
-                    foreach (Transform secondChild in child)
-                    {
-                        if (secondChild.GetComponent<Renderer>() != null)
-                            secondChild.GetComponent<Renderer>().enabled = false;
-                    }
-                }
+                fallenEnable = !fallenEnable;
             }
         }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.name == "Player")
+        else
         {
-            //ghost_Trap_Visible = true;
-            //PlayerPrefsX.SetBool("Visible" + gameObject.name.Insert(0, "Ghost"), ghost_Trap_Visible);
-        }
-        if (collision.gameObject.name == "Ghost")
-        {
-            if (tag == "GhostTrap")
+            if (transform.position.y < DistanceToTop)
             {
-                //消失のエフェクトを再生
-                if (effPlayable)
-                {
-                    eff_Disapear.transform.position = transform.position;
-                    eff_Disapear.GetComponent<ParticleSystem>().Play();
-                    effPlayable = false;
-                }
-                ghost_Trap_Visible = false;
-                //PlayerPrefsX.SetBool("Visible" + gameObject.name, ghost_Trap_Visible);
+                transform.position += new Vector3(0, RaiseVeloc, 0);
+            }
+            else
+            {
+                fallenEnable = !fallenEnable;
             }
         }
-
     }
 }

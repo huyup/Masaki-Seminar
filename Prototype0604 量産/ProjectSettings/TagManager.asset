@@ -5,15 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - MainLight
-  - Fire
   - Ghost
-  - LightningObj
   - Trap
   - Floor
-  - GhostBody
-  - GhostHead
-  - GhostSwitch
-  - GhostTrap
+  - Stone
   layers:
   - Default
   - TransparentFX
@@ -26,7 +21,7 @@ TagManager:
   - Player
   - Ghost
   - OutArea
-  - GhostObj
+  - ThroughObj
   - Stone
   - Doll
   - Light

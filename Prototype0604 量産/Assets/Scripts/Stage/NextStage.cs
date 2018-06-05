@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class NextStage : MonoBehaviour
 {
-    public int StageNum = 2;
+    public int nowStageNum = 1;
+    public int NextStageNum = 2;
 
     void OnTriggerEnter(Collider collider)
     {
@@ -18,10 +19,9 @@ public class NextStage : MonoBehaviour
 
     void LoadNextScene()
     {
-        string nextStage = StageNum.ToString();
-        if(SceneManager.GetSceneByName("Stage" + nextStage).IsValid())
-            SceneManager.LoadScene("Stage" + nextStage);
-        else
-            SceneManager.LoadScene("Stage" + (StageNum-1).ToString());
+        string nextStage = NextStageNum.ToString();
+        //Debug.Log(SceneManager.GetSceneByBuildIndex(-1).name);
+        //if()
+        SceneManager.LoadScene("Stage" + (NextStageNum).ToString());
     }
 }

@@ -21,13 +21,9 @@ public class PlayerLifeControl : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
+
         if (lifeCount < 0)
             lifeCount = 0;
-        //キーボードLでライフ数を減らす
-        if(Input.GetKeyDown(KeyCode.L))
-        {
-            lifeCount--;
-        }
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -36,7 +32,13 @@ public class PlayerLifeControl : MonoBehaviour {
         {
             lifeCount--;
         }
-
+        if (collision.gameObject.tag == "Stone")
+        {
+            if(collision.gameObject.GetComponent<Rigidbody>().velocity.magnitude>1)
+            {
+                lifeCount--;
+            }
+        }
     }
     private void OnTriggerEnter(Collider other)
     {

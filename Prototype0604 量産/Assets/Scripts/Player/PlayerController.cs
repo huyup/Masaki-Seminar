@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
     #region フィールド
-    public const float DistanceToGround = 0.15f;
+    public const float DistanceToGround = 0.3f;
 
     //変更できるコンポーネント
     public float animSpeed = 1.5f;

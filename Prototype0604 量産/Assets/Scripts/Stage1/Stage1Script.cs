@@ -1,68 +1,62 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Stage1Script : MonoBehaviour {
+/// <summary>
+/// これはステージ1全般をコントロールするクラス
+/// 作成者:huyup
+/// </summary>
+public class Stage1Script : MonoBehaviour
+{
+    //参照
     GameObject FallenTrap;
     GameObject FallenTrap2;
+    //パラメータ
+    public float fallenSpeed = 0.5f;
+    public float raiseSpeed = 0.1f;
 
-    bool fallenEnable;
-    bool fallenEnable2;
-
-    public float fallenSpeed=0.5f;
-    public float raiseSpeed=0.1f;
+    public float distanceToTop = 5.5f;
+    public float distanceToBottom = 1;
 
     public float fallenSpeed2 = 0.5f;
     public float raiseSpeed2 = 0.5f;
-    // Use this for initialization
-    void Start () {
-        FallenTrap = GameObject.Find("FallenTrapSet");
-        fallenEnable = true;
 
+    public float distanceToTop2 = 5.5f;
+    public float distanceToBottom2 = 1;
+    // Use this for initialization
+    void Start()
+    {
+        FallenTrap = GameObject.Find("FallenTrapSet");
         FallenTrap2 = GameObject.Find("FallenTrapSet2");
-        fallenEnable2 = true;
+
+        FallenTrap.GetComponent<PressMachineTrapScript>().InitializeParameter(distanceToTop, distanceToBottom, fallenSpeed, raiseSpeed);
+        FallenTrap2.GetComponent<PressMachineTrapScript>().InitializeParameter(distanceToTop2, distanceToBottom2, fallenSpeed2, raiseSpeed2);
 
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        if (fallenEnable)
+        FallenTrap.GetComponent<PressMachineTrapScript>().
+            SetTwoWaysTrap();
+
+        FallenTrap2.GetComponent<PressMachineTrapScript>().
+            SetTwoWaysTrap();
+
+        if (UIScript.parameter_ChangeEnable)
         {
-            if (FallenTrap.transform.localPosition.y > 1)
-            {
-                FallenTrap.transform.position -= new Vector3(0, fallenSpeed, 0);
-            }
-            else
-                fallenEnable = !fallenEnable;
-        }
-        else
-        {
-            if (FallenTrap.transform.localPosition.y < 5.5)
-            {
-                FallenTrap.transform.position += new Vector3(0, raiseSpeed, 0);
-            }
-            else
-                fallenEnable = !fallenEnable;
+            SetParameterInRealTime();
         }
 
-        if (fallenEnable2)
-        {
-            if (FallenTrap2.transform.localPosition.y > 1.0)
-            {
-                FallenTrap2.transform.position -= new Vector3(0, fallenSpeed2, 0);
-            }
-            else
-                fallenEnable2 = !fallenEnable2;
-        }
-        else
-        {
-            if (FallenTrap2.transform.localPosition.y < 5)
-            {
-                FallenTrap2.transform.position += new Vector3(0, raiseSpeed2, 0);
-            }
-            else
-                fallenEnable2 = !fallenEnable2;
-        }
+
+    }
+    /// <summary>
+    /// これはリアルタイムでパラメータを反映させる関数
+    /// </summary>
+    void SetParameterInRealTime()
+    {
+
+        FallenTrap.GetComponent<PressMachineTrapScript>().InitializeParameter(distanceToTop, distanceToBottom, fallenSpeed, raiseSpeed);
+        FallenTrap2.GetComponent<PressMachineTrapScript>().InitializeParameter(distanceToTop2, distanceToBottom2, fallenSpeed2, raiseSpeed2);
+
     }
 }
