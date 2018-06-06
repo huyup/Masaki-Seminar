@@ -21,5 +21,6 @@ public class Stage1TrapParameterEditor : Editor {
         Stage1.raiseSpeed2 = EditorGUILayout.FloatField("上昇速度", Stage1.raiseSpeed2);
         Stage1.distanceToBottom2 = EditorGUILayout.FloatField("最低点", Stage1.distanceToBottom2);
         Stage1.distanceToTop2 = EditorGUILayout.FloatField("最高点", Stage1.distanceToTop2);
+
     }
 }
