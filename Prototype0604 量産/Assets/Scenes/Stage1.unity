@@ -1753,7 +1753,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 403806423
+  randomSeed: 1485789462
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -5497,7 +5497,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1693249825
+  randomSeed: 1004007885
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -10226,7 +10226,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1403741921
+  randomSeed: -567043505
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -13695,11 +13695,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1563379498}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acb9ab288bdb6cf4eb945e9e31606464, type: 3}
+  m_Script: {fileID: 11500000, guid: a3e37aefbbcfc514e9bf3204469addc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallenSpeed: 0.1
-  raiseSpeed: 0.05
+  fallenSpeed: 0.2
+  raiseSpeed: 0.1
   distanceToTop: 5.5
   distanceToBottom: 1
   fallenSpeed2: 0.1
