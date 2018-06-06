@@ -179,6 +179,50 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &42822665 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 135efdffed6ae234ba5104dccc678f02, type: 3}
+  m_PrefabInternal: {fileID: 914436549}
+--- !u!136 &42822666
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 42822665}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.03511264
+  m_Height: 0.08605982
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.0030299264, z: 0.0000000039736427}
+--- !u!54 &42822667
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 42822665}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 0.1
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &42822672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 42822665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8bdf652567b3b24b8504307404234c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fallenEnable: 0
 --- !u!1 &43252893
 GameObject:
   m_ObjectHideFlags: 0
@@ -1191,6 +1235,16 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114923953508210542, guid: 25fdee165f96aa541b40d67ba209d956,
+        type: 2}
+      propertyPath: nowStageNum
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114923953508210542, guid: 25fdee165f96aa541b40d67ba209d956,
+        type: 2}
+      propertyPath: NextStageNum
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 25fdee165f96aa541b40d67ba209d956, type: 2}
   m_IsPrefabParent: 0
@@ -1572,7 +1626,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 646777357}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.633, y: -5.388, z: -5}
+  m_LocalPosition: {x: -8.801, y: -5.204, z: -5}
   m_LocalScale: {x: 0.5, y: 0.2, z: 0.29999998}
   m_Children: []
   m_Father: {fileID: 130043777}
@@ -1653,7 +1707,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &757517715
 Transform:
   m_ObjectHideFlags: 0
@@ -1992,6 +2046,80 @@ Transform:
   m_Father: {fileID: 1004855229}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &914436549
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 135efdffed6ae234ba5104dccc678f02, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.099
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 135efdffed6ae234ba5104dccc678f02, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.004
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 135efdffed6ae234ba5104dccc678f02, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.095
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 135efdffed6ae234ba5104dccc678f02, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 135efdffed6ae234ba5104dccc678f02, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 135efdffed6ae234ba5104dccc678f02, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 135efdffed6ae234ba5104dccc678f02, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 135efdffed6ae234ba5104dccc678f02, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 135efdffed6ae234ba5104dccc678f02, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 135efdffed6ae234ba5104dccc678f02, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 135efdffed6ae234ba5104dccc678f02, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 135efdffed6ae234ba5104dccc678f02, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: de26248c678638a4baed8be15e9d0097, type: 2}
+    - target: {fileID: 100000, guid: 135efdffed6ae234ba5104dccc678f02, type: 3}
+      propertyPath: m_Name
+      value: Stone
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 135efdffed6ae234ba5104dccc678f02, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 135efdffed6ae234ba5104dccc678f02, type: 3}
+      propertyPath: m_TagString
+      value: Stone
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 135efdffed6ae234ba5104dccc678f02, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 135efdffed6ae234ba5104dccc678f02, type: 3}
+  m_IsPrefabParent: 0
 --- !u!1 &919208751
 GameObject:
   m_ObjectHideFlags: 0
@@ -2138,7 +2266,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1858442337
+  randomSeed: 1840019078
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -5855,7 +5983,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1875525559
+  randomSeed: -976449190
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -10577,7 +10705,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1395985726
+  randomSeed: -976137528
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -13936,7 +14064,7 @@ Transform:
   - {fileID: 919208752}
   - {fileID: 1029388836}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1562525470
 GameObject:
@@ -14296,7 +14424,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1740851185
 GameObject:
@@ -15465,7 +15593,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &1915088401
 MonoBehaviour:
@@ -15783,7 +15911,7 @@ Transform:
   - {fileID: 793665979}
   - {fileID: 2145610472}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2076194639
 MonoBehaviour:
@@ -15832,7 +15960,7 @@ Transform:
   - {fileID: 1266951074}
   - {fileID: 1070884440}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2079573954
 MonoBehaviour:
@@ -15842,12 +15970,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2079573952}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acb9ab288bdb6cf4eb945e9e31606464, type: 3}
+  m_Script: {fileID: 11500000, guid: a3e37aefbbcfc514e9bf3204469addc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Stone_FallenVeloc: -3
-  Stone_HitFloor_AddForce: -10
-  FallenNeedle_FallenVeloc: -1
+  Stone_HitFloor_AddForce: -13
+  FallenNeedle_FallenVeloc: -2
   FallenNeedle_To_Next_distance: 2
   RemoteFloor1_MaxBottomY: -2
   RemoteFloor2_MaxBottomY: -1

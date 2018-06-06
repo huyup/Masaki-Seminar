@@ -50,7 +50,7 @@ public class FallenStoneScript : MonoBehaviour
         }
         if (hitFloorCount == 2 && addForceEnable)
         {
-            transform.GetComponent<Rigidbody>().AddForce(HitFloor_AddForce, 0, 0, ForceMode.VelocityChange);
+            transform.GetComponent<Rigidbody>().AddForce(HitFloor_AddForce+5, 0, 0, ForceMode.VelocityChange);
             addForceEnable = false;
             fallenEnable = false;
         }

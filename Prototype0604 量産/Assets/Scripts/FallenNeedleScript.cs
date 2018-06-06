@@ -16,6 +16,7 @@ public class FallenNeedleScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
     }
 
     public void InitializeParameter(float _Fallen_Veloc)

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 /// <summary>
 /// これはUI全般をコントロールするクラスです
+/// 作成者:huyp
 /// </summary>
 public class UIScript : MonoBehaviour
 {
