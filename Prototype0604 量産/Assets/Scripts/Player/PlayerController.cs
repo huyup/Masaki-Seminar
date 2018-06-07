@@ -61,7 +61,11 @@ public class PlayerController : MonoBehaviour
         changeRotation.ResetRotation();
         rb.velocity = Vector3.zero;
         velocity = Vector3.zero;
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> master
         g_VeclocityX = 0;
         canInput = false;
     }
@@ -77,9 +81,12 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+<<<<<<< HEAD
         if (Time.timeScale == 0)
             return;
 
+=======
+>>>>>>> master
         //クリア時のアニメーション
         if (!canControlPlayer)
         {
@@ -118,11 +125,18 @@ public class PlayerController : MonoBehaviour
     #region input animator更新
     void UpdateInput()
     {
+<<<<<<< HEAD
         if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)
             || (int)Input.GetAxis("Horizontal") == 0)
             canInput = true;
 
         if (canInput)
+=======
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
+            canInput = true;
+
+        if(canInput)
+>>>>>>> master
             g_VeclocityX = Input.GetAxis("Horizontal");
         if (Input.GetButtonDown("Jump"))
         {
