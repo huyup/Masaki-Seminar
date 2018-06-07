@@ -11,16 +11,24 @@ public class RemoteFloorScript : MonoBehaviour
     float MaxBottomY { get; set; }
     float FallenVeloc { get; set; }
 
+    Vector3 remoteFloorInitPos;
+
     // Use this for initialization
     void Start()
     {
+        remoteFloorInitPos = transform.position;
+    }
+
+    public void ResetRemoteFloor()
+    {
+        fallenEnable = false;
+        transform.position = remoteFloorInitPos;
     }
 
     public void InitializeParameter(float _MaxBottomY,float _FallenVeloc)
     {
         MaxBottomY = _MaxBottomY;
         FallenVeloc = _FallenVeloc;
-        
     }
 
     // Update is called once per frame

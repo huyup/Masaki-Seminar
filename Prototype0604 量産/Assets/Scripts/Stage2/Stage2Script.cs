@@ -35,6 +35,19 @@ public class Stage2Script : MonoBehaviour
     public float RemoteFloor2_MaxBottomY = -1;
     public float RemoteFloor_FallenVeloc = -0.02f;
 
+    public void ResetStage()
+    {
+        for (int i = 0; i < fallenNeedle_count; i++)
+            fallenNeedle[i].GetComponent<FallenNeedleScript>().ResetFallenNeedle();
+
+        for (int i = 0; i < remoteFloor_Count; i++)
+            remoteFloor[i].GetComponent<RemoteFloorScript>().ResetRemoteFloor();
+
+        stone.GetComponent<FallenStoneScript>().ResetFallenStone();
+        remoteFloorSwitch.GetComponent<SwitchScript>().ResetSwitch();
+        fallenStoneSwitch.GetComponent<SwitchScript>().ResetSwitch();
+    }
+
     // Use this for initialization
     void Start()
     {

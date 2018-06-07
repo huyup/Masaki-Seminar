@@ -19,6 +19,11 @@ public class SwitchScript : MonoBehaviour
     {
     }
 
+    public void ResetSwitch()
+    {
+        trapEnable = false;
+        GetComponent<Renderer>().material.color = Color.black;
+    }
 
     private void OnCollisionEnter(Collision collision)
     {

@@ -11,6 +11,8 @@ public class Stage4Script : MonoBehaviour
     const int bedMachine_Count = 3;
     GameObject[] bedMachine=new GameObject[bedMachine_Count];
 
+    GameObject stoneFactory;
+    GameObject stoneFactory2;
     //パラメータ
     public static string bedMachineName = "ベッド１";
     public float elasticity = 3;
@@ -20,6 +22,23 @@ public class Stage4Script : MonoBehaviour
 
     public static string bedMachineName3 = "ベッド３";
     public float elasticity3 = 3;
+
+    public static string stoneFactoryName = "落石工場";
+    public float intervalOfCreate = 3;
+
+    public static string stoneFactoryName2 = "落石工場2";
+    public float intervalOfCreate2 = 3;
+
+    public void ResetStage()
+    {
+        stoneFactory.GetComponent<FallenStoneFactory>().ResetFallenStoneFactory();
+        stoneFactory2.GetComponent<FallenStoneFactory>().ResetFallenStoneFactory();
+
+        foreach(GameObject obj in GameObject.FindGameObjectsWithTag("Trap"))
+        {
+            obj.GetComponent<InfiniteFallingStoneScript>().ResetInfiniteFallingStone();
+        }
+    }
 
     // Use this for initialization
     void Start()
@@ -33,21 +52,19 @@ public class Stage4Script : MonoBehaviour
         bedMachine[1].GetComponent<BedMachineScript>().InitializeParameter(elasticity2);
         bedMachine[2].GetComponent<BedMachineScript>().InitializeParameter(elasticity3);
 
+
+        stoneFactory = GameObject.Find("FallenStoneFactory");
+        stoneFactory.GetComponent<FallenStoneFactory>().InitializeParameter(intervalOfCreate);
+
+        stoneFactory2 = GameObject.Find("FallenStoneFactory2");
+        stoneFactory2.GetComponent<FallenStoneFactory>().InitializeParameter(intervalOfCreate2);
     }
 
     // Update is called once per frame
     void Update()
     {
-    }
 
-    /// <summary>
-    /// これは落石を生成する関数
-    /// </summary>
-    void CreateFallenStone()
-    {
-        
     }
-
     /// <summary>
     /// これはリアルタイムでパラメータを反映させる関数
     /// </summary>

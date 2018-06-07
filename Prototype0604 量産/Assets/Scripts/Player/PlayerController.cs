@@ -6,9 +6,10 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody))]
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
     #region フィールド
-    public const float DistanceToGround = 0.3f;
+    public const float DistanceToGround = 0.15f;
 
     //変更できるコンポーネント
     public float animSpeed = 1.5f;
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour {
 
     float g_VeclocityX;
     bool duringRun = false;
+    bool canInput;
     bool canControlPlayer;
 
     public bool P_CanControlPlayer
@@ -35,38 +37,50 @@ public class PlayerController : MonoBehaviour {
     private Vector3 velocity;
     private Vector3 playerInitPos;
     private Animator anim;
-    
+
     private bool isGround = false;
     #endregion
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         playerInitPos = this.gameObject.transform.position;
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         changeRotation = new ChangeRotation();
         canControlPlayer = true;
+        canInput = false;
     }
 
     public void ResetPlayer()
     {
         this.gameObject.transform.position = playerInitPos;
         this.gameObject.transform.eulerAngles = new Vector3(0, 90, 0);
-        rb.velocity = Vector3.zero;
         this.gameObject.SendMessage("ResetLife");
+
+        changeRotation.ResetRotation();
+        rb.velocity = Vector3.zero;
+        velocity = Vector3.zero;
+
+        g_VeclocityX = 0;
+        canInput = false;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         rb.useGravity = true;
         CheckisGrounded();
-        UpdateInput();
         UpdateAnimator();
+        UpdateInput();
     }
 
     void FixedUpdate()
     {
-        //クリア時
+        if (Time.timeScale == 0)
+            return;
+
+        //クリア時のアニメーション
         if (!canControlPlayer)
         {
             transform.eulerAngles = new Vector3(0, 0, 0);
@@ -81,9 +95,9 @@ public class PlayerController : MonoBehaviour {
     void Move()
     {
         velocity = new Vector3(g_VeclocityX, 0, 0);
-        velocity *= Speed;       
+        velocity *= Speed;
 
-        if (!changeRotation.P_TurnOverEnable)
+        if (!changeRotation.P_TurnOverEnable && canInput)
             transform.localPosition += velocity * Time.fixedDeltaTime;
     }
 
@@ -104,7 +118,12 @@ public class PlayerController : MonoBehaviour {
     #region input animator更新
     void UpdateInput()
     {
-        g_VeclocityX = Input.GetAxis("Horizontal");
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)
+            || (int)Input.GetAxis("Horizontal") == 0)
+            canInput = true;
+
+        if (canInput)
+            g_VeclocityX = Input.GetAxis("Horizontal");
         if (Input.GetButtonDown("Jump"))
         {
             if (isGround && !anim.GetCurrentAnimatorStateInfo(0).IsName("Jump"))

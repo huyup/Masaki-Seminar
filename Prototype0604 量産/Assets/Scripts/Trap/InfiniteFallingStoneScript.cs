@@ -9,15 +9,24 @@ using UnityEngine.SceneManagement;
 public class InfiniteFallingStoneScript : MonoBehaviour
 {
     float FallenVeloc { get; set; }
+
     // Use this for initialization
     void Start()
     {
 
     }
+
+    public void ResetInfiniteFallingStone()
+    {
+        if(gameObject.activeSelf)
+            Destroy(gameObject);
+    }
+
     public void InitializeParameter(float _FallenVeloc)
     {
         FallenVeloc = _FallenVeloc;
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -28,7 +37,8 @@ public class InfiniteFallingStoneScript : MonoBehaviour
     {
         if(collision.gameObject.name=="OutArea")
         {
-            Destroy(this);
+            Destroy(gameObject);
+            GetComponent<Pauser>().OnDestory();
         }
     }
 }

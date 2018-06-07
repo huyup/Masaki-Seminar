@@ -17,5 +17,10 @@ public class Stage4TrapParameterEditor : Editor
         Stage4.elasticity2 = EditorGUILayout.FloatField("弾力：", Stage4.elasticity2);
         EditorGUILayout.LabelField("装置：" + Stage4Script.bedMachineName3);
         Stage4.elasticity3 = EditorGUILayout.FloatField("弾力：", Stage4.elasticity3);
+        EditorGUILayout.LabelField("装置：" + Stage4Script.stoneFactoryName);
+        Stage4.intervalOfCreate = EditorGUILayout.FloatField("間隔：", Stage4.intervalOfCreate);
+
+        EditorGUILayout.LabelField("装置：" + Stage4Script.stoneFactoryName2);
+        Stage4.intervalOfCreate2 = EditorGUILayout.FloatField("間隔：", Stage4.intervalOfCreate2);
     }
 }

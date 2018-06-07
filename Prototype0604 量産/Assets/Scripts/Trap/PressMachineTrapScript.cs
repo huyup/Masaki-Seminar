@@ -14,9 +14,19 @@ public class PressMachineTrapScript : MonoBehaviour
     float FallenVeloc { get; set; }
     float RaiseVeloc { get; set; }
 
+
+    Vector3 pressMachInitPos;
+
     // Use this for initialization
     void Start()
     {
+        pressMachInitPos = transform.position;
+    }
+
+    public void ResetPressMachine()
+    {
+        fallenEnable = false;
+        transform.position = pressMachInitPos;
     }
 
     public void InitializeParameter(float _DistanceToTop,float _DistanceToBottom,float _FallenVeloc,float _RaiseVeloc)
@@ -25,6 +35,7 @@ public class PressMachineTrapScript : MonoBehaviour
         DistanceToBottom = _DistanceToBottom;
         FallenVeloc = _FallenVeloc;
         RaiseVeloc = _RaiseVeloc;
+        
     }
 
     // Update is called once per frame
@@ -40,7 +51,7 @@ public class PressMachineTrapScript : MonoBehaviour
         {
             if (transform.position.y > DistanceToBottom)
             {
-                transform.position -= new Vector3(0, FallenVeloc, 0);
+                transform.position += new Vector3(0, FallenVeloc, 0);
             }
             else
             {

@@ -23,7 +23,7 @@ public class RecordPlayerPos : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
         playerPos = GameObject.Find("Player").transform;
         playerLife = GameObject.Find("Player").GetComponent<PlayerLifeControl>().lifeCount;
 
@@ -44,8 +44,6 @@ public class RecordPlayerPos : MonoBehaviour {
 
             //次回のプレイのための初期化
             playerPosRecord.Clear();
-            ResetStage.ResetThisStage();
-
         }
         else
         {

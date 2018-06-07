@@ -11,17 +11,25 @@ public class FallenNeedleScript : MonoBehaviour
     public bool fallenEnable;
 
     float Fallen_Veloc{ get; set;}
-
+    Vector3 needleInitPos;
 
     // Use this for initialization
     void Start()
     {
-
+        needleInitPos = transform.position;
     }
 
     public void InitializeParameter(float _Fallen_Veloc)
     {
         Fallen_Veloc = _Fallen_Veloc;
+    }
+
+    public void ResetFallenNeedle()
+    {
+        fallenEnable = false;
+        GetComponent<Rigidbody>().isKinematic = true;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        transform.position = needleInitPos;
     }
 
     // Update is called once per frame

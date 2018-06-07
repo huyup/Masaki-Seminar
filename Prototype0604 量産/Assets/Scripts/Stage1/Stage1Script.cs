@@ -24,7 +24,7 @@ public class Stage1Script : MonoBehaviour
 
     public float distanceToTop2 = 5.5f;
     public float distanceToBottom2 = 1;
-    
+
     // Use this for initialization
     void Start()
     {
@@ -32,7 +32,12 @@ public class Stage1Script : MonoBehaviour
         FallenTrap2 = GameObject.Find("FallenTrapSet2");
         FallenTrap.GetComponent<PressMachineTrapScript>().InitializeParameter(distanceToTop, distanceToBottom, fallenSpeed, raiseSpeed);
         FallenTrap2.GetComponent<PressMachineTrapScript>().InitializeParameter(distanceToTop2, distanceToBottom2, fallenSpeed2, raiseSpeed2);
+    }
 
+    public void ResetStage()
+    {
+        FallenTrap.GetComponent<PressMachineTrapScript>().ResetPressMachine();
+        FallenTrap2.GetComponent<PressMachineTrapScript>().ResetPressMachine();
     }
 
     // Update is called once per frame

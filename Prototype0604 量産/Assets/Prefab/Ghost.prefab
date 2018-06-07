@@ -218,8 +218,10 @@ GameObject:
   - component: {fileID: 95450064788156156}
   - component: {fileID: 54100998875086254}
   - component: {fileID: 136551139148980542}
+  - component: {fileID: 96913985957499050}
+  - component: {fileID: 114182991548802822}
   - component: {fileID: 114328041750464390}
-  - component: {fileID: 96190670814507252}
+  - component: {fileID: 114698623583536218}
   m_Layer: 9
   m_Name: Ghost
   m_TagString: Ghost
@@ -4801,7 +4803,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!96 &96190670814507252
+--- !u!96 &96913985957499050
 TrailRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 1
@@ -4836,7 +4838,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 1.5
+  m_Time: 1
   m_Parameters:
     serializedVersion: 2
     widthMultiplier: 0.1
@@ -4849,9 +4851,15 @@ TrailRenderer:
         inSlope: 0
         outSlope: 0
         tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
-      m_RotationOrder: 4
+      m_RotationOrder: 0
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4960,6 +4968,22 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114182991548802822
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1049449838711780}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4339c90b477a5dd4fa3947b104009095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animSpeed: 1.5
+  Speed: 4
+  g_VeclocityX: 0
+  jumpPower: 8
+  g_duringJump: 0
 --- !u!114 &114328041750464390
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4969,6 +4993,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bf0eaf371fcd9a4b8bb91067e639d38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114698623583536218
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1049449838711780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6924953fc9c10414585f508276fbc62a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!136 &136551139148980542

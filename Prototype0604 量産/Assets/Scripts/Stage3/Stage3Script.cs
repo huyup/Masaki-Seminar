@@ -32,6 +32,14 @@ public class Stage3Script : MonoBehaviour
 
     public float distanceToTop3 = 5f;
     public float distanceToBottom3 = -5;
+    
+    public void ResetStage()
+    {
+        FallenTrap.GetComponent<PressMachineTrapScript>().ResetPressMachine();
+        FallenTrap2.GetComponent<PressMachineTrapScript>().ResetPressMachine();
+        FallenTrap3.GetComponent<PressMachineTrapScript>().ResetPressMachine();
+    }
+
     // Use this for initialization
     void Start()
     {

@@ -15,10 +15,13 @@ public class FallenStoneScript : MonoBehaviour
 
     float FallenVeloc { get; set; }
     float HitFloor_AddForce { get; set; }
+
+    Vector3 stoneInitPos;
     
     // Use this for initialization
     void Start()
     {
+        stoneInitPos = transform.position;
     }
     public void InitializeParameter(float _FallenVeloc,float _HitFloor_AddForce)
     {
@@ -33,6 +36,17 @@ public class FallenStoneScript : MonoBehaviour
             SetFallenStone();
         }
     }
+
+    public void ResetFallenStone()
+    {
+        hitFloorCount = 0;
+        fallenEnable = false;
+        addForceEnable = false;
+        GetComponent<Rigidbody>().isKinematic = true ;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        transform.position = stoneInitPos;
+    }
+
     /// <summary>
     /// これは岩を落下させるメソッド
     /// 床に落ちたら、力を与える
