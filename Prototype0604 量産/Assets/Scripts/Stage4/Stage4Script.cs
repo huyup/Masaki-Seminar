@@ -39,6 +39,15 @@ public class Stage4Script : MonoBehaviour
     void Update()
     {
     }
+
+    /// <summary>
+    /// これは落石を生成する関数
+    /// </summary>
+    void CreateFallenStone()
+    {
+        
+    }
+
     /// <summary>
     /// これはリアルタイムでパラメータを反映させる関数
     /// </summary>
