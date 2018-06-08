@@ -5,14 +5,14 @@ using UnityEngine;
 /// これは罠：プレス機をコントロールするクラス
 /// 作成者:huyup
 /// </summary>
-public class PressMachineTrapScript : MonoBehaviour
+public class PressMachineHorizontal : MonoBehaviour
 {
     bool fallenEnable;
 
-    float DistanceToTop { get; set; }
-    float DistanceToBottom { get; set; }
-    float FallenVeloc { get; set; }
-    float RaiseVeloc { get; set; }
+    float DistanceToRight { get; set; }
+    float DistanceToLeft { get; set; }
+    float RightVeloc { get; set; }
+    float LeftVeloc { get; set; }
 
     Vector3 pressMachInitPos;
 
@@ -28,12 +28,12 @@ public class PressMachineTrapScript : MonoBehaviour
         transform.position = pressMachInitPos;
     }
 
-    public void InitializeParameter(float _DistanceToTop,float _DistanceToBottom,float _FallenVeloc,float _RaiseVeloc)
+    public void InitializeParameter(float _DistanceToRight, float _DistanceToLeft, float _RightVeloc, float _LeftVeloc)
     {
-        DistanceToTop = _DistanceToTop;
-        DistanceToBottom = _DistanceToBottom;
-        FallenVeloc = _FallenVeloc;
-        RaiseVeloc = _RaiseVeloc;
+        DistanceToRight = _DistanceToRight;
+        DistanceToLeft = _DistanceToLeft;
+        RightVeloc = _RightVeloc;
+        LeftVeloc = _LeftVeloc;
     }
 
     // Update is called once per frame
@@ -43,13 +43,13 @@ public class PressMachineTrapScript : MonoBehaviour
     /// <summary>
     /// プレス機を上下運動させるメソッド
     /// </summary>
-    public void SetTwoWaysTrap()
+    public void SetTrapHorizontal()
     {
         if (fallenEnable)
         {
-            if (transform.position.y > DistanceToBottom)
+            if (transform.position.x > DistanceToLeft)
             {
-                transform.position += new Vector3(0, FallenVeloc, 0);
+                transform.localPosition += new Vector3(LeftVeloc, 0, 0);
             }
             else
             {
@@ -58,9 +58,9 @@ public class PressMachineTrapScript : MonoBehaviour
         }
         else
         {
-            if (transform.position.y < DistanceToTop)
+            if (transform.position.x < DistanceToRight)
             {
-                transform.position += new Vector3(0, RaiseVeloc, 0);
+                transform.localPosition += new Vector3(RightVeloc, 0, 0);
             }
             else
             {

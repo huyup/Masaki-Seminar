@@ -11954,7 +11954,7 @@ Prefab:
     - target: {fileID: 114923953508210542, guid: 25fdee165f96aa541b40d67ba209d956,
         type: 2}
       propertyPath: NextStageNum
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114923953508210542, guid: 25fdee165f96aa541b40d67ba209d956,
         type: 2}
