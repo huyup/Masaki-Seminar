@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class NextStage : MonoBehaviour
 {
-    public int nowStageNum = 1;
     public int NextStageNum = 2;
 
     void OnTriggerEnter(Collider collider)

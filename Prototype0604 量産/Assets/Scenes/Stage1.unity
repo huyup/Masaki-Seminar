@@ -12850,8 +12850,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1563379500}
-  - component: {fileID: 1563379499}
   - component: {fileID: 1563379501}
+  - component: {fileID: 1563379499}
   m_Layer: 0
   m_Name: Stage1
   m_TagString: Untagged
@@ -12867,14 +12867,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1563379498}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acb9ab288bdb6cf4eb945e9e31606464, type: 3}
+  m_Script: {fileID: 11500000, guid: a3e37aefbbcfc514e9bf3204469addc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallenSpeed: 0.03
+  fallenSpeed: -0.05
   raiseSpeed: 0.1
   distanceToTop: 5.5
   distanceToBottom: 1
-  fallenSpeed2: 0.1
+  fallenSpeed2: -0.1
   raiseSpeed2: 0.1
   distanceToTop2: 5.5
   distanceToBottom2: 1
