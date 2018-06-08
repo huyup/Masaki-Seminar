@@ -15,6 +15,7 @@ public class FallFloor : MonoBehaviour {
 
     public void ResetFallFloor()
     {
+        gameObject.SetActive(true);
         transform.position = fallFloorInitPos;
         gameObject.GetComponent<Rigidbody>().isKinematic = true;
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -40,6 +41,6 @@ public class FallFloor : MonoBehaviour {
         if (collision.gameObject.name == "Player")
             fall = true;
         if (collision.gameObject.name == "OutArea")
-            Destroy(gameObject);
+            gameObject.SetActive(false);
     }
 }
