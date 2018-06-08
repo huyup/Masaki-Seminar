@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GhostController : MonoBehaviour {
     public GameObject ghostPrefab;
+    public GameObject lightPrefab;
     public const int ghostNumMax = 3;
 
     Ghost[] ghost;
@@ -68,6 +69,7 @@ public class GhostController : MonoBehaviour {
             if (ghost[i] == null)
                 continue;
             ghost[i].MoveGhost(frameCount);
+            ghost[i].CreateAreaLight(frameCount, lightPrefab);
         }
         frameCount++;
     }

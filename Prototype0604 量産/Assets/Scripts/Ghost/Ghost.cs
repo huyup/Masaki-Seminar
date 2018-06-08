@@ -5,9 +5,11 @@ using UnityEngine;
 public class Ghost : MonoBehaviour {
     Vector3[] ghostPos;
     ChangeRotation changeRotation;
-    const float lightIntensity = 10;
 
+    const float lightIntensity = 10;
     const float turnOffSpeed = 0.05f;
+
+    Vector3 preLightPos;
 
     // Use this for initialization
     void Start () {
@@ -17,6 +19,7 @@ public class Ghost : MonoBehaviour {
     public void InitGhostPos(Vector3[] pos)
     {
         ghostPos = pos;
+        preLightPos = pos[0];
     }
 	
 	// Update is called once per frame
@@ -38,6 +41,8 @@ public class Ghost : MonoBehaviour {
     private void ResetLight()
     {
         gameObject.GetComponentInChildren<Light>().intensity = lightIntensity;
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("GhostLineLight"))
+            Destroy(obj);
     }
 
     public void MoveGhost(int frameCount)
@@ -67,6 +72,20 @@ public class Ghost : MonoBehaviour {
         if (frameCount == 0)
             return;
         changeRotation.ChangeDirection(ghostPos[frameCount].x - ghostPos[frameCount - 1].x, this.gameObject);
+    }
+
+    public void CreateAreaLight(int frameCount, GameObject light)
+    {
+        if (frameCount >= ghostPos.Length)
+            return;
+        float disDiff = 2f;
+        if (Mathf.Abs(ghostPos[frameCount].x - preLightPos.x) > disDiff)
+        {
+            float height = 2f;
+            Vector3 instantiatePos = new Vector3(ghostPos[frameCount].x, ghostPos[frameCount].y + height, ghostPos[frameCount].z);
+            Instantiate(light, instantiatePos, Quaternion.identity);
+            preLightPos = ghostPos[frameCount];
+        }
     }
 
     void TurnOffLight()
