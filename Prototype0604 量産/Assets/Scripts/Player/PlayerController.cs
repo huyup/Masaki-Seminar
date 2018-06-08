@@ -9,7 +9,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     #region フィールド
-    public const float DistanceToGround = 0.15f;
+    public const float DistanceToGround = 0.3f;
 
     //変更できるコンポーネント
     public float animSpeed = 1.5f;
@@ -149,12 +149,55 @@ public class PlayerController : MonoBehaviour
 
     void CheckisGrounded()
     {
+        //RaycastHit hit;
+        //Ray ray = new Ray(transform.position, Vector3.down);
+        //Ray ray2 = new Ray(transform.position - new Vector3(0.03f, 0, 0), Vector3.down);
+
+        //Ray ray3 = new Ray(transform.position + new Vector3(0.03f, 0, 0), Vector3.down);
+
+        //if (Physics.Raycast(ray, out hit, DistanceToGround)|| 
+        //    Physics.Raycast(ray2, out hit, DistanceToGround)||
+        //    Physics.Raycast(ray3, out hit, DistanceToGround))
+        //    isGround = true;
+        //else
+        //    isGround = false;
+
         RaycastHit hit;
-        Ray ray = new Ray(transform.position, Vector3.down);
-        if (Physics.Raycast(ray, out hit, DistanceToGround))
-            isGround = true;
-        else
+        Ray[] ray = new Ray[20];
+        for (int i = 0; i < 20; i++)
+        {
+                ray[i] = new Ray(transform.position - new Vector3(0.10f, 0, 0)+new Vector3(0.012f * i, 0, 0), Vector3.down);
+        }
+        int count = 0;
+        for (int i = 0; i < 20; i++)
+        {
+
+            if (Physics.Raycast(ray[i], out hit, DistanceToGround))
+            {
+                isGround = true;
+                break;
+            }
+            else
+            {
+                count++;
+            }
+
+        }
+        Debug.Log(count);
+        if (count == 20)
+        {
             isGround = false;
-        //Debug.DrawLine(ray.origin, ray.origin - new Vector3(0, DistanceToGround, 0), Color.red, 0.1f);
+        }
+        for (int i = 0; i < 20; i++)
+        {
+            Debug.DrawLine(ray[i].origin, ray[i].origin + new Vector3(0, DistanceToGround, 0), Color.red, 0.1f);
+        }
+
+        //if (Physics.Raycast(ray, out hit, DistanceToGround)|| 
+        //    Physics.Raycast(ray2, out hit, DistanceToGround)||
+        //    Physics.Raycast(ray3, out hit, DistanceToGround))
+        //    isGround = true;
+        //else
+        //    isGround = false;
     }
 }

@@ -2098,7 +2098,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 1394333316
+  randomSeed: -177019530
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -5843,7 +5843,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1406630271
+  randomSeed: -1600491202
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -9842,7 +9842,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 529304073
+  randomSeed: 1736489994
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -14411,12 +14411,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2079573952}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acb9ab288bdb6cf4eb945e9e31606464, type: 3}
+  m_Script: {fileID: 11500000, guid: a3e37aefbbcfc514e9bf3204469addc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Stone_FallenVeloc: -3
-  Stone_HitFloor_AddForce: -15
-  FallenNeedle_FallenVeloc: -2
+  Stone_HitFloor_AddForce: -10
+  FallenNeedle_FallenVeloc: -1
   FallenNeedle_To_Next_distance: 2
   RemoteFloor1_MaxBottomY: -2
   RemoteFloor2_MaxBottomY: -1
