@@ -27,6 +27,9 @@ public class PlayerController : MonoBehaviour
         set { canControlPlayer = value; }
     }
 
+    public float g_VeclocityY;
+
+
     //方向変更用
     ChangeRotation changeRotation;
 
@@ -124,6 +127,12 @@ public class PlayerController : MonoBehaviour
 
         if (canInput)
             g_VeclocityX = Input.GetAxis("Horizontal");
+
+
+
+        g_VeclocityY = Input.GetAxis("Vertical");
+
+
         if (Input.GetButtonDown("Jump"))
         {
             if (isGround && !anim.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
@@ -149,19 +158,6 @@ public class PlayerController : MonoBehaviour
 
     void CheckisGrounded()
     {
-        //RaycastHit hit;
-        //Ray ray = new Ray(transform.position, Vector3.down);
-        //Ray ray2 = new Ray(transform.position - new Vector3(0.03f, 0, 0), Vector3.down);
-
-        //Ray ray3 = new Ray(transform.position + new Vector3(0.03f, 0, 0), Vector3.down);
-
-        //if (Physics.Raycast(ray, out hit, DistanceToGround)|| 
-        //    Physics.Raycast(ray2, out hit, DistanceToGround)||
-        //    Physics.Raycast(ray3, out hit, DistanceToGround))
-        //    isGround = true;
-        //else
-        //    isGround = false;
-
         RaycastHit hit;
         Ray[] ray = new Ray[20];
         for (int i = 0; i < 20; i++)
@@ -183,21 +179,10 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        Debug.Log(count);
         if (count == 20)
         {
             isGround = false;
         }
-        for (int i = 0; i < 20; i++)
-        {
-            Debug.DrawLine(ray[i].origin, ray[i].origin + new Vector3(0, DistanceToGround, 0), Color.red, 0.1f);
-        }
-
-        //if (Physics.Raycast(ray, out hit, DistanceToGround)|| 
-        //    Physics.Raycast(ray2, out hit, DistanceToGround)||
-        //    Physics.Raycast(ray3, out hit, DistanceToGround))
-        //    isGround = true;
-        //else
-        //    isGround = false;
+        
     }
 }

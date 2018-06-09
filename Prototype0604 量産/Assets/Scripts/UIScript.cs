@@ -55,11 +55,11 @@ public class UIScript : MonoBehaviour
             worldLight.GetComponent<Light>().color = Color.white;
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetButtonDown("LightOn"))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             turnLightOn = !turnLightOn;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetButtonDown("Retry"))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             player.GetComponent<PlayerLifeControl>().lifeCount = 0;
         }
