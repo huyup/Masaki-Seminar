@@ -18,20 +18,21 @@ public class GunShotScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetButtonDown("Fire1"))
+        if (aming.GetComponent<AmingScript>().isAming)
         {
-            Vector3 newPos = aming.transform.position - transform.position+new Vector3(0,0.1f,0);
-            Instantiate(shot, transform.position, Quaternion.identity);
+            if (Input.GetButtonDown("Fire1"))
+            {
+                Vector3 newPos = aming.transform.position - transform.position + new Vector3(0, 0.1f, 0);
+                Instantiate(shot, transform.position, Quaternion.identity);
 
-            shot_Clone = GameObject.Find("shot(Clone)");
-            //shot_Clone.transform.rotation = Quaternion.LookRotation(player.transform.position, aming.transform.position);
+                shot_Clone = GameObject.Find("shot(Clone)");
+                //shot_Clone.transform.rotation = Quaternion.LookRotation(player.transform.position, aming.transform.position);
 
-            shot_Clone.transform.LookAt(aming.transform);
-            shot_Clone.transform.Rotate(0, 90, 0);
+                shot_Clone.transform.LookAt(aming.transform);
+                shot_Clone.transform.Rotate(0, 90, 0);
 
-            shot_Clone.GetComponent<Rigidbody>().AddForce(newPos * 20f, ForceMode.VelocityChange);
+                shot_Clone.GetComponent<Rigidbody>().AddForce(newPos * 20f, ForceMode.VelocityChange);
+            }
         }
-        
     }
 }

@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class GhostController : MonoBehaviour {
+
     public GameObject ghostPrefab;
     public GameObject lightPrefab;
-    public const int ghostNumMax = 3;
+    public const int ghostNumMax = 1;
 
     Ghost[] ghost;
 

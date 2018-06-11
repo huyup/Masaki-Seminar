@@ -77,5 +77,5 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0, g: 0, b: 0, a: 1}
-    - _EmissionColor: {r: 0.16678801, g: 0.060175188, b: 0.3897059, a: 1}
+    - _EmissionColor: {r: 0.21323532, g: 0.20915876, b: 0.20367649, a: 1}
     - _XRayRimColor: {r: 1, g: 1, b: 1, a: 1}

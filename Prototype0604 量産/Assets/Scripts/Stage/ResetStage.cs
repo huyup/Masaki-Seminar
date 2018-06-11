@@ -24,7 +24,7 @@ public class ResetStage{
 
     public void UpdateReset()
     {
-        if(playerLife.lifeCount == 0)
+        if(playerLife.lifeCount <= 0)
         {
             ResetPlayer();
             ResetThisStage();
