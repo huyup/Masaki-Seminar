@@ -1,13 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// これは銃をコントロールするクラスです
+/// 作成者:huyp
+/// </summary>
+/// 
 public class GunShotScript : MonoBehaviour
 {
+    /// <summary>
+    /// 参照
+    /// </summary>
     public GameObject shot;
     public GameObject aming;
+
     GameObject shot_Clone;
     GameObject player;
+
+    Vector3 posToAming;
     // Use this for initialization
     void Start()
     {
@@ -22,17 +32,22 @@ public class GunShotScript : MonoBehaviour
         {
             if (Input.GetButtonDown("Fire1"))
             {
-                Vector3 newPos = aming.transform.position - transform.position + new Vector3(0, 0.1f, 0);
                 Instantiate(shot, transform.position, Quaternion.identity);
-
-                shot_Clone = GameObject.Find("shot(Clone)");
-                //shot_Clone.transform.rotation = Quaternion.LookRotation(player.transform.position, aming.transform.position);
-
-                shot_Clone.transform.LookAt(aming.transform);
-                shot_Clone.transform.Rotate(0, 90, 0);
-
-                shot_Clone.GetComponent<Rigidbody>().AddForce(newPos * 20f, ForceMode.VelocityChange);
             }
+        }
+    }
+    private void FixedUpdate()
+    {
+        if (GameObject.Find("shot(Clone)"))
+        {
+            posToAming = aming.transform.position - transform.position + new Vector3(0, 0.2f, 0);
+
+            shot_Clone = GameObject.Find("shot(Clone)");
+
+            shot_Clone.transform.LookAt(aming.transform);
+            shot_Clone.transform.Rotate(0, 90, 0);
+            
+            shot_Clone.GetComponent<Rigidbody>().AddForce(posToAming * 20f, ForceMode.VelocityChange);
         }
     }
 }

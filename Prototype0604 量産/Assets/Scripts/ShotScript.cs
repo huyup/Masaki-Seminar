@@ -1,79 +1,64 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// これは弾をコントロールするクラスです
+/// 作成者:huyp
+/// </summary>
 public class ShotScript : MonoBehaviour
 {
-
+    //参照
     GameObject aming;
     GameObject player;
-    GameObject target;
+    GameObject ghost;
 
-    Vector3 distanceToTarget;
-    bool setTimeScale;
+    Vector3 distanceToGhost;
+    
     // Use this for initialization
     void Start()
     {
-        setTimeScale = true;
         player = GameObject.Find("Player");
         aming = GameObject.Find("Aming");
-        this.target = aming.gameObject.GetComponent<AmingScript>().target;
     }
 
     // Update is called once per frame
     void Update()
     {
-        distanceToTarget = target.transform.position - transform.position;
-
-        if (distanceToTarget.magnitude < 2.5f)
-        {
-            if (setTimeScale)
-            {
-                Time.timeScale = 0.1f;
-                setTimeScale = false;
-            }
-        }
-        else
-        {
-            Time.timeScale = 1f;
-        }
-        //if (this.gameObject != null)
-        //{
-        //    transform.localScale += new Vector3(2, 0, 0);
-        //}
+        if (GameObject.Find("Ghost1"))
+            ghost = GameObject.Find("Ghost1");
         Destroy
-            (this.gameObject, 0.8f);
+            (this.gameObject, 1.5f);
     }
-
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "Wall2" ||
-            collision.gameObject.name == "Wall3")
-        {
-            Destroy
-                (this.gameObject);
-        }
         if (collision.gameObject.tag == "Ghost")
         {
-
             if (collision.gameObject.GetComponent<Ghost>().beTargeted &&
                 collision.gameObject.GetComponent<Ghost>().canBeTarget)
             {
-                Time.timeScale = 1f;
+                //ゴーストとプレイヤーの位置を入れ替わる
+                Vector3 temp_Pos;
+                temp_Pos = player.transform.position;
+                player.transform.position = collision.transform.position;
+                collision.transform.position = temp_Pos;
+
+
+                //ライトを明るくする
                 player.transform.Find("Point light").GetComponent<Light>().intensity = 10;
 
+                //プレイヤーに無敵と空中ジャンプさせる
                 player.gameObject.GetComponent<PlayerController>().airJumpEnable = true;
                 player.gameObject.GetComponent<PlayerLifeControl>().invincble = true;
 
 
                 collision.gameObject.GetComponent<Ghost>().canBeTarget = false;
-                GetComponent<Rigidbody>().velocity = Vector3.zero;
-
                 aming.GetComponent<AmingScript>().ghostNum--;
 
 
                 Destroy
         (this.gameObject);
+
+                //ゴーストを消す
                 Transform ghostSoul = collision.transform.Find("shot3");
                 ghostSoul.GetComponent<Renderer>().enabled = false;
 
@@ -84,10 +69,7 @@ public class ShotScript : MonoBehaviour
                         child.GetComponent<Renderer>().enabled = false;
                 }
 
-                Vector3 pos;
-                pos = player.transform.position;
-                player.transform.position = collision.transform.position;
-                collision.transform.position = pos;
+
             }
         }
     }

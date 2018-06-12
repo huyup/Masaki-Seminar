@@ -9,15 +9,18 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     #region フィールド
-    public const float DistanceToGround = 0.3f;
+    public const float DistanceToGround = 0.1f;
 
-    //変更できるコンポーネント
+    /// <summary>
+    /// プロパティ
+    /// </summary>
     public float animSpeed = 1.5f;
     public float Speed = 7.0f;
     public float jumpPower = 8.0f;
 
     public float g_VeclocityX;
     bool duringRun = false;
+
     bool canInput;
     bool canControlPlayer;
 
@@ -26,26 +29,38 @@ public class PlayerController : MonoBehaviour
         get { return canControlPlayer; }
         set { canControlPlayer = value; }
     }
-
-    public float g_VeclocityY;
-
-
     //方向変更用
     ChangeRotation changeRotation;
 
     // ジャンプ
     public bool g_duringJump = false;
+    public bool isGround = false;
 
+
+    //変更できるコンポーネント
     private Rigidbody rb;
     private Vector3 velocity;
     private Vector3 playerInitPos;
     private Animator anim;
 
-    public bool isGround = false;
-    public bool airJumpEnable = false;
 
-    public const int MAXINITCOUNT = 50;
-    public int initCount = MAXINITCOUNT;
+    /// <summary>
+    /// 空中ジャンプ
+    /// </summary>
+    public bool airJumpEnable = false;
+    public const int MAX_AIR_JUMP_COUNT = 20;
+    int airJumpEnableCount = MAX_AIR_JUMP_COUNT;
+
+    /// <summary>
+    /// 規定の初期
+    /// </summary>
+    public const int MAX_INIT_RECORD_COUNT = 50;
+    public int initCount = MAX_INIT_RECORD_COUNT;
+
+    bool onBed = false;
+    public const int MAX_BED_COUNT = 20;
+    int onBedCount = 0;
+
     #endregion
 
     // Use this for initialization
@@ -71,18 +86,34 @@ public class PlayerController : MonoBehaviour
         velocity = Vector3.zero;
 
         g_VeclocityX = 0;
+
         canInput = false;
-        initCount = MAXINITCOUNT;
+
+
+        initCount = MAX_INIT_RECORD_COUNT;
+        airJumpEnableCount = MAX_AIR_JUMP_COUNT;
+
+        onBed = false;
+        onBedCount = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (initCount > -5)
+        if (initCount > 0)
         {
             initCount--;
         }
-        rb.useGravity = true;
+
+        if (onBed)
+        {
+            onBedCount++;
+            if (onBedCount > MAX_BED_COUNT)
+            {
+                onBedCount = 0;
+                onBed = false;
+            }
+        }
         CheckisGrounded();
         UpdateAnimator();
         UpdateInput();
@@ -100,21 +131,14 @@ public class PlayerController : MonoBehaviour
             transform.localPosition += Vector3.forward * Time.fixedDeltaTime;
             return;
         }
+
         Move();
+
         Jump();
+
         changeRotation.ChangeDirection(g_VeclocityX, this.gameObject);
 
-        if (airJumpEnable)
-        {
-            if (Input.GetButtonDown("Jump"))
-            {
-                anim.SetBool("Jump", true);
-                rb.AddForce(Vector3.up *
-    jumpPower, ForceMode.VelocityChange);
-                airJumpEnable = false;
-            }
 
-        }
     }
     #region 移動に関連する
     void Move()
@@ -133,12 +157,15 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(Vector3.up *
                 jumpPower, ForceMode.VelocityChange);
             g_duringJump = false;
-            // airJumpEnable = false;
         }
+
+        //入れ替えの後の空中ジャンプ
+        if (!airJumpEnable)
+            rb.useGravity = true;
         else
-        {
-            rb.velocity += Physics.gravity * Time.deltaTime;
-        }
+            rb.useGravity = false;
+
+
     }
     #endregion
 
@@ -153,18 +180,39 @@ public class PlayerController : MonoBehaviour
             g_VeclocityX = Input.GetAxis("Horizontal");
 
 
-
-        g_VeclocityY = Input.GetAxis("Vertical");
-
-
         if (Input.GetButtonDown("Jump"))
         {
-            if ((isGround || airJumpEnable) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+            if (isGround
+                && !airJumpEnable
+                && onBedCount==0
+                && !onBed
+                && !anim.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
             {
                 g_duringJump = true;
                 anim.SetBool("Jump", true);
             }
         }
+
+        if (airJumpEnable)
+        {
+            //短時間ジャンプしないと無効になる
+            airJumpEnableCount--;
+            if (airJumpEnableCount < 0)
+            {
+                airJumpEnable = false;
+            }
+            if (Input.GetButtonDown("Jump") && onBedCount == 0)
+            {
+                anim.SetBool("Jump", true);
+
+                rb.AddForce(Vector3.up *
+    jumpPower, ForceMode.VelocityChange);
+
+                airJumpEnable = false;
+            }
+
+        }
+
 
         if (g_VeclocityX > 0 || g_VeclocityX < 0)
             duringRun = true;
@@ -205,8 +253,15 @@ public class PlayerController : MonoBehaviour
         if (count == 20)
         {
             isGround = false;
-            //airJumpEnable = false;
         }
 
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Bed")
+        {
+            onBed = true;
+        }
     }
 }

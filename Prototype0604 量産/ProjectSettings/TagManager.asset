@@ -10,6 +10,8 @@ TagManager:
   - Floor
   - Stone
   - GhostLineLight
+  - Fire
+  - Bed
   layers:
   - Default
   - TransparentFX

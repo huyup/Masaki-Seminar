@@ -11,6 +11,8 @@ public class Stage6Script : MonoBehaviour
     const int bedMachine_Count = 6;
     GameObject[] bedMachine = new GameObject[bedMachine_Count];
     GameObject FallenTrap;
+    GameObject fireTrap;
+    GameObject fireTrap2;
 
     //パラメータ
     #region parameter
@@ -19,6 +21,12 @@ public class Stage6Script : MonoBehaviour
     public float distanceToLeft = 6.5f;
     public float rightSpeed = 0.1f;
     public float leftSpeed = -0.1f;
+
+    public static string fireTrapName = "噴火装置";
+    public int eruptionCount = 800;
+
+    public static string fireTrapName2 = "噴火装置2";
+    public int eruptionCount2 = 1;
 
     public static string bedMachineName = "ベッド１";
     public float elasticity = 3;
@@ -50,6 +58,12 @@ public class Stage6Script : MonoBehaviour
         FallenTrap = GameObject.Find("FallenTrapSet");
         FallenTrap.GetComponent<PressMachineHorizontal>().InitializeParameter(distanceToRight, distanceToLeft, rightSpeed, leftSpeed);
 
+        fireTrap = GameObject.Find("Pf_Trap_Fire");
+        fireTrap.GetComponent<FireTrapScript>().InitializeParameter(eruptionCount);
+
+        fireTrap2 = GameObject.Find("Pf_Trap_Fire2");
+        fireTrap2.GetComponent<FireTrapScript>().InitializeParameter(eruptionCount2);
+
         for (int i = 0; i < bedMachine_Count; i++)
         {
             bedMachine[i] = GameObject.Find("bed" + (i + 1));
@@ -67,6 +81,8 @@ public class Stage6Script : MonoBehaviour
     void Update()
     {
         FallenTrap.GetComponent<PressMachineHorizontal>().SetTrapHorizontal();
+        fireTrap.GetComponent<FireTrapScript>().SetFireTrap();
+        fireTrap2.GetComponent<FireTrapScript>().SetFireTrap();
     }
     /// <summary>
     /// これはリアルタイムでパラメータを反映させる関数

@@ -31,9 +31,7 @@ public class RecordPlayerPos : MonoBehaviour
     {
         playerPos = GameObject.Find("Player").transform;
         playerLife = GameObject.Find("Player").GetComponent<PlayerLifeControl>().lifeCount;
-
-        Debug.Log(playerLife);
-
+        
 
         if (playerLife <= 0)
         {
