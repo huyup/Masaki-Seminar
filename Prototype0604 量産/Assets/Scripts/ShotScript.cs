@@ -59,8 +59,8 @@ public class ShotScript : MonoBehaviour
         (this.gameObject);
 
                 //ゴーストを消す
-                Transform ghostSoul = collision.transform.Find("shot3");
-                ghostSoul.GetComponent<Renderer>().enabled = false;
+                //Transform ghostSoul = collision.transform.Find("shot3");
+                //ghostSoul.GetComponent<Renderer>().enabled = false;
 
                 Transform ghostBody = collision.transform.Find("character_ghost").Find("root");
                 foreach (Transform child in ghostBody)

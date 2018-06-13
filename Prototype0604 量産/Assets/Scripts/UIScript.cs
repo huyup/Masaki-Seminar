@@ -45,7 +45,7 @@ public class UIScript : MonoBehaviour
         if (!turnLightOn)
         {
             lightSwitch_Text.text = "LightON(Num1)";
-            worldLight.GetComponent<Light>().intensity = 0.01f;
+            worldLight.GetComponent<Light>().intensity = 0f;
             worldLight.GetComponent<Light>().color = Color.black;
         }
         else

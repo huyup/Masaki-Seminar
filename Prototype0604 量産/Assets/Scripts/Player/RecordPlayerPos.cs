@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class RecordPlayerPos : MonoBehaviour
 {
     GameObject player;
+    GameObject soulPerformance;
     Transform playerPos;
     List<Vector3> playerPosRecord;
     GhostController ghostController;
@@ -14,11 +15,14 @@ public class RecordPlayerPos : MonoBehaviour
     int playerLife;
     int retryNumOfTime;
 
+    bool setSoulValue = false;
+
     // Use this for initialization
     void Start()
     {
         player = GameObject.Find("Player");
         playerPos = GameObject.Find("Player").transform;
+        soulPerformance = GameObject.Find("Soul");
         playerPosRecord = new List<Vector3>();
         ghostController = GameObject.FindGameObjectWithTag("Respawn").GetComponent<GhostController>();
         //dollController = GameObject.Find("dollRespawn").GetComponent<DollController>();
@@ -35,6 +39,14 @@ public class RecordPlayerPos : MonoBehaviour
 
         if (playerLife <= 0)
         {
+            setSoulValue = true;
+
+            if (setSoulValue)
+            {
+                soulPerformance.GetComponent<DeadPerformanceScript>().SetCircleParameter(player.transform.position);
+                setSoulValue = false;
+            }
+
             retryNumOfTime++;
 
             //list to vector3[]

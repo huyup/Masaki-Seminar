@@ -94,8 +94,8 @@ public class Ghost : MonoBehaviour
         /// <summary>
         /// huyup
         /// </summary>
-        Transform ghostSoul = transform.Find("shot3");
-        ghostSoul.GetComponent<Renderer>().enabled = true;
+        //Transform ghostSoul = transform.Find("shot3");
+        //ghostSoul.GetComponent<Renderer>().enabled = true;
         Transform ghostBody = transform.Find("character_ghost").Find("root");
         foreach (Transform child in ghostBody)
         {

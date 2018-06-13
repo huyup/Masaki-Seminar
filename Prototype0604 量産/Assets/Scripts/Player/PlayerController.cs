@@ -114,9 +114,24 @@ public class PlayerController : MonoBehaviour
                 onBed = false;
             }
         }
+
+
         CheckisGrounded();
         UpdateAnimator();
-        UpdateInput();
+        if (DeadPerformanceScript.moveEnable)
+        {
+            Transform body = transform.Find("character_motion2").Find("root");
+            foreach (Transform child in body)
+            {
+                if (child.GetComponent<Renderer>())
+                    child.GetComponent<Renderer>().enabled = false;
+            }
+        }
+        else
+        {
+            UpdateInput();
+        }
+
     }
 
     void FixedUpdate()
@@ -140,6 +155,7 @@ public class PlayerController : MonoBehaviour
 
 
     }
+
     #region 移動に関連する
     void Move()
     {

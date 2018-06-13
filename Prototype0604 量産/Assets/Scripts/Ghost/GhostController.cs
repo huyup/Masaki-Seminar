@@ -8,7 +8,7 @@ public class GhostController : MonoBehaviour {
 
     public GameObject ghostPrefab;
     public GameObject lightPrefab;
-    public const int ghostNumMax = 1;
+    public const int ghostNumMax = 3;
 
     Ghost[] ghost;
 
@@ -66,14 +66,16 @@ public class GhostController : MonoBehaviour {
 
 	// Update is called once per frame
 	void FixedUpdate () {
-
-        for (int i = 0; i < ghostNumMax; i++)
+        if (!DeadPerformanceScript.moveEnable)
         {
-            if (ghost[i] == null)
-                continue;
-            ghost[i].MoveGhost(frameCount);
-            ghost[i].CreateAreaLight(frameCount, lightPrefab);
+            for (int i = 0; i < ghostNumMax; i++)
+            {
+                if (ghost[i] == null)
+                    continue;
+                ghost[i].MoveGhost(frameCount);
+                ghost[i].CreateAreaLight(frameCount, lightPrefab);
+            }
+            frameCount++;
         }
-        frameCount++;
     }
 }
