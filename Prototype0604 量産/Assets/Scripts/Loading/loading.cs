@@ -4,34 +4,54 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class loading : MonoBehaviour {
+public class Loading : MonoBehaviour
+{
     public GameObject loadingUI;
-    public GameObject startButton;
 
-    private AsyncOperation async;
-    private Slider slider;
+    float waitSecond = 2f;
+    //private AsyncOperation async;
 
     // Use this for initialization
     private void Start()
     {
-        PlayerPrefs.DeleteAll();
-    }
-    public void nextScene () {
         loadingUI.SetActive(true);
-        startButton.SetActive(false);
-        slider = loadingUI.GetComponentInChildren<Slider>();
-        StartCoroutine("LoadNextScene");
-	}
-	
-    IEnumerator LoadNextScene()
-    {
-        async = SceneManager.LoadSceneAsync("Stage1");
+        Invoke("LoadStage", waitSecond);
+    }
 
-        while(!async.isDone)
+    void LoadStage()
+    {
+        switch (StageSelect.getStageNum())
         {
-            float progressVal = Mathf.Clamp01(async.progress);
-            slider.value = async.progress;
-            yield return null;
+            case StageSelect.StageNum.Stage1:
+                SceneManager.LoadScene("Stage1");
+                break;
+            case StageSelect.StageNum.Stage2:
+                SceneManager.LoadScene("Stage2");
+                break;
+            case StageSelect.StageNum.Stage3:
+                SceneManager.LoadScene("Stage3");
+                break;
+            case StageSelect.StageNum.Stage4:
+                SceneManager.LoadScene("Stage4");
+                break;
+            case StageSelect.StageNum.Stage5:
+                SceneManager.LoadScene("Stage5");
+                break;
+            case StageSelect.StageNum.Stage6:
+                SceneManager.LoadScene("Stage6");
+                break;
+            case StageSelect.StageNum.Stage7:
+                SceneManager.LoadScene("Stage7");
+                break;
+            case StageSelect.StageNum.Stage8:
+                //SceneManager.LoadScene("Stage8");
+                break;
+            case StageSelect.StageNum.Stage9:
+                //SceneManager.LoadScene("Stage9");
+                break;
+            case StageSelect.StageNum.Stage10:
+                //SceneManager.LoadScene("Stage10");
+                break;
         }
     }
 }

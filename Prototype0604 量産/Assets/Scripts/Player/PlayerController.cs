@@ -77,9 +77,6 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Time.timeScale == 0)
-            return;
-
         //クリア時のアニメーション
         if (!canControlPlayer)
         {

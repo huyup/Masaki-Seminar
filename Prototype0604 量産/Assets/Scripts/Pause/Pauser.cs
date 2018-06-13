@@ -28,7 +28,7 @@ public class Pauser : MonoBehaviour {
     {
         if (pauseBehavs != null)
             return;
-
+        
         pauseBehavs = Array.FindAll(GetComponentsInChildren<Behaviour>(), (obj) => { return obj.enabled; });
         foreach (var com in pauseBehavs)
         {

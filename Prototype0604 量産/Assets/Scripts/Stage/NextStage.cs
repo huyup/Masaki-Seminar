@@ -5,12 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class NextStage : MonoBehaviour
 {
-    public int NextStageNum = 2;
+    int nextStageNum = 0;
+
+    private void Start()
+    {
+        int.TryParse(SceneManager.GetActiveScene().name.Remove(0,5), out nextStageNum);
+        nextStageNum++;
+    }
 
     void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.tag == "Player")
         {
+            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name, 1);
             //一秒後に実行
             Invoke("LoadNextScene", 1f);
         }
@@ -18,9 +25,6 @@ public class NextStage : MonoBehaviour
 
     void LoadNextScene()
     {
-        string nextStage = NextStageNum.ToString();
-        //Debug.Log(SceneManager.GetSceneByBuildIndex(-1).name);
-        //if()
-        SceneManager.LoadScene("Stage" + (NextStageNum).ToString());
+        SceneManager.LoadScene("Stage" + nextStageNum.ToString());
     }
 }

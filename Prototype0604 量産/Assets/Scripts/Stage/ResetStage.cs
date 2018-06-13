@@ -8,7 +8,7 @@ public class ResetStage{
 
     public virtual void SetNowStage(){
     }
-    public virtual void ResetThisStage(){
+    public　virtual void ResetThisStage(){
     }
 
     public void InitPlayer()
@@ -24,7 +24,7 @@ public class ResetStage{
 
     public void UpdateReset()
     {
-        if(playerLife.lifeCount == 0)
+        if (playerLife.lifeCount == 0)
         {
             ResetPlayer();
             ResetThisStage();
