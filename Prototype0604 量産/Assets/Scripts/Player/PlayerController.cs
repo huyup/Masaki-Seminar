@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
     /// 空中ジャンプ
     /// </summary>
     public bool airJumpEnable = false;
-    public const int MAX_AIR_JUMP_COUNT = 20;
+    public const int MAX_AIR_JUMP_COUNT = 30;
     int airJumpEnableCount = MAX_AIR_JUMP_COUNT;
 
     /// <summary>
@@ -158,6 +158,14 @@ public class PlayerController : MonoBehaviour
                 jumpPower, ForceMode.VelocityChange);
             g_duringJump = false;
         }
+        if(!g_duringJump)
+        {
+            rb.velocity += Physics.gravity * Time.deltaTime;
+        }
+        //if(!g_duringJump||!airJumpEnable)
+        //{
+        //    rb.velocity += Physics.gravity;
+        //}
 
         //入れ替えの後の空中ジャンプ
         if (!airJumpEnable)
@@ -206,7 +214,7 @@ public class PlayerController : MonoBehaviour
                 anim.SetBool("Jump", true);
 
                 rb.AddForce(Vector3.up *
-    jumpPower, ForceMode.VelocityChange);
+    jumpPower*1.5f, ForceMode.VelocityChange);
 
                 airJumpEnable = false;
             }
