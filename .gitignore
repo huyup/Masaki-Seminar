@@ -30,6 +30,8 @@ ExportedObj/
 
 *.sln
 
+*.unity
+
 *.suo
 
 *.tmp
