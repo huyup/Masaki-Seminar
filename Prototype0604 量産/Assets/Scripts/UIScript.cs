@@ -15,9 +15,6 @@ public class UIScript : MonoBehaviour
     GameObject worldLight;
     GameObject player;
 
-    //コンポーネント
-    public Text lightSwitch_Text;
-    public Text playerlife_Text;
 
     public bool turnLightOn;
 
@@ -44,13 +41,11 @@ public class UIScript : MonoBehaviour
         //turnlightonフラグを頼って、ワールドライトの輝度を調整する
         if (!turnLightOn)
         {
-            lightSwitch_Text.text = "LightON(Num1)";
             worldLight.GetComponent<Light>().intensity = 0f;
             worldLight.GetComponent<Light>().color = Color.black;
         }
         else
         {
-            lightSwitch_Text.text = "LightOFF(Num1)";
             worldLight.GetComponent<Light>().intensity = 2f;
             worldLight.GetComponent<Light>().color = Color.white;
         }

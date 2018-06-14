@@ -4,7 +4,8 @@ using UnityEngine;
 
 
 
-public class GhostController : MonoBehaviour {
+public class GhostController : MonoBehaviour
+{
 
     public GameObject ghostPrefab;
     public GameObject lightPrefab;
@@ -14,12 +15,13 @@ public class GhostController : MonoBehaviour {
 
     int frameCount;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
 
         ghost = new Ghost[ghostNumMax];
         frameCount = 0;
-	}
+    }
 
     public void InitializeGhost(Vector3[] pos, int retryNum)
     {
@@ -30,7 +32,7 @@ public class GhostController : MonoBehaviour {
         ResetFrameCount();
     }
 
-	//ゴーストのゲームオブジェクトを作る
+    //ゴーストのゲームオブジェクトを作る
     private void InstantiateGhost(int retryNum)
     {
         if (retryNum <= 0)
@@ -64,18 +66,16 @@ public class GhostController : MonoBehaviour {
         frameCount = 0;
     }
 
-	// Update is called once per frame
-	void FixedUpdate () {
-        if (!DeadPerformanceScript.moveEnable)
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        for (int i = 0; i < ghostNumMax; i++)
         {
-            for (int i = 0; i < ghostNumMax; i++)
-            {
-                if (ghost[i] == null)
-                    continue;
-                ghost[i].MoveGhost(frameCount);
-                ghost[i].CreateAreaLight(frameCount, lightPrefab);
-            }
-            frameCount++;
+            if (ghost[i] == null)
+                continue;
+            ghost[i].MoveGhost(frameCount);
+            ghost[i].CreateAreaLight(frameCount, lightPrefab);
         }
+        frameCount++;
     }
 }

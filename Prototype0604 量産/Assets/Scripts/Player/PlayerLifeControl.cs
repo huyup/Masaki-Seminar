@@ -11,7 +11,11 @@ public class PlayerLifeControl : MonoBehaviour
 
     public int lifeCount;
     public bool invincble = false;
+
     GameObject Eff_Invincble;
+    GameObject soul;
+    GameObject frontWall;
+
     public const int MAXINVINCBLECOUNT = 30;
     int invincbleCount = MAXINVINCBLECOUNT;
     //Use this for initialization
@@ -22,6 +26,10 @@ public class PlayerLifeControl : MonoBehaviour
         lifeCount = 1;
 
         Eff_Invincble = GameObject.Find("Eff_PowerUp_Fix");
+
+        soul = GameObject.Find("Soul");
+
+        frontWall = GameObject.Find("FrontWall");
     }
     private void ResetLife()
     {
@@ -30,10 +38,10 @@ public class PlayerLifeControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (lifeCount < 0)
+        if (lifeCount <= 0)
+        {
             lifeCount = 0;
-
+        }
         if (invincble)
         {
             Eff_Invincble.transform.position = transform.position + new Vector3(0, 1, 0);
@@ -43,8 +51,6 @@ public class PlayerLifeControl : MonoBehaviour
 
             if (invincbleCount > 0)
             {
-
-
                 invincbleCount--;
             }
             else
@@ -61,15 +67,22 @@ public class PlayerLifeControl : MonoBehaviour
         if (!invincble)
         {
             //tag名が”トラップ”のオブジェと遭遇したら、ライフ数を減らす
-            if (collision.gameObject.tag == "Trap" || collision.gameObject.layer == 10/*10:OutArea*/)
+            if (collision.gameObject.tag == "Trap")
             {
                 lifeCount--;
+                soul.GetComponent<DeadPerformanceScript>().SetCircleParameter(transform.position);
+            }
+            if (collision.gameObject.name == "OutArea")
+            {
+                lifeCount--;
+                soul.GetComponent<DeadPerformanceScript>().SetSquareParameter(transform.position);
             }
             if (collision.gameObject.tag == "Stone")
             {
                 if (collision.gameObject.GetComponent<Rigidbody>().velocity.magnitude > 1)
                 {
                     lifeCount--;
+                    soul.GetComponent<DeadPerformanceScript>().SetCircleParameter(transform.position);
                 }
             }
         }

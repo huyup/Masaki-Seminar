@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
         velocity = Vector3.zero;
 
         g_VeclocityX = 0;
-
+        rb.isKinematic = false;
         canInput = false;
 
 
@@ -118,18 +118,17 @@ public class PlayerController : MonoBehaviour
 
         CheckisGrounded();
         UpdateAnimator();
-        if (DeadPerformanceScript.moveEnable)
+
+        if(!DeadPerformanceScript.moveEnable)
         {
-            Transform body = transform.Find("character_motion2").Find("root");
-            foreach (Transform child in body)
-            {
-                if (child.GetComponent<Renderer>())
-                    child.GetComponent<Renderer>().enabled = false;
-            }
+            UpdateInput();
         }
         else
         {
-            UpdateInput();
+            rb.velocity = Vector3.zero;
+            rb.isKinematic = true;
+            g_VeclocityX = 0;
+            g_duringJump = false;
         }
 
     }
