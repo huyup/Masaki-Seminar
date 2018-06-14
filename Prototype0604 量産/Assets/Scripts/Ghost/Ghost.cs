@@ -14,11 +14,20 @@ public class Ghost : MonoBehaviour
 
     Vector3 preLightPos;
 
+
+    private enum State
+    {
+        Idle, Run, Jump, None
+    }
+
+    State state;
+    State oldState;
+    
     /// <summary>
     /// huyup
     /// </summary>
     public bool beTargeted;
-    public bool canBeTarget=true;
+    public bool canBeTarget = true;
     public Material beTargetedMaterial;
     public Material normalMaterial;
 
@@ -27,6 +36,10 @@ public class Ghost : MonoBehaviour
     {
         changeRotation = new ChangeRotation();
 
+        changeRotation = new ChangeRotation();
+        animator = gameObject.GetComponent<Animator>();
+        state = State.Jump;
+        oldState = State.Jump;
     }
 
     public void InitGhostPos(Vector3[] pos)
@@ -43,7 +56,7 @@ public class Ghost : MonoBehaviour
         /// <summary>
         /// huyup
         /// </summary>
-        if(canBeTarget)
+        if (canBeTarget)
         {
             transform.gameObject.GetComponent<CapsuleCollider>().enabled = true;
         }
@@ -51,35 +64,36 @@ public class Ghost : MonoBehaviour
         {
             transform.gameObject.GetComponent<CapsuleCollider>().enabled = false;
         }
-        if (beTargeted)
-        {
-            bool setMaterial = true;
-            if (setMaterial)
-            {
+        //if (beTargeted)
+        //{
+        //    bool setMaterial = true;
+        //    if (setMaterial)
+        //    {
 
-                Transform ghostBody = transform.Find("character_ghost").Find("root");
-                foreach (Transform child in ghostBody)
-                {
-                    if (child.GetComponent<Renderer>())
-                        child.GetComponent<Renderer>().material = beTargetedMaterial;
-                }
-                setMaterial = false;
-            }
-        }
-        else { 
-            bool setMaterial = true;
-            if (setMaterial)
-            {
+        //        Transform ghostBody = transform.Find("character_ghost").Find("root");
+        //        foreach (Transform child in ghostBody)
+        //        {
+        //            if (child.GetComponent<Renderer>())
+        //                child.GetComponent<Renderer>().material = beTargetedMaterial;
+        //        }
+        //        setMaterial = false;
+        //    }
+        //}
+        //else
+        //{
+        //    bool setMaterial = true;
+        //    if (setMaterial)
+        //    {
 
-                Transform ghostBody = transform.Find("character_ghost").Find("root");
-                foreach (Transform child in ghostBody)
-                {
-                    if (child.GetComponent<Renderer>())
-                        child.GetComponent<Renderer>().material = normalMaterial;
-                }
-                setMaterial = false;
-            }
-        }
+        //        Transform ghostBody = transform.Find("character_ghost").Find("root");
+        //        foreach (Transform child in ghostBody)
+        //        {
+        //            if (child.GetComponent<Renderer>())
+        //                child.GetComponent<Renderer>().material = normalMaterial;
+        //        }
+        //        setMaterial = false;
+        //    }
+        //}
     }
 
     public void ResetGhost()
@@ -95,15 +109,15 @@ public class Ghost : MonoBehaviour
     {
         foreach (SkinnedMeshRenderer mesh in this.GetComponentsInChildren<SkinnedMeshRenderer>())
             mesh.enabled = true;
-        /// <summary>
-        /// huyup
-        /// </summary>
-        Transform ghostBody = transform.Find("character_ghost").Find("root");
-        foreach (Transform child in ghostBody)
-        {
-            if (child.GetComponent<Renderer>())
-                child.GetComponent<Renderer>().material = normalMaterial;
-        }
+        ///// <summary>
+        ///// huyup
+        ///// </summary>
+        //Transform ghostBody = transform.Find("character_ghost").Find("root");
+        //foreach (Transform child in ghostBody)
+        //{
+        //    if (child.GetComponent<Renderer>())
+        //        child.GetComponent<Renderer>().material = normalMaterial;
+        //}
     }
 
     private void ResetLight()
@@ -172,7 +186,7 @@ public class Ghost : MonoBehaviour
         if (oldState == state)
             return;
 
-        switch(state)
+        switch (state)
         {
             case State.Idle:
                 animator.SetBool("Idle", true);
