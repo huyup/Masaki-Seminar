@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Pause : MonoBehaviour
 {
@@ -209,7 +210,7 @@ public class Pause : MonoBehaviour
             switch (returnState)
             {
                 case ReturnState.ReturnState_Yes:
-                    //GOTO::scene.menu
+                    SceneManager.LoadScene("Menu");
                     return;
                 case ReturnState.ReturnState_No:
                     isReturnMenuState = false;

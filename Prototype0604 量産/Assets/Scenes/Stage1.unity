@@ -2145,6 +2145,7 @@ RectTransform:
   m_Children:
   - {fileID: 2091457797}
   - {fileID: 586901583}
+  - {fileID: 1497431260}
   m_Father: {fileID: 2076194638}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2164,7 +2165,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 833399932}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6924953fc9c10414585f508276fbc62a, type: 3}
   m_Name: 
@@ -2438,7 +2439,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -699801964
+  randomSeed: 1771774228
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -5823,8 +5824,6 @@ GameObject:
   - component: {fileID: 963424116}
   - component: {fileID: 963424120}
   - component: {fileID: 963424119}
-  - component: {fileID: 963424118}
-  - component: {fileID: 963424117}
   m_Layer: 16
   m_Name: NeedleCollisionArea2
   m_TagString: Trap
@@ -5845,28 +5844,6 @@ Transform:
   m_Father: {fileID: 69989086}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &963424117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 963424115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f0003fad24c3494e84fe572fa51833a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &963424118
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 963424115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cb8957c10925fc4286d056a0a6f3dad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &963424119
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6257,7 +6234,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -746676372
+  randomSeed: -930266685
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -9835,7 +9812,6 @@ GameObject:
   - component: {fileID: 1154120880}
   - component: {fileID: 1154120883}
   - component: {fileID: 1154120882}
-  - component: {fileID: 1154120881}
   m_Layer: 16
   m_Name: NeedleCollisionArea
   m_TagString: Trap
@@ -9856,17 +9832,6 @@ Transform:
   m_Father: {fileID: 684729356}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1154120881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1154120879}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f0003fad24c3494e84fe572fa51833a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1154120882
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10249,6 +10214,17 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114322763509765348, guid: b58a5788020d4724eae77f850bd6bf8e,
+        type: 2}
+      propertyPath: ghostNumMax
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114322763509765348, guid: b58a5788020d4724eae77f850bd6bf8e,
+        type: 2}
+      propertyPath: ghostPrefab
+      value: 
+      objectReference: {fileID: 1535016840304740, guid: eed97a81a68deb846a8b42b8e829b66f,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b58a5788020d4724eae77f850bd6bf8e, type: 2}
   m_IsPrefabParent: 0
@@ -10638,6 +10614,92 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1474729516}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1497431259
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1497431260}
+  - component: {fileID: 1497431263}
+  - component: {fileID: 1497431262}
+  - component: {fileID: 1497431261}
+  m_Layer: 5
+  m_Name: Timer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1497431260
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1497431259}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 793665979}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 960, y: -540}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1497431261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1497431259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ab6aa7c3591d943a6cdd17652cf997, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1497431262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1497431259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 134
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 185
+    m_Alignment: 2
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 0:00
+--- !u!222 &1497431263
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1497431259}
 --- !u!1 &1543548420
 GameObject:
   m_ObjectHideFlags: 0
@@ -10771,7 +10833,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 394140789
+  randomSeed: 509774429
   InitialModule:
     serializedVersion: 3
     enabled: 1

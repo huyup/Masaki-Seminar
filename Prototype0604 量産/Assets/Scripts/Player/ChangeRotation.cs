@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChangeRotation
 {
-    Vector3 rotationSpeed = new Vector3(0, 15, 0);
+    Vector3 rotationSpeed = new Vector3(0, 20, 0);
 
     public enum Direction
     {

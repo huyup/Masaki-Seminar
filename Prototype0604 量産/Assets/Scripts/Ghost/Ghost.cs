@@ -6,24 +6,39 @@ public class Ghost : MonoBehaviour {
     Vector3[] ghostPos;
     ChangeRotation changeRotation;
 
+    Animator animator;
+
     const float lightIntensity = 10;
     const float turnOffSpeed = 0.05f;
 
     Vector3 preLightPos;
 
+    private enum State
+    {
+        Idle, Run, Jump,None
+    }
+
+    State state;
+    State oldState;
+
     // Use this for initialization
-    void Start () {
+    void Start() {
         changeRotation = new ChangeRotation();
+        animator = gameObject.GetComponent<Animator>();
+        state = State.Jump;
+        oldState = State.Jump;
     }
 
     public void InitGhostPos(Vector3[] pos)
     {
         ghostPos = pos;
         preLightPos = pos[0];
+        state = State.Jump;
+        oldState = State.Jump;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update() {
 
     }
 
@@ -72,6 +87,59 @@ public class Ghost : MonoBehaviour {
         if (frameCount == 0)
             return;
         changeRotation.ChangeDirection(ghostPos[frameCount].x - ghostPos[frameCount - 1].x, this.gameObject);
+
+        ChangeState(frameCount);
+        ChangeAnimation();
+
+    }
+
+    private void ChangeState(int frameCount)
+    {
+        if (frameCount == 1)
+            return;
+
+        Vector3 vec = ghostPos[frameCount] - ghostPos[frameCount - 2];
+
+
+        if (vec.y != 0)
+        {
+            state = State.Jump;
+            return;
+        }
+        if (vec.x != 0)
+        {
+            state = State.Run;
+            return;
+        }
+        state = State.Idle;
+    }
+
+    private void ChangeAnimation()
+    {
+        if (oldState == state)
+            return;
+
+        switch(state)
+        {
+            case State.Idle:
+                animator.SetBool("Idle", true);
+                animator.SetBool("Run", false);
+                animator.SetBool("Jump", false);
+                break;
+            case State.Run:
+                animator.SetBool("Idle", false);
+                animator.SetBool("Run", true);
+                animator.SetBool("Jump", false);
+                break;
+            case State.Jump:
+                animator.SetBool("Idle", false);
+                animator.SetBool("Run", false);
+                animator.SetBool("Jump", true);
+                break;
+            default:
+                break;
+        }
+        oldState = state;
     }
 
     public void CreateAreaLight(int frameCount, GameObject light)

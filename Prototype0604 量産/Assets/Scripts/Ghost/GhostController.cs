@@ -5,9 +5,10 @@ using UnityEngine;
 public class GhostController : MonoBehaviour {
     public GameObject ghostPrefab;
     public GameObject lightPrefab;
-    public const int ghostNumMax = 3;
+    public int ghostNumMax = 3;
 
     Ghost[] ghost;
+    GameObject goRespawn;
 
     int frameCount;
 
@@ -16,7 +17,8 @@ public class GhostController : MonoBehaviour {
 
         ghost = new Ghost[ghostNumMax];
         frameCount = 0;
-	}
+        goRespawn = GameObject.Find("GhostRespawn");
+    }
 
     public void InitializeGhost(Vector3[] pos, int retryNum)
     {
@@ -32,7 +34,7 @@ public class GhostController : MonoBehaviour {
     {
         if (retryNum <= 0)
             return;
-        GameObject ghostTmp = (GameObject)Instantiate(ghostPrefab, GameObject.FindGameObjectWithTag("Respawn").transform);
+        GameObject ghostTmp = (GameObject)Instantiate(ghostPrefab, goRespawn.transform);
         ghostTmp.name = ghostPrefab.name + retryNum.ToString();
     }
 

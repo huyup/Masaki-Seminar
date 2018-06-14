@@ -259,7 +259,7 @@ public class StageSelect : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.JoystickButton1))
         {
-            //SceneManager.LoadScene("Menu");
+            SceneManager.LoadScene("Menu");
         }
         if (Input.GetKeyDown(KeyCode.JoystickButton0))
         {

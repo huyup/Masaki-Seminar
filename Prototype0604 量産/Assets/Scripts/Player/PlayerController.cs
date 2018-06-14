@@ -21,6 +21,10 @@ public class PlayerController : MonoBehaviour
     bool canInput;
     bool canControlPlayer;
 
+    public bool P_CanInput
+    {
+        get { return canInput; }
+    }
     public bool P_CanControlPlayer
     {
         get { return canControlPlayer; }
@@ -146,12 +150,21 @@ public class PlayerController : MonoBehaviour
 
     void CheckisGrounded()
     {
-        RaycastHit hit;
-        Ray ray = new Ray(transform.position, Vector3.down);
-        if (Physics.Raycast(ray, out hit, DistanceToGround))
-            isGround = true;
-        else
-            isGround = false;
-        //Debug.DrawLine(ray.origin, ray.origin - new Vector3(0, DistanceToGround, 0), Color.red, 0.1f);
+        RaycastHit[] hit = new RaycastHit[3];
+
+        for (int i = -1; i < hit.Length - 1; i++)
+        {
+            Ray ray = new Ray(new Vector3(transform.position.x + (i * 0.2f), transform.position.y, transform.position.z), Vector3.down);
+            if (Physics.Raycast(ray, out hit[i + 1], DistanceToGround))
+            {
+                isGround = true;
+                return;
+            }
+            else
+                isGround = false;
+
+            //    Debug.DrawLine(ray.origin, ray.origin - new Vector3(0, DistanceToGround, 0), Color.red, 0.1f);
+        }
+
     }
 }

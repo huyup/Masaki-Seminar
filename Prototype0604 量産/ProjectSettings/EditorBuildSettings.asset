@@ -6,14 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: e9036c2b5faccc34cbd3e9ed3be8db2b
+  - enabled: 1
+    path: Assets/Scenes/StageSelect.unity
+    guid: ca82e08b77344bb43848185f1a72695d
+  - enabled: 1
     path: Assets/Scenes/Loading.unity
     guid: 61a1f5a92e4398c4fa5431b2bad04618
   - enabled: 1
     path: Assets/Scenes/Pause.unity
     guid: ac065e0ba2c91054496c587c00fb08c7
-  - enabled: 1
-    path: Assets/Scenes/StageSelect.unity
-    guid: ca82e08b77344bb43848185f1a72695d
   - enabled: 1
     path: Assets/Scenes/Stage1.unity
     guid: e125610c26770a546b4c50042a9ad864
