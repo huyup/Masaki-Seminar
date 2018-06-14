@@ -10,6 +10,8 @@ TagManager:
   - Floor
   - Stone
   - GhostLineLight
+  - Fire
+  - Bed
   layers:
   - Default
   - TransparentFX
@@ -28,7 +30,7 @@ TagManager:
   - Light
   - MoveObj
   - NormalObj
-  - 
+  - Wall
   - 
   - 
   - 

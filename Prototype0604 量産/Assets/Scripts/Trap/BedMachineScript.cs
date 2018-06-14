@@ -8,9 +8,10 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class BedMachineScript : MonoBehaviour {
     float Elasticity { get; set; }
+    GameObject player;
     // Use this for initialization
     void Start () {
-		
+		player=GameObject.Find("Player");
 	}
     public void InitializeParameter(float _Elasticity)
     {
@@ -25,6 +26,7 @@ public class BedMachineScript : MonoBehaviour {
     {
         if(collision.gameObject.name=="Player")
         {
+            player.GetComponent<Rigidbody>().velocity = Vector3.zero; 
             collision.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * Elasticity,ForceMode.VelocityChange);
         }
     }

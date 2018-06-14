@@ -4996,8 +4996,8 @@ Light:
     m_NearPlane: 0.2
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
-  m_Flare: {fileID: 12100000, guid: 9bdb18c49d114cb4300035184241aa39, type: 2}
-  m_RenderMode: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294958335
@@ -5039,9 +5039,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.2
-  m_Height: 1
-  m_Direction: 1
+  m_Radius: 0.5
+  m_Height: 1.5
+  m_Direction: 0
   m_Center: {x: 0, y: 0.47, z: 0}
 --- !u!137 &137185531980539164
 SkinnedMeshRenderer:

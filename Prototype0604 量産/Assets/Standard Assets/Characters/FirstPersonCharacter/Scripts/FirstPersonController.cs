@@ -246,7 +246,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 return;
             }
-
             if (body == null || body.isKinematic)
             {
                 return;
