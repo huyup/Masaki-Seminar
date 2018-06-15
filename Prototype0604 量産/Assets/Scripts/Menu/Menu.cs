@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEditor;
+//using UnityEditor;
 
 public class Menu : MonoBehaviour {
     enum MenuState { MenuState_SelectStage, MenuState_HowToPlay, MenuState_PV, MenuState_Exit };
@@ -152,7 +152,7 @@ public class Menu : MonoBehaviour {
                     //SceneManager.LoadScene("Pv");
                     break;
                 case MenuState.MenuState_Exit:
-                    EditorApplication.isPlaying = false;
+                   // EditorApplication.isPlaying = false;
                     Application.Quit();
                     break;
             }

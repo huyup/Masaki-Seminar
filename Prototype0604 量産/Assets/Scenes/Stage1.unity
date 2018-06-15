@@ -7784,8 +7784,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2088938872}
-  - component: {fileID: 2088938871}
   - component: {fileID: 2088938873}
+  - component: {fileID: 2088938871}
   m_Layer: 0
   m_Name: Stage1
   m_TagString: Untagged
@@ -7801,7 +7801,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2088938870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3e37aefbbcfc514e9bf3204469addc1, type: 3}
+  m_Script: {fileID: 11500000, guid: acb9ab288bdb6cf4eb945e9e31606464, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fallenSpeed: -0.05
