@@ -1,46 +1,58 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+/// <summary>
+/// これは装置：落ちる床をコントロールするクラス
+/// 作成者:huyup
+/// </summary>
 
 public class FallFloor : MonoBehaviour {
     Vector3 fallFloorInitPos;
-    bool fall;
-    const float fallSpeed = -0.1f;
+
+    bool fallEnable;
+
+    float FallenVeloc { get; set; }
 
 	// Use this for initialization
 	void Start () {
         fallFloorInitPos = transform.position;
-        fall = false;
+        fallEnable = false;
 	}
 
     public void ResetFallFloor()
     {
-        gameObject.SetActive(true);
+        gameObject.GetComponent<BoxCollider>().isTrigger = false;
+
         transform.position = fallFloorInitPos;
+
         gameObject.GetComponent<Rigidbody>().isKinematic = true;
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        fall = false;
+
+        fallEnable = false;
     }
-	
-	// Update is called once per frame
-	void Update () {
+    public void InitializeParameter(float _FallenVeloc)
+    {
+        FallenVeloc = _FallenVeloc;
+    }
+    // Update is called once per frame
+    void Update () {
         MoveFallFloor();
     }
 
     void MoveFallFloor()
     {
-        if(fall)
+        if(fallEnable)
         {
             gameObject.GetComponent<Rigidbody>().isKinematic = false;
-            gameObject.GetComponent<Rigidbody>().AddForce(0, fallSpeed, 0, ForceMode.VelocityChange);
+            gameObject.GetComponent<Rigidbody>().AddForce(0, FallenVeloc, 0, ForceMode.VelocityChange);
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name == "Player")
-            fall = true;
+            fallEnable = true;
         if (collision.gameObject.name == "OutArea")
-            gameObject.SetActive(false);
+            gameObject.GetComponent<BoxCollider>().isTrigger = true;
     }
 }

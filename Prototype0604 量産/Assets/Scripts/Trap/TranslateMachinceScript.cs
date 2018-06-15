@@ -7,6 +7,8 @@ using UnityEngine;
 /// </summary>
 public class TranslateMachinceScript : MonoBehaviour {
     GameObject floor;
+    GameObject kassa;
+    GameObject kassa2;
     bool setTranslateEnable = false;
 
     float TranslateVeloc { get; set; }
@@ -16,13 +18,15 @@ public class TranslateMachinceScript : MonoBehaviour {
     Vector3 initPos;
 	// Use this for initialization
 	void Start () {
-        floor=transform.Find("TranslateFloor").gameObject;
-        initPos = floor.transform.position;
+        kassa = transform.Find("kassya").gameObject;
+        kassa2 = transform.Find("kassya2").gameObject;
+        floor =transform.Find("TranslateFloor").gameObject;
+        initPos = floor.transform.localPosition;
 	}
     public void ResetTranslateMachine()
     {
         setTranslateEnable = false;
-        floor.transform.position = initPos;
+        floor.transform.localPosition = initPos;
     }
     public void InitializeParameter(float _TranslateVeloc,float _TopPosY,float _BottomPosY)
     {
@@ -32,7 +36,8 @@ public class TranslateMachinceScript : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
-        SetTwoWayTranslateFloor();
+        kassa.transform.Rotate(0, 0, 2);
+        kassa2.transform.Rotate(0, 0, 2);
 
     }
 
@@ -43,9 +48,9 @@ public class TranslateMachinceScript : MonoBehaviour {
     {
         if (setTranslateEnable)
         {
-            if (floor.transform.position.y < TopPosY)
+            if (floor.transform.localPosition.x < TopPosY)
             {
-                floor.transform.position += new Vector3(0, TranslateVeloc, 0);
+                floor.transform.localPosition += new Vector3(TranslateVeloc,0 , 0);
             }
             else
             {
@@ -54,9 +59,38 @@ public class TranslateMachinceScript : MonoBehaviour {
         }
         else
         {
-            if (floor.transform.position.y > BottomPosY)
+            if (floor.transform.localPosition.x > BottomPosY)
             {
-                floor.transform.position -= new Vector3(0, TranslateVeloc, 0);
+                floor.transform.localPosition -= new Vector3(TranslateVeloc,0, 0);
+            }
+            else
+            {
+                setTranslateEnable = !setTranslateEnable;
+            }
+        }
+    }
+
+    /// <summary>
+    /// これは床を往復運動させるメソッド
+    /// </summary>
+    public void SetTwoWayTranslateFloor_Y()
+    {
+        if (setTranslateEnable)
+        {
+            if (floor.transform.localPosition.y < TopPosY)
+            {
+                floor.transform.localPosition += new Vector3(0, TranslateVeloc, 0);
+            }
+            else
+            {
+                setTranslateEnable = !setTranslateEnable;
+            }
+        }
+        else
+        {
+            if (floor.transform.localPosition.y > BottomPosY)
+            {
+                floor.transform.localPosition -= new Vector3(0, TranslateVeloc, 0);
             }
             else
             {

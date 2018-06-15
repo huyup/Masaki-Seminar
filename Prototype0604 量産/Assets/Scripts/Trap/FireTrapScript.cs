@@ -30,7 +30,6 @@ public class FireTrapScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(transform.name +":"+ fireCount);
     }
     public void SetFireTrap()
     {
@@ -51,13 +50,12 @@ public class FireTrapScript : MonoBehaviour
         }
         else
         {
-
             stopFireCount++;
 
             if (!fireEff.isStopped)
                 fireEff.Stop();
 
-            if (stopFireCount == EruptionCount * 2)
+            if (stopFireCount == EruptionCount * 3)
             {
                 GetComponent<BoxCollider>().enabled = true;
                 fireEnable = true;
