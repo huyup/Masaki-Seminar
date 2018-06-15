@@ -17,6 +17,7 @@ public class SwitchScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
     }
 
     public void ResetSwitch()
@@ -25,13 +26,14 @@ public class SwitchScript : MonoBehaviour
         GetComponent<Renderer>().material.color = Color.black;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.name == "Player")
+        if (other.gameObject.name == "Player")
         {
             trapEnable = true;
             //プレイヤーがスイッチを踏んだら、スイッチの色を赤に変える。
             GetComponent<Renderer>().material.color = Color.red;
         }
+
     }
 }

@@ -9,7 +9,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     #region フィールド
-    public const float DistanceToGround = 0.1f;
+    public const float DistanceToGround = 0.2f;
 
     /// <summary>
     /// プロパティ

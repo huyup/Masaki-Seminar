@@ -2,100 +2,134 @@
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// これはステージ4全般をコントロールするクラス
+/// これはステージ6全般をコントロールするクラス
 /// 作成者:huyup
 /// </summary>
 public class Stage6Script : MonoBehaviour
 {
     //参照
-    const int bedMachine_Count = 6;
-    GameObject[] bedMachine = new GameObject[bedMachine_Count];
-    GameObject FallenTrap;
-    GameObject fireTrap;
-    GameObject fireTrap2;
+    const int mshinIto_Count = 5;
+    GameObject[] mshinIto = new GameObject[mshinIto_Count];
 
+    GameObject pressMachine;
+    GameObject pressMachine2;
+
+    GameObject switch1;
+    GameObject switch2;
     //パラメータ
-    #region parameter
-    public static string fallenTrapName = "プレス機１";
-    public float distanceToRight = 15;
-    public float distanceToLeft = 6.5f;
-    public float rightSpeed = 0.1f;
-    public float leftSpeed = -0.1f;
+    public static string mshinItoName = "ミシン糸１";
+    public float fallenVeloc = 3;
+    public float conflictForce = 5;
 
-    public static string fireTrapName = "噴火装置";
-    public int eruptionCount = 800;
+    public static string mshinItoName2 = "ミシン糸２";
+    public float fallenVeloc2 = 3;
+    public float conflictForce2 = 5;
 
-    public static string fireTrapName2 = "噴火装置2";
-    public int eruptionCount2 = 1;
+    public static string mshinItoName3 = "ミシン糸３";
+    public float fallenVeloc3 = 3;
+    public float conflictForce3 = 5;
 
-    public static string bedMachineName = "ベッド１";
-    public float elasticity = 3;
+    public static string mshinItoName4 = "ミシン糸４";
+    public float fallenVeloc4 = 3;
+    public float conflictForce4 = 5;
 
-    public static string bedMachineName2 = "ベッド２";
-    public float elasticity2 = 3;
+    public static string mshinItoName5 = "ミシン糸５";
+    public float fallenVeloc5 = 3;
+    public float conflictForce5 = 5;
 
-    public static string bedMachineName3 = "ベッド３";
-    public float elasticity3 = 3;
+    public static string pressMachineName = "プレス機１";
+    public float fallenSpeed = -0.1f;
+    public float raiseSpeed = 0.1f;
+    public float distanceToTop = 4f;
+    public float distanceToBottom = -4;
 
-    public static string bedMachineName4 = "ベッド４";
-    public float elasticity4 = 3;
-
-    public static string bedMachineName5 = "ベッド５";
-    public float elasticity5 = 3;
-
-    public static string bedMachineName6 = "ベッド６";
-    public float elasticity6 = 3;
-    #endregion
+    public static string pressMachineName2 = "プレス機２";
+    public float fallenSpeed2 = -0.1f;
+    public float raiseSpeed2 = 0.1f;
+    public float distanceToTop2 = 5.5f;
+    public float distanceToBottom2 = 1;
 
     public void ResetStage()
     {
-        FallenTrap.GetComponent<PressMachineHorizontal>().ResetPressMachine();
+        for (int i = 0; i < mshinIto_Count; i++)
+        {
+            mshinIto[i].GetComponent<MshinItoScript>().ResetFallenStone();
+        }
+
+        pressMachine.GetComponent<PressMachineTrapScript>().ResetPressMachine();
+        pressMachine2.GetComponent<PressMachineTrapScript>().ResetPressMachine();
+
+        switch1.GetComponent<SwitchScript>().ResetSwitch();
+        switch2.GetComponent<SwitchScript>().ResetSwitch();
     }
 
     // Use this for initialization
     void Start()
     {
-        FallenTrap = GameObject.Find("FallenTrapSet");
-        FallenTrap.GetComponent<PressMachineHorizontal>().InitializeParameter(distanceToRight, distanceToLeft, rightSpeed, leftSpeed);
-
-        fireTrap = GameObject.Find("Pf_Trap_Fire");
-        fireTrap.GetComponent<FireTrapScript>().InitializeParameter(eruptionCount);
-
-        fireTrap2 = GameObject.Find("Pf_Trap_Fire2");
-        fireTrap2.GetComponent<FireTrapScript>().InitializeParameter(eruptionCount2);
-
-        for (int i = 0; i < bedMachine_Count; i++)
+        for (int i = 0; i < mshinIto_Count; i++)
         {
-            bedMachine[i] = GameObject.Find("bed" + (i + 1));
+            mshinIto[i] = GameObject.Find("ito" + (i + 1));
         }
 
-        bedMachine[0].GetComponent<BedMachineScript>().InitializeParameter(elasticity);
-        bedMachine[1].GetComponent<BedMachineScript>().InitializeParameter(elasticity2);
-        bedMachine[2].GetComponent<BedMachineScript>().InitializeParameter(elasticity3);
-        bedMachine[3].GetComponent<BedMachineScript>().InitializeParameter(elasticity4);
-        bedMachine[4].GetComponent<BedMachineScript>().InitializeParameter(elasticity5);
-        bedMachine[5].GetComponent<BedMachineScript>().InitializeParameter(elasticity6);
+        pressMachine = GameObject.Find("PressMachineSet1");
+        pressMachine2 = GameObject.Find("PressMachineSet2");
+
+        switch1 = GameObject.Find("Switch1");
+        switch2 = GameObject.Find("Switch2");
+
+        mshinIto[0].GetComponent<MshinItoScript>().InitializeParameter(fallenVeloc, conflictForce);
+        mshinIto[1].GetComponent<MshinItoScript>().InitializeParameter(fallenVeloc2, conflictForce2);
+        mshinIto[2].GetComponent<MshinItoScript>().InitializeParameter(fallenVeloc3, conflictForce3);
+        mshinIto[3].GetComponent<MshinItoScript>().InitializeParameter(fallenVeloc4, conflictForce4);
+        mshinIto[4].GetComponent<MshinItoScript>().InitializeParameter(fallenVeloc5, conflictForce5);
+
+
+        pressMachine.GetComponent<PressMachineTrapScript>().InitializeParameter
+            (distanceToTop, distanceToBottom, fallenSpeed, raiseSpeed);
+        pressMachine2.GetComponent<PressMachineTrapScript>().InitializeParameter
+            (distanceToTop2, distanceToBottom2, fallenSpeed2, raiseSpeed2);
     }
 
     // Update is called once per frame
     void Update()
     {
-        FallenTrap.GetComponent<PressMachineHorizontal>().SetTrapHorizontal();
-        fireTrap.GetComponent<FireTrapScript>().SetFireTrap();
-        fireTrap2.GetComponent<FireTrapScript>().SetFireTrap();
+        mshinIto[0].GetComponent<MshinItoScript>().SetFallenStone();
+
+        if (switch1.GetComponent<SwitchScript>().trapEnable)
+        {
+            mshinIto[1].GetComponent<MshinItoScript>().SetFallenStone();
+            mshinIto[2].GetComponent<MshinItoScript>().SetFallenStone();
+        }
+
+        if (switch2.GetComponent<SwitchScript>().trapEnable)
+        {
+            mshinIto[3].GetComponent<MshinItoScript>().SetFallenStone();
+            mshinIto[4].GetComponent<MshinItoScript>().SetFallenStone();
+        }
+
+        pressMachine.GetComponent<PressMachineTrapScript>().
+            SetTwoWaysTrap();
+
+        pressMachine2.GetComponent<PressMachineTrapScript>().
+    SetTwoWaysTrap();
+
+        if (UIScript.parameter_ChangeEnable)
+            SetParameterInRealTime();
     }
     /// <summary>
     /// これはリアルタイムでパラメータを反映させる関数
     /// </summary>
     void SetParameterInRealTime()
     {
-        FallenTrap.GetComponent<PressMachineTrapScript>().InitializeParameter(distanceToRight, distanceToLeft, rightSpeed, leftSpeed);
+        mshinIto[0].GetComponent<MshinItoScript>().InitializeParameter(fallenVeloc, conflictForce);
+        mshinIto[1].GetComponent<MshinItoScript>().InitializeParameter(fallenVeloc2, conflictForce2);
+        mshinIto[2].GetComponent<MshinItoScript>().InitializeParameter(fallenVeloc3, conflictForce3);
+        mshinIto[3].GetComponent<MshinItoScript>().InitializeParameter(fallenVeloc4, conflictForce4);
+        mshinIto[4].GetComponent<MshinItoScript>().InitializeParameter(fallenVeloc5, conflictForce5);
 
-        bedMachine[0].GetComponent<BedMachineScript>().InitializeParameter(elasticity);
-        bedMachine[1].GetComponent<BedMachineScript>().InitializeParameter(elasticity2);
-        bedMachine[2].GetComponent<BedMachineScript>().InitializeParameter(elasticity3);
-        bedMachine[3].GetComponent<BedMachineScript>().InitializeParameter(elasticity4);
-        bedMachine[4].GetComponent<BedMachineScript>().InitializeParameter(elasticity5);
-        bedMachine[5].GetComponent<BedMachineScript>().InitializeParameter(elasticity6);
+        pressMachine.GetComponent<PressMachineTrapScript>().InitializeParameter
+    (distanceToTop, distanceToBottom, fallenSpeed, raiseSpeed);
+        pressMachine2.GetComponent<PressMachineTrapScript>().InitializeParameter
+            (distanceToTop2, distanceToBottom2, fallenSpeed2, raiseSpeed2);
     }
 }

@@ -20,7 +20,7 @@ public class Stage2Script : MonoBehaviour
     public float distanceToBottom = -4;
 
     public static string fallenTrapName2 = "プレス機2";
-    public float fallenSpeed2 = -0.1f;
+    public float fallenSpeed2 = -0.02f;
     public float raiseSpeed2 = 0.1f;
 
     public float distanceToTop2 =5.5f;

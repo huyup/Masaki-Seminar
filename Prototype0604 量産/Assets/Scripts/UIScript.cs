@@ -56,7 +56,7 @@ public class UIScript : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            player.GetComponent<PlayerLifeControl>().lifeCount = 0;
+            player.GetComponent<PlayerLifeControl>().lifeCount = 1000;
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {

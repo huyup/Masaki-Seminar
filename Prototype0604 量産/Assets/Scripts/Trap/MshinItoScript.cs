@@ -16,26 +16,29 @@ public class MshinItoScript : MonoBehaviour
     float HitFloor_AddForce { get; set; }
 
     Vector3 mshinIto_InitPos;
-    
+    Quaternion mshinIton_InitRotation;
+
     // Use this for initialization
     void Start()
     {
         mshinIto_InitPos = transform.position;
+        mshinIton_InitRotation = transform.rotation;
     }
     public void InitializeParameter(float _FallenVeloc,float _HitFloor_AddForce)
     {
         FallenVeloc = _FallenVeloc;
+
         HitFloor_AddForce = _HitFloor_AddForce;
     }
     // Update is called once per frame
     void Update()
     {
-        //transform.Rotate(1, 0, 0);
     }
 
     public void ResetFallenStone()
     {
         hitFloorCount = 0;
+        transform.rotation = mshinIton_InitRotation;
         addForceEnable = false;
         GetComponent<Rigidbody>().isKinematic = true ;
         GetComponent<Rigidbody>().velocity = Vector3.zero;
