@@ -147,7 +147,7 @@ Material:
     - _DepthBias: 0.00012
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _EdgeThickness: 1
+    - _EdgeThickness: 4.59
     - _Farthest_Distance: 10
     - _GI_Intensity: 0
     - _GlossMapScale: 1
@@ -192,7 +192,7 @@ Material:
     - _Set_SystemShadowsToBase: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SpecularPower: 20
+    - _SpecularPower: 2
     - _SrcBlend: 1
     - _TweakHighColorOnShadow: 0
     - _TweakMatCapOnShadow: 0
@@ -208,10 +208,11 @@ Material:
     - _2nd_ShadeColor: {r: 1, g: 1, b: 1, a: 1}
     - _Ap_RimLightColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.78431374}
+    - _Color: {r: 0.13235295, g: 0.12846021, b: 0.12846021, a: 0.78431374}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Emissive_Color: {r: 0, g: 0, b: 0, a: 1}
     - _HighColor: {r: 0, g: 0, b: 0, a: 1}
     - _MatCapColor: {r: 1, g: 1, b: 1, a: 1}
     - _Outline_Color: {r: 0, g: 0, b: 0, a: 1}
     - _RimLightColor: {r: 0.9117647, g: 0.55241805, b: 0.06704153, a: 1}
+    - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}

@@ -8,68 +8,61 @@ using UnityEngine;
 public class Stage3Script : MonoBehaviour
 {
     //参照
-    GameObject FallenTrap;
-    GameObject FallenTrap2;
-    GameObject FallenTrap3;
+    const int bedMachine_Count = 3;
+    GameObject[] bedMachine = new GameObject[bedMachine_Count];
+
+    GameObject stoneFactory;
+    GameObject stoneFactory2;
     //パラメータ
-    public static string fallenTrapName = "プレス機１";
-    public float fallenSpeed = 0.5f;
-    public float raiseSpeed = 0.1f;
+    public static string bedMachineName = "ベッド１";
+    public float elasticity = 11;
 
-    public float distanceToTop = 5.5f;
-    public float distanceToBottom = 1;
+    public static string bedMachineName2 = "ベッド２";
+    public float elasticity2 =11;
 
-    public static string fallenTrapName2 = "プレス機2";
-    public float fallenSpeed2 = 0.5f;
-    public float raiseSpeed2 = 0.5f;
+    public static string bedMachineName3 = "ベッド３";
+    public float elasticity3 = 11;
 
-    public float distanceToTop2 = 5.5f;
-    public float distanceToBottom2 = 1;
+    public static string stoneFactoryName = "落石工場";
+    public float intervalOfCreate = 2;
 
-    public static string fallenTrapName3 = "プレス機3";
-    public float fallenSpeed3 = 0.1f;
-    public float raiseSpeed3 = 0.1f;
+    public static string stoneFactoryName2 = "落石工場2";
+    public float intervalOfCreate2 = 2;
 
-    public float distanceToTop3 = 5f;
-    public float distanceToBottom3 = -5;
-    
     public void ResetStage()
     {
-        FallenTrap.GetComponent<PressMachineTrapScript>().ResetPressMachine();
-        FallenTrap2.GetComponent<PressMachineTrapScript>().ResetPressMachine();
-        FallenTrap3.GetComponent<PressMachineTrapScript>().ResetPressMachine();
+        stoneFactory.GetComponent<FallenStoneFactory>().ResetFallenStoneFactory();
+        stoneFactory2.GetComponent<FallenStoneFactory>().ResetFallenStoneFactory();
+
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Trap"))
+        {
+            obj.GetComponent<InfiniteFallingStoneScript>().ResetInfiniteFallingStone();
+        }
     }
 
     // Use this for initialization
     void Start()
     {
-        FallenTrap = GameObject.Find("FallenTrapSet1");
-        FallenTrap2 = GameObject.Find("FallenTrapSet2");
-        FallenTrap3 = GameObject.Find("FallenTrapSet3");
+        for (int i = 0; i < bedMachine_Count; i++)
+        {
+            bedMachine[i] = GameObject.Find("bed" + (i + 1));
+        }
 
-        FallenTrap.GetComponent<PressMachineTrapScript>().InitializeParameter(distanceToTop, distanceToBottom, fallenSpeed, raiseSpeed);
-        FallenTrap2.GetComponent<PressMachineTrapScript>().InitializeParameter(distanceToTop2, distanceToBottom2, fallenSpeed2, raiseSpeed2);
-        FallenTrap3.GetComponent<PressMachineTrapScript>().InitializeParameter(distanceToTop3, distanceToBottom3, fallenSpeed3, raiseSpeed3);
+        bedMachine[0].GetComponent<BedMachineScript>().InitializeParameter(elasticity);
+        bedMachine[1].GetComponent<BedMachineScript>().InitializeParameter(elasticity2);
+        bedMachine[2].GetComponent<BedMachineScript>().InitializeParameter(elasticity3);
 
+
+        stoneFactory = GameObject.Find("FallenStoneFactory");
+        stoneFactory.GetComponent<FallenStoneFactory>().InitializeParameter(intervalOfCreate);
+
+        stoneFactory2 = GameObject.Find("FallenStoneFactory2");
+        stoneFactory2.GetComponent<FallenStoneFactory>().InitializeParameter(intervalOfCreate2);
     }
 
     // Update is called once per frame
     void Update()
     {
-        FallenTrap.GetComponent<PressMachineTrapScript>().
-            SetTwoWaysTrap();
-
-        FallenTrap2.GetComponent<PressMachineTrapScript>().
-            SetTwoWaysTrap();
-
-        FallenTrap3.GetComponent<PressMachineTrapScript>().
-           SetTwoWaysTrap();
-
-        if (UIScript.parameter_ChangeEnable)
-        {
-            SetParameterInRealTime();
-        }
-
 
     }
     /// <summary>
@@ -77,10 +70,8 @@ public class Stage3Script : MonoBehaviour
     /// </summary>
     void SetParameterInRealTime()
     {
-
-        FallenTrap.GetComponent<PressMachineTrapScript>().InitializeParameter(distanceToTop, distanceToBottom, fallenSpeed, raiseSpeed);
-        FallenTrap2.GetComponent<PressMachineTrapScript>().InitializeParameter(distanceToTop2, distanceToBottom2, fallenSpeed2, raiseSpeed2);
-        FallenTrap3.GetComponent<PressMachineTrapScript>().InitializeParameter(distanceToTop3, distanceToBottom3, fallenSpeed3, raiseSpeed3);
-
+        bedMachine[0].GetComponent<BedMachineScript>().InitializeParameter(elasticity);
+        bedMachine[1].GetComponent<BedMachineScript>().InitializeParameter(elasticity2);
+        bedMachine[2].GetComponent<BedMachineScript>().InitializeParameter(elasticity3);
     }
 }

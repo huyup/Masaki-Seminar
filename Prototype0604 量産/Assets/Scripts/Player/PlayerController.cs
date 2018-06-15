@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
     {
         this.gameObject.transform.position = playerInitPos;
         this.gameObject.transform.eulerAngles = new Vector3(0, 90, 0);
-
+        this.gameObject.GetComponent<CapsuleCollider>().isTrigger = false;
         this.gameObject.SendMessage("ResetLife");
 
         changeRotation.ResetRotation();

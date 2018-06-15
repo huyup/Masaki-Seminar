@@ -4801,7 +4801,7 @@ TrailRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: 54bba44eb8eedad4299727f289dad6b2, type: 2}
+  - {fileID: 2100000, guid: a5961e80e5e769946a4eebbefbc79b03, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5019,6 +5019,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bf0eaf371fcd9a4b8bb91067e639d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  beTargeted: 0
+  canBeTarget: 1
+  beTargetedMaterial: {fileID: 0}
+  normalMaterial: {fileID: 0}
 --- !u!114 &114760437587793268
 MonoBehaviour:
   m_ObjectHideFlags: 1

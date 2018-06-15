@@ -138,7 +138,7 @@ public class Menu : MonoBehaviour {
 
     void Select()
     {
-        if(Input.GetKeyDown(KeyCode.JoystickButton0))
+        if(Input.GetKeyDown(KeyCode.JoystickButton0)||Input.GetKeyDown(KeyCode.Space))
         {
             switch (menuState)
             {

@@ -71,11 +71,13 @@ public class PlayerLifeControl : MonoBehaviour
             {
                 lifeCount--;
                 soul.GetComponent<DeadPerformanceScript>().SetCircleParameter(transform.position);
+                transform.gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
             }
             if (collision.gameObject.name == "OutArea")
             {
                 lifeCount--;
                 soul.GetComponent<DeadPerformanceScript>().SetSquareParameter(transform.position);
+                transform.gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
             }
             if (collision.gameObject.tag == "Stone")
             {
@@ -83,6 +85,7 @@ public class PlayerLifeControl : MonoBehaviour
                 {
                     lifeCount--;
                     soul.GetComponent<DeadPerformanceScript>().SetCircleParameter(transform.position);
+                    transform.gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
                 }
             }
         }

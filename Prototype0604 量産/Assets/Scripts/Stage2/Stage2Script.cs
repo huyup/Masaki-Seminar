@@ -2,152 +2,85 @@
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// これはステージ２全般をコントロールするクラス
+/// これはステージ2全般をコントロールするクラス
 /// 作成者:huyup
 /// </summary>
 public class Stage2Script : MonoBehaviour
 {
     //参照
-    const int fallenNeedle_count = 3;
-    GameObject[] fallenNeedle = new GameObject[fallenNeedle_count];
+    GameObject FallenTrap;
+    GameObject FallenTrap2;
+    GameObject FallenTrap3;
+    //パラメータ
+    public static string fallenTrapName = "プレス機１";
+    public float fallenSpeed = -0.1f;
+    public float raiseSpeed = 0.1f;
 
-    const int remoteFloor_Count = 2;
-    GameObject[] remoteFloor = new GameObject[remoteFloor_Count];
-    GameObject remoteFloorSwitch;
+    public float distanceToTop = 4f;
+    public float distanceToBottom = -4;
 
-    GameObject fallenStoneSwitch;
-    GameObject stone;
+    public static string fallenTrapName2 = "プレス機2";
+    public float fallenSpeed2 = -0.1f;
+    public float raiseSpeed2 = 0.1f;
 
-    //パラメータ（エディタから編集可能）
-    public static string needleName = "床の針";
+    public float distanceToTop2 =5.5f;
+    public float distanceToBottom2 = 1;
 
+    public static string fallenTrapName3 = "プレス機3";
+    public float fallenSpeed3 = -0.1f;
+    public float raiseSpeed3 = 0.1f;
 
-    public static string stoneName = "落石";
-    public float Stone_FallenVeloc = -3;
-    public float Stone_HitFloor_AddForce = -15;
-
-    public static string fallenNeedleName = "落ちる針";
-    public float FallenNeedle_FallenVeloc = -2;
-    public float FallenNeedle_To_Next_distance = 2;
-
-    public static string remoteFloorName = "遠距離操作の床";
-    public float RemoteFloor1_MaxBottomY = -2;
-    public float RemoteFloor2_MaxBottomY = -1;
-    public float RemoteFloor_FallenVeloc = -0.02f;
+    public float distanceToTop3 = 4f;
+    public float distanceToBottom3 = -4;
 
     public void ResetStage()
     {
-        for (int i = 0; i < fallenNeedle_count; i++)
-            fallenNeedle[i].GetComponent<FallenNeedleScript>().ResetFallenNeedle();
-
-        for (int i = 0; i < remoteFloor_Count; i++)
-            remoteFloor[i].GetComponent<RemoteFloorScript>().ResetRemoteFloor();
-
-        stone.GetComponent<FallenStoneScript>().ResetFallenStone();
-        remoteFloorSwitch.GetComponent<SwitchScript>().ResetSwitch();
-        fallenStoneSwitch.GetComponent<SwitchScript>().ResetSwitch();
+        FallenTrap.GetComponent<PressMachineTrapScript>().ResetPressMachine();
+        FallenTrap2.GetComponent<PressMachineTrapScript>().ResetPressMachine();
+        FallenTrap3.GetComponent<PressMachineTrapScript>().ResetPressMachine();
     }
 
     // Use this for initialization
     void Start()
     {
-        //参照初期化
-        for (int i = 0; i < fallenNeedle_count; i++)
-        {
-            fallenNeedle[i] = GameObject.Find("FallenNeedle" + (i + 1));
-        }
+        FallenTrap = GameObject.Find("FallenTrapSet1");
+        FallenTrap2 = GameObject.Find("FallenTrapSet2");
+        FallenTrap3 = GameObject.Find("FallenTrapSet3");
 
-        for (int i = 0; i < remoteFloor_Count; i++)
-        {
-            remoteFloor[i] = GameObject.Find("RemoteFloor" + (i + 1));
-        }
+        FallenTrap.GetComponent<PressMachineTrapScript>().InitializeParameter(distanceToTop, distanceToBottom, fallenSpeed, raiseSpeed);
+        FallenTrap2.GetComponent<PressMachineTrapScript>().InitializeParameter(distanceToTop2, distanceToBottom2, fallenSpeed2, raiseSpeed2);
+        FallenTrap3.GetComponent<PressMachineTrapScript>().InitializeParameter(distanceToTop3, distanceToBottom3, fallenSpeed3, raiseSpeed3);
 
-        stone = GameObject.Find("Stone");
-
-        remoteFloorSwitch = GameObject.Find("RemoteSwitch");
-
-        fallenStoneSwitch = GameObject.Find("FallenStoneSwitch");
-        
-        //パラメータ設定
-        for (int i = 0; i < fallenNeedle_count; i++)
-        {
-            fallenNeedle[i].GetComponent<FallenNeedleScript>().InitializeParameter(FallenNeedle_FallenVeloc);
-        }
-
-        remoteFloor[0].GetComponent<RemoteFloorScript>().InitializeParameter(RemoteFloor1_MaxBottomY, RemoteFloor_FallenVeloc);
-        remoteFloor[1].GetComponent<RemoteFloorScript>().InitializeParameter(RemoteFloor2_MaxBottomY, RemoteFloor_FallenVeloc);
-
-        stone.GetComponent<FallenStoneScript>().InitializeParameter(Stone_FallenVeloc, Stone_HitFloor_AddForce);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //スイッチを踏んだら、岩を移動させる
-        if (fallenStoneSwitch.GetComponent<SwitchScript>().trapEnable)
-        {
-            stone.GetComponent<FallenStoneScript>().fallenEnable = true;
-            fallenStoneSwitch.GetComponent<SwitchScript>().trapEnable = false;
-        }
+        FallenTrap.GetComponent<PressMachineTrapScript>().
+            SetTwoWaysTrap();
 
-        //スイッチを踏んだら、針と床両方を落下させる
-        if (remoteFloorSwitch.GetComponent<SwitchScript>().trapEnable)
-        {
-            //床
-            for (int i = 0; i < remoteFloor_Count; i++)
-            {
-                remoteFloor[i].GetComponent<RemoteFloorScript>().fallenEnable = true;
-            }
-            //矢
-            fallenNeedle[0].GetComponent<FallenNeedleScript>().SetNeedleFallen();
+        FallenTrap2.GetComponent<PressMachineTrapScript>().
+            SetTwoWaysTrap();
 
-            remoteFloorSwitch.GetComponent<SwitchScript>().trapEnable = false;
-        }
-
-        FallenByDistance(fallenNeedle_count);
+        FallenTrap3.GetComponent<PressMachineTrapScript>().
+           SetTwoWaysTrap();
 
         if (UIScript.parameter_ChangeEnable)
         {
             SetParameterInRealTime();
         }
+
+
     }
     /// <summary>
     /// これはリアルタイムでパラメータを反映させる関数
     /// </summary>
-    public void SetParameterInRealTime()
+    void SetParameterInRealTime()
     {
 
-            for (int i = 0; i < fallenNeedle_count; i++)
-            {
-                fallenNeedle[i].GetComponent<FallenNeedleScript>().InitializeParameter(FallenNeedle_FallenVeloc);
-            }
+        FallenTrap.GetComponent<PressMachineTrapScript>().InitializeParameter(distanceToTop, distanceToBottom, fallenSpeed, raiseSpeed);
+        FallenTrap2.GetComponent<PressMachineTrapScript>().InitializeParameter(distanceToTop2, distanceToBottom2, fallenSpeed2, raiseSpeed2);
+        FallenTrap3.GetComponent<PressMachineTrapScript>().InitializeParameter(distanceToTop3, distanceToBottom3, fallenSpeed3, raiseSpeed3);
 
-            remoteFloor[0].GetComponent<RemoteFloorScript>().InitializeParameter(RemoteFloor1_MaxBottomY, RemoteFloor_FallenVeloc);
-            remoteFloor[1].GetComponent<RemoteFloorScript>().InitializeParameter(RemoteFloor2_MaxBottomY, RemoteFloor_FallenVeloc);
-
-            stone.GetComponent<FallenStoneScript>().InitializeParameter(Stone_FallenVeloc, Stone_HitFloor_AddForce);
-        
     }
-
-    /// <summary>
-    /// これは針を一個ずつ落下させる関数
-    /// </summary>
-    /// <param name="fallenNeedle_count"></param>
-    public void FallenByDistance(int fallenNeedle_count)
-    {
-        if (!fallenNeedle[fallenNeedle_count - 1].GetComponent<FallenNeedleScript>().fallenEnable)
-        {
-            for (int i = 0; i < fallenNeedle_count; i++)
-            {
-                if (i != 0)
-                {
-                    if (fallenNeedle[i].transform.position.y - fallenNeedle[i - 1].transform.position.y > FallenNeedle_To_Next_distance)
-                    {
-                        fallenNeedle[i].GetComponent<FallenNeedleScript>().fallenEnable = true;
-                    }
-                }
-            }
-        }
-    }
-
 }

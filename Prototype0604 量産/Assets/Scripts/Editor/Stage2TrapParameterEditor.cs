@@ -9,19 +9,22 @@ public class Stage2TrapParameterEditor : Editor
         var Stage2 = target as Stage2Script;
         //EditorGUILayout.LabelField("罠：" + Stage2Script.needleName);
 
-        EditorGUILayout.LabelField("罠：" + Stage2Script.fallenNeedleName);
-        Stage2.FallenNeedle_FallenVeloc = EditorGUILayout.FloatField("落ちる速度", Stage2.FallenNeedle_FallenVeloc);
-        Stage2.FallenNeedle_To_Next_distance = EditorGUILayout.FloatField("次の針が落ちる間隔", Stage2.FallenNeedle_To_Next_distance);
+        EditorGUILayout.LabelField("罠：" + Stage2Script.fallenTrapName);
+        Stage2.fallenSpeed = EditorGUILayout.FloatField("落ちる速度", Stage2.fallenSpeed);
+        Stage2.raiseSpeed = EditorGUILayout.FloatField("上昇速度", Stage2.raiseSpeed);
+        Stage2.distanceToBottom = EditorGUILayout.FloatField("最低点", Stage2.distanceToBottom);
+        Stage2.distanceToTop = EditorGUILayout.FloatField("最高点", Stage2.distanceToTop);
 
-        EditorGUILayout.LabelField("罠：" + Stage2Script.remoteFloorName);
-        Stage2.RemoteFloor1_MaxBottomY = EditorGUILayout.FloatField("床1が止まる位置", Stage2.RemoteFloor1_MaxBottomY);
-        Stage2.RemoteFloor2_MaxBottomY = EditorGUILayout.FloatField("床2が止まる位置", Stage2.RemoteFloor2_MaxBottomY);
-        Stage2.RemoteFloor_FallenVeloc = EditorGUILayout.FloatField("落ちる速度", Stage2.RemoteFloor_FallenVeloc);
+        EditorGUILayout.LabelField("罠：" + Stage2Script.fallenTrapName2);
+        Stage2.fallenSpeed2 = EditorGUILayout.FloatField("落ちる速度", Stage2.fallenSpeed2);
+        Stage2.raiseSpeed2 = EditorGUILayout.FloatField("上昇速度", Stage2.raiseSpeed2);
+        Stage2.distanceToBottom2 = EditorGUILayout.FloatField("最低点", Stage2.distanceToBottom2);
+        Stage2.distanceToTop2 = EditorGUILayout.FloatField("最高点", Stage2.distanceToTop2);
 
-        EditorGUILayout.LabelField("罠：" + Stage2Script.stoneName);
-        Stage2.Stone_FallenVeloc = EditorGUILayout.FloatField("落ちる速度", Stage2.Stone_FallenVeloc);
-        Stage2.Stone_HitFloor_AddForce = EditorGUILayout.FloatField("床に落ちた瞬間に発生する力", Stage2.Stone_HitFloor_AddForce);
-        
-        //EditorGUILayout.LabelField("リアルタイム編集" + UIScript.parameter_ChangeEnable);
+        EditorGUILayout.LabelField("罠：" + Stage2Script.fallenTrapName3);
+        Stage2.fallenSpeed3 = EditorGUILayout.FloatField("落ちる速度", Stage2.fallenSpeed3);
+        Stage2.raiseSpeed3 = EditorGUILayout.FloatField("上昇速度", Stage2.raiseSpeed3);
+        Stage2.distanceToBottom3 = EditorGUILayout.FloatField("最低点", Stage2.distanceToBottom3);
+        Stage2.distanceToTop3 = EditorGUILayout.FloatField("最高点", Stage2.distanceToTop3);
     }
 }

@@ -41,7 +41,7 @@ public class PressMachineHorizontal : MonoBehaviour
     {
     }
     /// <summary>
-    /// プレス機を上下運動させるメソッド
+    /// プレス機を左右運動させるメソッド
     /// </summary>
     public void SetTrapHorizontal()
     {

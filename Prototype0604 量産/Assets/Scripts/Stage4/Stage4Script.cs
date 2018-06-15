@@ -11,8 +11,9 @@ public class Stage4Script : MonoBehaviour
     const int bedMachine_Count = 3;
     GameObject[] bedMachine=new GameObject[bedMachine_Count];
 
-    GameObject stoneFactory;
-    GameObject stoneFactory2;
+    GameObject pressMachine;
+    GameObject pressMachine2;
+
     //パラメータ
     public static string bedMachineName = "ベッド１";
     public float elasticity = 3;
@@ -23,21 +24,22 @@ public class Stage4Script : MonoBehaviour
     public static string bedMachineName3 = "ベッド３";
     public float elasticity3 = 3;
 
-    public static string stoneFactoryName = "落石工場";
-    public float intervalOfCreate = 3;
+    public static string pressMachineName = "プレス機１";
+    public float distanceToRight = -2.5f;
+    public float distanceToLeft = 3.5f;
+    public float rightSpeed = -0.03f;
+    public float leftSpeed = 0.1f;
 
-    public static string stoneFactoryName2 = "落石工場2";
-    public float intervalOfCreate2 = 3;
+    public static string pressMachineName2 = "プレス機２";
+    public float distanceToRight2 = 7f;
+    public float distanceToLeft2 = 13f;
+    public float rightSpeed2 = -0.1f;
+    public float leftSpeed2 = 0.03f;
 
     public void ResetStage()
     {
-        stoneFactory.GetComponent<FallenStoneFactory>().ResetFallenStoneFactory();
-        stoneFactory2.GetComponent<FallenStoneFactory>().ResetFallenStoneFactory();
-
-        foreach(GameObject obj in GameObject.FindGameObjectsWithTag("Trap"))
-        {
-            obj.GetComponent<InfiniteFallingStoneScript>().ResetInfiniteFallingStone();
-        }
+        pressMachine.GetComponent<PressMachineHorizontal>().ResetPressMachine();
+        pressMachine2.GetComponent<PressMachineHorizontal>().ResetPressMachine();
     }
 
     // Use this for initialization
@@ -53,17 +55,23 @@ public class Stage4Script : MonoBehaviour
         bedMachine[2].GetComponent<BedMachineScript>().InitializeParameter(elasticity3);
 
 
-        stoneFactory = GameObject.Find("FallenStoneFactory");
-        stoneFactory.GetComponent<FallenStoneFactory>().InitializeParameter(intervalOfCreate);
+        pressMachine = GameObject.Find("PressMachineSet1");
+        pressMachine.GetComponent<PressMachineHorizontal>().InitializeParameter
+            (distanceToRight,distanceToLeft,rightSpeed,leftSpeed);
 
-        stoneFactory2 = GameObject.Find("FallenStoneFactory2");
-        stoneFactory2.GetComponent<FallenStoneFactory>().InitializeParameter(intervalOfCreate2);
+        pressMachine2 = GameObject.Find("PressMachineSet2");
+        pressMachine2.GetComponent<PressMachineHorizontal>().InitializeParameter
+            (distanceToRight2, distanceToLeft2, rightSpeed2, leftSpeed2);
     }
 
     // Update is called once per frame
     void Update()
     {
+        pressMachine.GetComponent<PressMachineHorizontal>().SetTrapHorizontal();
+        pressMachine2.GetComponent<PressMachineHorizontal>().SetTrapHorizontal();
 
+        if (UIScript.parameter_ChangeEnable)
+            SetParameterInRealTime();
     }
     /// <summary>
     /// これはリアルタイムでパラメータを反映させる関数
@@ -73,5 +81,10 @@ public class Stage4Script : MonoBehaviour
         bedMachine[0].GetComponent<BedMachineScript>().InitializeParameter(elasticity);
         bedMachine[1].GetComponent<BedMachineScript>().InitializeParameter(elasticity2);
         bedMachine[2].GetComponent<BedMachineScript>().InitializeParameter(elasticity3);
+
+        pressMachine.GetComponent<PressMachineHorizontal>().InitializeParameter
+    (distanceToRight, distanceToLeft, rightSpeed, leftSpeed);
+        pressMachine2.GetComponent<PressMachineHorizontal>().InitializeParameter
+    (distanceToRight2, distanceToLeft2, rightSpeed2, leftSpeed2);
     }
 }

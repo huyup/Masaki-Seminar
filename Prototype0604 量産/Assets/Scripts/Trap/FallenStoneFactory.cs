@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 /// <summary>
-/// これは装置：岩を作る装置をコントロールするクラス
+/// これは装置：ミシン糸を作る装置をコントロールするクラス
 /// 作成者:huyup
 /// </summary>
 public class FallenStoneFactory : MonoBehaviour

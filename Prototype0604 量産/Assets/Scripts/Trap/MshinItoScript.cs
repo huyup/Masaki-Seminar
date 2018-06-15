@@ -6,22 +6,21 @@ using UnityEngine.SceneManagement;
 /// これは罠：落石をコントロールするクラス
 /// 作成者:huyup
 /// </summary>
-public class FallenStoneScript : MonoBehaviour
+public class MshinItoScript : MonoBehaviour
 {
     int hitFloorCount;
-    [HideInInspector]
-    public bool fallenEnable;
-    bool addForceEnable;
 
+    bool addForceEnable;
     float FallenVeloc { get; set; }
+
     float HitFloor_AddForce { get; set; }
 
-    Vector3 stoneInitPos;
+    Vector3 mshinIto_InitPos;
     
     // Use this for initialization
     void Start()
     {
-        stoneInitPos = transform.position;
+        mshinIto_InitPos = transform.position;
     }
     public void InitializeParameter(float _FallenVeloc,float _HitFloor_AddForce)
     {
@@ -31,24 +30,20 @@ public class FallenStoneScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(fallenEnable)
-        {
-            SetFallenStone();
-        }
+        //transform.Rotate(1, 0, 0);
     }
 
     public void ResetFallenStone()
     {
         hitFloorCount = 0;
-        fallenEnable = false;
         addForceEnable = false;
         GetComponent<Rigidbody>().isKinematic = true ;
         GetComponent<Rigidbody>().velocity = Vector3.zero;
-        transform.position = stoneInitPos;
+        transform.position = mshinIto_InitPos;
     }
 
     /// <summary>
-    /// これは岩を落下させるメソッド
+    /// これはミシン糸を落下させるメソッド
     /// 床に落ちたら、力を与える
     /// </summary>
     public void SetFallenStone()
@@ -66,7 +61,6 @@ public class FallenStoneScript : MonoBehaviour
         {
             transform.GetComponent<Rigidbody>().AddForce(HitFloor_AddForce+5, 0, 0, ForceMode.VelocityChange);
             addForceEnable = false;
-            fallenEnable = false;
         }
     }
     private void OnCollisionEnter(Collision collision)

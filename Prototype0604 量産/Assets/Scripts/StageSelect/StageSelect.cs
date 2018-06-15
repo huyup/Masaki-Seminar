@@ -261,7 +261,7 @@ public class StageSelect : MonoBehaviour {
         {
             SceneManager.LoadScene("Menu");
         }
-        if (Input.GetKeyDown(KeyCode.JoystickButton0))
+        if (Input.GetKeyDown(KeyCode.JoystickButton0)||Input.GetKeyDown(KeyCode.Space))
         {
             SceneManager.LoadScene("Loading");
         }

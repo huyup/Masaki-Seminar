@@ -54,7 +54,7 @@ public class DeadPerformanceScript : MonoBehaviour
     {
         //参照
         player = GameObject.Find("Player");
-        startTarget = GameObject.Find("Start");
+        startTarget = GameObject.Find("StartArea");
 
         //コンポーネント
         soulEff = transform.Find("Particle System").GetComponent<ParticleSystem>();
@@ -102,7 +102,7 @@ public class DeadPerformanceScript : MonoBehaviour
 
         //円
         centerPos = new Vector3((deathPos.x + startTarget.transform.position.x) / 2,
-    (deathPos.y + startTarget.transform.position.y) / 2 + 0.1f, deathPos.z);
+    (deathPos.y + startTarget.transform.position.y) / 2 + 0.1f, transform.position.z);
 
         Radius = Mathf.Abs((deathPos.x - startTarget.transform.position.x) / 2);
 
@@ -130,7 +130,7 @@ public class DeadPerformanceScript : MonoBehaviour
         raiseEnable = true;
         moveEnable = true;
 
-        transform.position = deathPos;
+        transform.position = new Vector3(deathPos.x,deathPos.y,transform.position.z);
 
         if (deathPos.x > startTarget.transform.position.x)
             moveSoulToLeft = true;
@@ -167,7 +167,7 @@ public class DeadPerformanceScript : MonoBehaviour
         if (raiseEnable)
         {
             // 正方形運動演算
-            if (transform.position.y < startTarget.transform.position.y + 1)
+            if (transform.position.y < startTarget.transform.position.y)
             {
                 transform.position += new Vector3(0, moveSqureSpeed, 0);
             }
@@ -192,7 +192,7 @@ public class DeadPerformanceScript : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "Start")
+        if (other.gameObject.name == "StartArea")
         {
             if (!soulEff.isStopped)
                 soulEff.Stop();

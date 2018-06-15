@@ -17,10 +17,17 @@ public class Stage4TrapParameterEditor : Editor
         Stage4.elasticity2 = EditorGUILayout.FloatField("弾力：", Stage4.elasticity2);
         EditorGUILayout.LabelField("装置：" + Stage4Script.bedMachineName3);
         Stage4.elasticity3 = EditorGUILayout.FloatField("弾力：", Stage4.elasticity3);
-        EditorGUILayout.LabelField("装置：" + Stage4Script.stoneFactoryName);
-        Stage4.intervalOfCreate = EditorGUILayout.FloatField("間隔：", Stage4.intervalOfCreate);
+        EditorGUILayout.LabelField("装置：" + Stage4Script.pressMachineName);
 
-        EditorGUILayout.LabelField("装置：" + Stage4Script.stoneFactoryName2);
-        Stage4.intervalOfCreate2 = EditorGUILayout.FloatField("間隔：", Stage4.intervalOfCreate2);
+        Stage4.distanceToLeft = EditorGUILayout.FloatField("左のスタート位置：", Stage4.distanceToLeft);
+        Stage4.distanceToRight = EditorGUILayout.FloatField("右のスタート位置：", Stage4.distanceToRight);
+        Stage4.leftSpeed= EditorGUILayout.FloatField("左の速度：", Stage4.leftSpeed);
+        Stage4.rightSpeed = EditorGUILayout.FloatField("右の速度：", Stage4.rightSpeed);
+
+        EditorGUILayout.LabelField("装置：" + Stage4Script.pressMachineName2);
+        Stage4.distanceToLeft2 = EditorGUILayout.FloatField("左のスタート位置：", Stage4.distanceToLeft2);
+        Stage4.distanceToRight2 = EditorGUILayout.FloatField("右のスタート位置：", Stage4.distanceToRight2);
+        Stage4.leftSpeed2 = EditorGUILayout.FloatField("左の速度：", Stage4.leftSpeed2);
+        Stage4.rightSpeed2 = EditorGUILayout.FloatField("右の速度：", Stage4.rightSpeed2);
     }
 }
