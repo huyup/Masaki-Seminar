@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4075735007724078}
   - component: {fileID: 114322763509765348}
+  - component: {fileID: 114700846651138074}
   m_Layer: 0
   m_Name: GhostRespawn
   m_TagString: Respawn
@@ -33,8 +34,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1260349010705276}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -1.76, y: -0.255, z: 0}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -1.7600002, y: -0.25499988, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,7 +52,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 031a315e684aa6046a65a760449d3672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ghostPrefab: {fileID: 1049449838711780, guid: e6daa28ac8459f740b0d1b7de6f249c9,
+  ghostPrefab: {fileID: 1535016840304740, guid: eed97a81a68deb846a8b42b8e829b66f,
     type: 2}
   lightPrefab: {fileID: 1220582813927022, guid: 6e43c941820e69545adf3968ecbfdec1,
     type: 2}
+  ghostNumMax: 3
+--- !u!114 &114700846651138074
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1260349010705276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6924953fc9c10414585f508276fbc62a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -6,11 +6,26 @@ using UnityEngine.SceneManagement;
 public class NextStage : MonoBehaviour
 {
     int nextStageNum = 0;
+    bool goNextStage;
+
+    public bool P_GoNextStage
+    {
+        get { return goNextStage; }
+        set { goNextStage = value; }
+    }
 
     private void Start()
     {
         int.TryParse(SceneManager.GetActiveScene().name.Remove(0,5), out nextStageNum);
         nextStageNum++;
+        goNextStage = false;
+    }
+    private void Update()
+    {
+        if(goNextStage)
+        {
+            Invoke("LoadNextScene", 1f);
+        }
     }
 
     void OnTriggerEnter(Collider collider)
@@ -18,8 +33,11 @@ public class NextStage : MonoBehaviour
         if (collider.gameObject.tag == "Player")
         {
             PlayerPrefs.SetInt(SceneManager.GetActiveScene().name, 1);
-            //一秒後に実行
-            Invoke("LoadNextScene", 1f);
+            if(SceneManager.GetActiveScene().name == "Stage5")
+            {
+                GameObject trap = GameObject.Find("Trap");
+                Destroy(trap);
+            }
         }
     }
 

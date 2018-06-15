@@ -15,7 +15,7 @@ public class ResetStage5 : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         s5.UpdateReset();
     }

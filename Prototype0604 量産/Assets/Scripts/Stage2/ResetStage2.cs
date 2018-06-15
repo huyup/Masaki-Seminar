@@ -15,7 +15,7 @@ public class ResetStage2 : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         s2.UpdateReset();
     }

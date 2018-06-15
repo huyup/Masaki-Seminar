@@ -67,7 +67,6 @@ public class DeadPerformanceScript : MonoBehaviour
 
     void Update()
     {
-        
         //円運動
         timeForCircle += Time.deltaTime;
 

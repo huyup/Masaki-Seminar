@@ -15,7 +15,7 @@ public class ResetStage3 : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         s3.UpdateReset();
     }
