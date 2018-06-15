@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using UnityEngine.UI;
 
 // 必要なコンポーネントの列記
 [RequireComponent(typeof(Animator))]
@@ -45,8 +47,11 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private Vector3 velocity;
     private Vector3 playerInitPos;
+    private Vector3 clearPos;
     private Animator anim;
 
+    bool playClearAnimation;
+    Image nextStage;
 
     /// <summary>
     /// 空中ジャンプ
@@ -67,6 +72,7 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+    #region 初期化
     // Use this for initialization
     void Start()
     {
@@ -76,7 +82,14 @@ public class PlayerController : MonoBehaviour
         changeRotation = new ChangeRotation();
         canControlPlayer = true;
         canInput = false;
+        playClearAnimation = false;
+        clearPos = GameObject.Find("ClearTrigger").transform.position;
+        clearPos.y = this.gameObject.transform.position.y;
+
+        nextStage = GameObject.Find("nextStage").GetComponent<Image>();
+        nextStage.enabled = false;
     }
+    #endregion
 
     public void ResetPlayer()
     {
@@ -134,27 +147,67 @@ public class PlayerController : MonoBehaviour
             g_VeclocityX = 0;
             g_duringJump = false;
         }
-
     }
 
     void FixedUpdate()
     {
-        //クリア時のアニメーション
-        if (!canControlPlayer)
-        {
-            transform.eulerAngles = new Vector3(0, 0, 0);
-            transform.localPosition += Vector3.forward * Time.fixedDeltaTime;
-            return;
-        }
-
+        CheckPressAnyKey();
         Move();
-
         Jump();
 
         changeRotation.ChangeDirection(g_VeclocityX, this.gameObject);
-
-
     }
+
+    #region clear時の演出
+    bool RecieveInput()
+    {
+        foreach (KeyCode key in Enum.GetValues(typeof(KeyCode)))
+        {
+            if (Input.GetKeyDown(key))
+                return true;
+        }
+        return false;
+    }
+    void ClearAnimation()
+    {
+        Animator doorAnimator = GameObject.Find("door").GetComponent<Animator>();
+        doorAnimator.SetTrigger("OpenDoor");
+        transform.localPosition += Vector3.forward * Time.fixedDeltaTime;
+    }
+    void GoNextStage()
+    {
+        //次のステージへ
+        NextStage nextStage = GameObject.Find("ClearTrigger").GetComponent<NextStage>();
+        nextStage.P_GoNextStage = true;
+    }
+    void SetPlayerToClearPos()
+    {
+        velocity = Vector3.zero;
+        rb.isKinematic = true;
+        nextStage.enabled = true;
+        transform.eulerAngles = new Vector3(0, 0, 0);
+    }
+    void CheckPressAnyKey()
+    {
+        if (canControlPlayer)
+            return;
+
+        SetPlayerToClearPos();
+
+        if (playClearAnimation)
+        {
+            ClearAnimation();
+            GoNextStage();
+            return;
+        }
+        else
+            transform.position = clearPos;
+
+        //入力したらクリアアニメ再生
+        if (RecieveInput())
+            playClearAnimation = true;
+    }
+    #endregion
 
     #region 移動に関連する
     void Move()
@@ -230,7 +283,7 @@ public class PlayerController : MonoBehaviour
                 anim.SetBool("Jump", true);
 
                 rb.AddForce(Vector3.up *
-    jumpPower*1.5f, ForceMode.VelocityChange);
+                jumpPower*1.5f, ForceMode.VelocityChange);
 
                 airJumpEnable = false;
             }

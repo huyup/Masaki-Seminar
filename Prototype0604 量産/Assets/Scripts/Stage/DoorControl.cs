@@ -42,8 +42,6 @@ public class DoorControl : MonoBehaviour
         if (other.gameObject.name == "Player")
         {
             eff_Playable = true;
-            Animator doorAnimator = GameObject.Find("door").GetComponent<Animator>();
-            doorAnimator.SetTrigger("OpenDoor");
             playerController.P_CanControlPlayer = false;
         }
     }

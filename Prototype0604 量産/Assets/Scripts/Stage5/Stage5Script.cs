@@ -48,6 +48,11 @@ public class Stage5Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        for(int i=0;i< mshinIto.Length;i++)
+        {
+            if (mshinIto[i] == null)
+                return;
+        }
         mshinIto[0].GetComponent<MshinItoScript>().SetFallenStone();
         mshinIto[1].GetComponent<MshinItoScript>().SetFallenStone();
         mshinIto[2].GetComponent<MshinItoScript>().SetFallenStone();

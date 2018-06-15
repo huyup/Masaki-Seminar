@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class GhostController : MonoBehaviour
 {
-
     public GameObject ghostPrefab;
     public GameObject lightPrefab;
     public int ghostNumMax = 3;

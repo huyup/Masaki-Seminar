@@ -45,6 +45,8 @@ public class RecordPlayerPos : MonoBehaviour
                 //ゴーストを作る+初期化
                 ghostController.InitializeGhost(playerPosTmp, retryNumOfTime);
 
+                
+
                 //人形を残す
                 //dollController.CreateDoll((Vector3)playerPosRecord[playerPosRecord.Count - 1]);
 

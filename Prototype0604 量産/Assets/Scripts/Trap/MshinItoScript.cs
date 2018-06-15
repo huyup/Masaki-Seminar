@@ -73,6 +73,5 @@ public class MshinItoScript : MonoBehaviour
             addForceEnable = true;
             hitFloorCount++;
         }
-
     }
 }
