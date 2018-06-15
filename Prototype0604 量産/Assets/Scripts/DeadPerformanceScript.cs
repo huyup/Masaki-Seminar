@@ -213,4 +213,27 @@ public class DeadPerformanceScript : MonoBehaviour
             }
         }
     }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.name == "StartArea")
+        {
+            if (!soulEff.isStopped)
+                soulEff.Stop();
+
+            GetComponent<Renderer>().enabled = false;
+            moveEnable = false;
+            moveCircle = false;
+            moveSquare = false;
+
+            moveSoulToLeft = false;
+            moveSoulToRight = false;
+
+            Transform body = player.transform.Find("character_motion2").Find("root");
+            foreach (Transform child in body)
+            {
+                if (child.GetComponent<Renderer>())
+                    child.GetComponent<Renderer>().enabled = true;
+            }
+        }
+    }
 }

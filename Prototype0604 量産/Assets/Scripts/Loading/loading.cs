@@ -44,13 +44,13 @@ public class Loading : MonoBehaviour
                 SceneManager.LoadScene("Stage7");
                 break;
             case StageSelect.StageNum.Stage8:
-                //SceneManager.LoadScene("Stage8");
+                SceneManager.LoadScene("Stage8");
                 break;
             case StageSelect.StageNum.Stage9:
-                //SceneManager.LoadScene("Stage9");
+                SceneManager.LoadScene("Stage9");
                 break;
             case StageSelect.StageNum.Stage10:
-                //SceneManager.LoadScene("Stage10");
+                SceneManager.LoadScene("Stage10");
                 break;
         }
     }

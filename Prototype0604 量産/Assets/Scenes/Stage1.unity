@@ -4220,7 +4220,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_Intensity: 3
   m_Range: 10
   m_SpotAngle: 30
@@ -28701,15 +28701,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2088938870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3e37aefbbcfc514e9bf3204469addc1, type: 3}
+  m_Script: {fileID: 11500000, guid: acb9ab288bdb6cf4eb945e9e31606464, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fallenSpeed: -0.05
   raiseSpeed: 0.1
   distanceToTop: 5.5
   distanceToBottom: 1
-  fallenSpeed2: -0.13
-  raiseSpeed2: 0.13
+  fallenSpeed2: -0.1
+  raiseSpeed2: 0.1
   distanceToTop2: 5.5
   distanceToBottom2: 1
 --- !u!4 &2088938872
