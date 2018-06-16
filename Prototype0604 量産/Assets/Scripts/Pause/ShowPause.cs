@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ShowPause : MonoBehaviour {
+public class ShowPause :MonoBehaviour{
     PlayerController playerController;
 
     // Use this for initialization
-    void Start () {
+    void Start() {
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
@@ -22,6 +22,8 @@ public class ShowPause : MonoBehaviour {
             return;
 
         if (Input.GetKeyDown(KeyCode.JoystickButton7))
+        {
             Pauser.Pause();
+        }
     }
 }

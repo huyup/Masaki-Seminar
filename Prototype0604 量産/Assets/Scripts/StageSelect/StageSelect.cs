@@ -62,6 +62,7 @@ public class StageSelect : MonoBehaviour {
         stageNum = StageNum.Stage1;
         oldh = 0;
         nowh = 0;
+        Pauser.DestoryTarget();
     }
 
     void InitializeImage()

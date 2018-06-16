@@ -35,7 +35,7 @@ public class FallFloor : MonoBehaviour {
         FallenVeloc = _FallenVeloc;
     }
     // Update is called once per frame
-    void Update () {
+    void FixedUpdate () {
         MoveFallFloor();
     }
 

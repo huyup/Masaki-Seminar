@@ -35,7 +35,7 @@ public class TranslateMachinceScript : MonoBehaviour {
         BottomPosY = _BottomPosY;
     }
     // Update is called once per frame
-    void Update () {
+    void FixedUpdate () {
         kassa.transform.Rotate(0, 0, 2);
         kassa2.transform.Rotate(0, 0, 2);
 

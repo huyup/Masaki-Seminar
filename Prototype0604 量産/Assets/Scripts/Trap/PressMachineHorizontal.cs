@@ -37,7 +37,7 @@ public class PressMachineHorizontal : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
     }
     /// <summary>

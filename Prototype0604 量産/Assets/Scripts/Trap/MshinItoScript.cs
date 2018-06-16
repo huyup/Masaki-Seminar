@@ -31,7 +31,7 @@ public class MshinItoScript : MonoBehaviour
         HitFloor_AddForce = _HitFloor_AddForce;
     }
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
     }
 

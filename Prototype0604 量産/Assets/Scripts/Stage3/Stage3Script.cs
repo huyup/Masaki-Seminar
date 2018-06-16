@@ -61,7 +61,7 @@ public class Stage3Script : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
     }

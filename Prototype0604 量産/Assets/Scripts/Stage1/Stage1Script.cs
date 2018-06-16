@@ -41,7 +41,7 @@ public class Stage1Script : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         FallenTrap.GetComponent<PressMachineTrapScript>().
             SetTwoWaysTrap();

@@ -47,20 +47,28 @@ public class Title : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         nowCountTime += Time.fixedDeltaTime;
 
         if (increaseRgbLogo >= 1 && RecieveInput())
         {
             pressBtn.sprite = pressAnyClickSprite;
             pressBtn.color = new Color(1, 1, 1, 1);
-            SceneManager.LoadScene("Menu");
+
+            SoundManager.StopBGM();
+            SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+            SceneManager.UnloadSceneAsync("Title");
+            return;
         }
+
+        if (increaseRgbBg > 0 && !SoundManager.IsPlayingBgm())
+            SoundManager.PlayBGM("titleBgm");
 
         ShowTpu();
         ShowBg();
         Showlogo();
         ShowPressAnyBtn();
+
     }
 
     #region draw func

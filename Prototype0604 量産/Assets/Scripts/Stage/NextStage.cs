@@ -43,6 +43,8 @@ public class NextStage : MonoBehaviour
 
     void LoadNextScene()
     {
-        SceneManager.LoadScene("Stage" + nextStageNum.ToString());
+        Pauser.DestoryTarget();
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+        SceneManager.LoadScene("Stage" + nextStageNum.ToString(), LoadSceneMode.Single);
     }
 }

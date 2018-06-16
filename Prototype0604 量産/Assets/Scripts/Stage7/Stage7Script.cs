@@ -56,7 +56,7 @@ public class Stage7Script : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         translateMachine[0].GetComponent<TranslateMachinceScript>().SetTwoWayTranslateFloor();
         translateMachine[1].GetComponent<TranslateMachinceScript>().SetTwoWayTranslateFloor();

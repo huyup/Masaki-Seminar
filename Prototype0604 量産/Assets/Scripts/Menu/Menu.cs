@@ -45,6 +45,7 @@ public class Menu : MonoBehaviour {
         menuState = MenuState.MenuState_SelectStage;
         old = 0;
         now = 0;
+        Pauser.DestoryTarget();
     }
 
     void InitializeImage()
