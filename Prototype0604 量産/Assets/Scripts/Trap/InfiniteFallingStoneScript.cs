@@ -38,7 +38,7 @@ public class InfiniteFallingStoneScript : MonoBehaviour
         if(collision.gameObject.name=="OutArea")
         {
             Destroy(gameObject);
-            GetComponent<Pauser>().OnDestory();
+            //GetComponent<Pauser>().OnDestory();
         }
     }
 }

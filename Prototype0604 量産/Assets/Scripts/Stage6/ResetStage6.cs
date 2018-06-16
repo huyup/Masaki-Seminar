@@ -15,7 +15,7 @@ public class ResetStage6 : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         s6.UpdateReset();
     }

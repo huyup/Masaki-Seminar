@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
         canInput = false;
         playClearAnimation = false;
         clearPos = GameObject.Find("ClearTrigger").transform.position;
-        clearPos.y = this.gameObject.transform.position.y;
+        clearPos.y = clearPos.y - GameObject.Find("ClearTrigger").GetComponent<BoxCollider>().bounds.extents.y;
 
         nextStage = GameObject.Find("nextStage").GetComponent<Image>();
         nextStage.enabled = false;
