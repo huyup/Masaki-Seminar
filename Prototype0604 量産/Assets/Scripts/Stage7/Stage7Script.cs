@@ -15,15 +15,13 @@ public class Stage7Script : MonoBehaviour
     GameObject fallenFloor2;
     //パラメータ
     public static string mshinItoName = "転送装置";
-    public float translateVeloc = 3;
-    public float bottomPosy = 5;
-    public float topPosy = 5;
+    public float translateVeloc = 2;
+    public float bottomPos_Y = 0.5f;
+    public float topPos_Y = 9;
 
     public static string fallenFloorName = "落ちる床";
     public float fallenVeloc = 3;
-
-    public static string fallenFloorName2 = "落ちる床２";
-    public float fallenVeloc2 = 3;
+    public float countToFallen = 6000;
 
     // Use this for initialization
     void Start()
@@ -31,8 +29,8 @@ public class Stage7Script : MonoBehaviour
         fallenFloor = GameObject.Find("FallenFloor");
         fallenFloor2 = GameObject.Find("FallenFloor2");
 
-        fallenFloor.GetComponent<FallFloor>().InitializeParameter(fallenVeloc);
-        fallenFloor2.GetComponent<FallFloor>().InitializeParameter(fallenVeloc2);
+        fallenFloor.GetComponent<FallFloor>().InitializeParameter(fallenVeloc, countToFallen);
+        fallenFloor2.GetComponent<FallFloor>().InitializeParameter(fallenVeloc, countToFallen);
 
         for (int i = 0; i < translateMachineCount; i++)
         {
@@ -41,7 +39,7 @@ public class Stage7Script : MonoBehaviour
         for (int i = 0; i < translateMachineCount; i++)
         {
             translateMachine[i].GetComponent<TranslateMachinceScript>().InitializeParameter
-                (translateVeloc, topPosy, bottomPosy);
+                (translateVeloc, topPos_Y,bottomPos_Y);
         }
     }
 
@@ -49,6 +47,7 @@ public class Stage7Script : MonoBehaviour
     {
         fallenFloor.GetComponent<FallFloor>().ResetFallFloor();
         fallenFloor2.GetComponent<FallFloor>().ResetFallFloor();
+
         for (int i = 0; i < translateMachineCount; i++)
         {
             translateMachine[i].GetComponent<TranslateMachinceScript>().ResetTranslateMachine();
@@ -58,26 +57,28 @@ public class Stage7Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        translateMachine[0].GetComponent<TranslateMachinceScript>().SetTwoWayTranslateFloor();
-        translateMachine[1].GetComponent<TranslateMachinceScript>().SetTwoWayTranslateFloor();
-        translateMachine[2].GetComponent<TranslateMachinceScript>().SetTwoWayTranslateFloor();
-        translateMachine[3].GetComponent<TranslateMachinceScript>().SetTwoWayTranslateFloor();
-
         if (UIScript.parameter_ChangeEnable)
             SetParameterInRealTime();
+    }
+
+    private void FixedUpdate()
+    {
+        for (int i = 0; i < translateMachineCount; i++)
+        {
+            translateMachine[i].GetComponent<TranslateMachinceScript>().MoveFloorVertical();
+        }
     }
     /// <summary>
     /// これはリアルタイムでパラメータを反映させる関数
     /// </summary>
     void SetParameterInRealTime()
     {
-        fallenFloor.GetComponent<FallFloor>().InitializeParameter(fallenVeloc);
-        fallenFloor2.GetComponent<FallFloor>().InitializeParameter(fallenVeloc2);
+        fallenFloor.GetComponent<FallFloor>().InitializeParameter(fallenVeloc, countToFallen);
 
         for (int i = 0; i < translateMachineCount; i++)
         {
             translateMachine[i].GetComponent<TranslateMachinceScript>().InitializeParameter
-                (translateVeloc, topPosy, bottomPosy);
+                (translateVeloc, topPos_Y, bottomPos_Y);
         }
     }
 }

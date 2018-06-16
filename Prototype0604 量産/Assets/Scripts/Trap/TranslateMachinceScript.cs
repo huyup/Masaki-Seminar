@@ -5,97 +5,158 @@ using UnityEngine;
 /// これは装置：床の転送をコントロールするクラス
 /// 作成者:huyup
 /// </summary>
-public class TranslateMachinceScript : MonoBehaviour {
+public class TranslateMachinceScript : MonoBehaviour
+{
+
     GameObject floor;
     GameObject kassa;
     GameObject kassa2;
-    bool setTranslateEnable = false;
-
+    
     float TranslateVeloc { get; set; }
     float TopPosY { get; set; }
     float BottomPosY { get; set; }
 
-    Vector3 initPos;
-	// Use this for initialization
-	void Start () {
+    bool setTranslateEnable = false;
+    float deltaTime_Rigidbody;
+    float total_Veloc;
+
+    Rigidbody rb;
+
+    /// <summary>
+    /// これは移動するときの初期位置の変数
+    /// </summary>
+    Vector3 translateInitPos;
+
+    /// <summary>
+    /// これは初期位置を記録するための変数
+    /// 読み込み専用
+    /// </summary>
+    Vector3 defaultPos;
+
+    // Use this for initialization
+    void Start()
+    {
         kassa = transform.Find("kassya").gameObject;
         kassa2 = transform.Find("kassya2").gameObject;
-        floor =transform.Find("TranslateFloor").gameObject;
-        initPos = floor.transform.localPosition;
-	}
+        floor = transform.Find("TranslateFloor").gameObject;
+
+        translateInitPos = floor.transform.position;
+        defaultPos = floor.transform.position;
+        rb = floor.GetComponent<Rigidbody>();
+    }
+
     public void ResetTranslateMachine()
     {
+        deltaTime_Rigidbody=0;
+        total_Veloc=0;
         setTranslateEnable = false;
-        floor.transform.localPosition = initPos;
+        translateInitPos = defaultPos;
+        rb.velocity =Vector3.zero;
+        rb.MovePosition(new Vector3(defaultPos.x,
+defaultPos.y,
+defaultPos.z));
     }
-    public void InitializeParameter(float _TranslateVeloc,float _TopPosY,float _BottomPosY)
+
+    public void InitializeParameter(float _TranslateVeloc, float _TopPosY, float _BottomPosY)
     {
+
         TranslateVeloc = _TranslateVeloc;
         TopPosY = _TopPosY;
         BottomPosY = _BottomPosY;
     }
+
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
+        //滑車を回す
         kassa.transform.Rotate(0, 0, 2);
         kassa2.transform.Rotate(0, 0, 2);
-
     }
-
     /// <summary>
-    /// これは床を往復運動させるメソッド
+    /// これは床を上下運動させるメソッド
     /// </summary>
-    public void SetTwoWayTranslateFloor()
+    public void MoveFloorVertical()
     {
+        if (setTranslateEnable)
+            total_Veloc = deltaTime_Rigidbody * TranslateVeloc;
+        else
+            total_Veloc = deltaTime_Rigidbody * TranslateVeloc * -1;
+
         if (setTranslateEnable)
         {
             if (floor.transform.localPosition.x < TopPosY)
             {
-                floor.transform.localPosition += new Vector3(TranslateVeloc,0 , 0);
+                rb.MovePosition(new Vector3(translateInitPos.x,
+            translateInitPos.y + total_Veloc,
+            translateInitPos.z));
             }
             else
             {
-                setTranslateEnable = !setTranslateEnable;
+                deltaTime_Rigidbody = 0;
+                translateInitPos = floor.transform.position;
+                setTranslateEnable = false;
             }
         }
         else
         {
             if (floor.transform.localPosition.x > BottomPosY)
             {
-                floor.transform.localPosition -= new Vector3(TranslateVeloc,0, 0);
+                rb.MovePosition(new Vector3(translateInitPos.x,
+            translateInitPos.y + total_Veloc,
+            translateInitPos.z));
             }
             else
             {
-                setTranslateEnable = !setTranslateEnable;
+                translateInitPos = floor.transform.position;
+                deltaTime_Rigidbody = 0;
+                setTranslateEnable = true;
             }
         }
+
+        deltaTime_Rigidbody += Time.deltaTime;
     }
 
     /// <summary>
-    /// これは床を往復運動させるメソッド
+    /// これは床を左右運動させるメソッド
     /// </summary>
-    public void SetTwoWayTranslateFloor_Y()
+    public void MoveFloorHorizontal()
     {
         if (setTranslateEnable)
+            total_Veloc = deltaTime_Rigidbody * TranslateVeloc;
+        else
+            total_Veloc = deltaTime_Rigidbody * TranslateVeloc * -1;
+
+        if (setTranslateEnable)
         {
-            if (floor.transform.localPosition.y < TopPosY)
+            if (floor.transform.localPosition.x < TopPosY)
             {
-                floor.transform.localPosition += new Vector3(0, TranslateVeloc, 0);
+                rb.MovePosition(new Vector3(translateInitPos.x + total_Veloc,
+            translateInitPos.y,
+            translateInitPos.z));
             }
             else
             {
-                setTranslateEnable = !setTranslateEnable;
+                deltaTime_Rigidbody = 0;
+                translateInitPos = floor.transform.position;
+                setTranslateEnable = false;
             }
         }
         else
         {
-            if (floor.transform.localPosition.y > BottomPosY)
+            if (floor.transform.localPosition.x > BottomPosY)
             {
-                floor.transform.localPosition -= new Vector3(0, TranslateVeloc, 0);
+                rb.MovePosition(new Vector3(translateInitPos.x + total_Veloc,
+            translateInitPos.y,
+            translateInitPos.z));
             }
             else
             {
-                setTranslateEnable = !setTranslateEnable;
+                translateInitPos = floor.transform.position;
+                deltaTime_Rigidbody = 0;
+                setTranslateEnable = true;
             }
         }
+
+        deltaTime_Rigidbody += Time.deltaTime;
     }
 }

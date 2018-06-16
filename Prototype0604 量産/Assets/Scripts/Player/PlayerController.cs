@@ -216,7 +216,10 @@ public class PlayerController : MonoBehaviour
         velocity *= Speed;
 
         if (!changeRotation.P_TurnOverEnable && canInput)
-            transform.localPosition += velocity * Time.fixedDeltaTime;
+        {
+            transform.position += velocity * Time.fixedDeltaTime;
+        }
+
     }
 
     void Jump()
@@ -318,8 +321,11 @@ public class PlayerController : MonoBehaviour
         {
             if (Physics.Raycast(ray[i], out hit, DistanceToGround))
             {
-                isGround = true;
-                break;
+                if (hit.transform.tag != "Bed")
+                {
+                    isGround = true;
+                    break;
+                }
             }
             else
             {
@@ -340,5 +346,13 @@ public class PlayerController : MonoBehaviour
         {
             onBed = true;
         }
+        if(collision.gameObject.tag=="MovingFloor")
+        {
+            transform.parent = collision.transform;
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        transform.parent = null;
     }
 }

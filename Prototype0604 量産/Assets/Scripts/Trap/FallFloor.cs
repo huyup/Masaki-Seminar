@@ -11,6 +11,8 @@ public class FallFloor : MonoBehaviour {
 
     bool fallEnable;
 
+    float CountToFallen { get; set; }
+    float initFallenCount;
     float FallenVeloc { get; set; }
 
 	// Use this for initialization
@@ -29,22 +31,36 @@ public class FallFloor : MonoBehaviour {
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
         fallEnable = false;
+        CountToFallen = initFallenCount;
     }
-    public void InitializeParameter(float _FallenVeloc)
+    public void InitializeParameter(float _FallenVeloc,float _CountToFallen)
     {
         FallenVeloc = _FallenVeloc;
+        CountToFallen = _CountToFallen;
+        initFallenCount = _CountToFallen;
     }
     // Update is called once per frame
     void Update () {
         MoveFallFloor();
+
     }
 
     void MoveFallFloor()
     {
         if(fallEnable)
         {
-            gameObject.GetComponent<Rigidbody>().isKinematic = false;
-            gameObject.GetComponent<Rigidbody>().AddForce(0, FallenVeloc, 0, ForceMode.VelocityChange);
+            if (CountToFallen > 0)
+            {
+                CountToFallen--;
+                transform.position = new Vector3(transform.position.x + 0.05f * Mathf.Sin(Time.time * 1000),
+            transform.position.y,
+            transform.position.z);
+            }
+            else
+            {
+                gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                gameObject.GetComponent<Rigidbody>().AddForce(0, FallenVeloc, 0, ForceMode.VelocityChange);
+            }
         }
     }
 

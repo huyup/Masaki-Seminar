@@ -7,25 +7,47 @@ using UnityEngine;
 /// </summary>
 public class PressMachineHorizontal : MonoBehaviour
 {
-    bool fallenEnable;
+    public bool fallenEnable;
+    float deltaTime_Rigidbody;
+    float total_Veloc;
 
+    Rigidbody rb;
     float DistanceToRight { get; set; }
     float DistanceToLeft { get; set; }
     float RightVeloc { get; set; }
     float LeftVeloc { get; set; }
 
-    Vector3 pressMachInitPos;
+
+    /// <summary>
+    /// これは移動するときの初期位置の変数
+    /// </summary>
+    Vector3 translateInitPos;
+
+    /// <summary>
+    /// これは初期位置を記録するための変数
+    /// 読み込み専用
+    /// </summary>
+    Vector3 defaultPos;
 
     // Use this for initialization
     void Start()
     {
-        pressMachInitPos = transform.position;
+        rb = gameObject.GetComponent<Rigidbody>();
+        translateInitPos = transform.position;
+        defaultPos = transform.position;
     }
 
     public void ResetPressMachine()
     {
+        deltaTime_Rigidbody = 0;
+        total_Veloc = 0;
+
         fallenEnable = false;
-        transform.position = pressMachInitPos;
+        translateInitPos = defaultPos;
+        rb.velocity = Vector3.zero;
+        rb.MovePosition(new Vector3(defaultPos.x,
+defaultPos.y,
+defaultPos.z));
     }
 
     public void InitializeParameter(float _DistanceToRight, float _DistanceToLeft, float _RightVeloc, float _LeftVeloc)
@@ -46,26 +68,41 @@ public class PressMachineHorizontal : MonoBehaviour
     public void SetTrapHorizontal()
     {
         if (fallenEnable)
+            total_Veloc = deltaTime_Rigidbody * RightVeloc;
+        else
+            total_Veloc = deltaTime_Rigidbody * LeftVeloc * -1;
+
+        if (fallenEnable)
         {
-            if (transform.position.x > DistanceToLeft)
+            if (transform.position.x < DistanceToRight)
             {
-                transform.localPosition += new Vector3(LeftVeloc, 0, 0);
+                rb.MovePosition(new Vector3(translateInitPos.x + total_Veloc,
+            translateInitPos.y,
+            translateInitPos.z));
             }
             else
             {
-                fallenEnable = !fallenEnable;
+                deltaTime_Rigidbody = 0;
+                translateInitPos = transform.position;
+                fallenEnable = false;
             }
         }
         else
         {
-            if (transform.position.x < DistanceToRight)
+            if (transform.position.x > DistanceToLeft)
             {
-                transform.localPosition += new Vector3(RightVeloc, 0, 0);
+                rb.MovePosition(new Vector3(translateInitPos.x + total_Veloc,
+            translateInitPos.y,
+            translateInitPos.z));
             }
             else
             {
-                fallenEnable = !fallenEnable;
+                translateInitPos = transform.position;
+                deltaTime_Rigidbody = 0;
+                fallenEnable = true;
             }
         }
+
+        deltaTime_Rigidbody += Time.deltaTime;
     }
 }

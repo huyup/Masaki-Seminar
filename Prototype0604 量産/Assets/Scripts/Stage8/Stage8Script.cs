@@ -17,8 +17,9 @@ public class Stage8Script : MonoBehaviour
     //パラメータ
     public static string mshinItoName = "転送装置";
     public float translateVeloc = 3;
-    public float bottomPosy = 5;
-    public float topPosy = 5;
+    public float topPos_Y = 5;
+    public float bottomPos_Y = 5;
+
 
     public static string fireTrapName = "点火装置";
     public int eruption = 60;
@@ -30,10 +31,11 @@ public class Stage8Script : MonoBehaviour
         {
             translateMachine[i] = GameObject.Find("TranslateMachince" + (i + 1));
         }
+
         for (int i = 0; i < translateMachineCount; i++)
         {
             translateMachine[i].GetComponent<TranslateMachinceScript>().InitializeParameter
-                (translateVeloc, topPosy, bottomPosy);
+                (translateVeloc, topPos_Y, bottomPos_Y);
         }
 
         for (int i = 0; i < fireTrapCount; i++)
@@ -62,14 +64,16 @@ public class Stage8Script : MonoBehaviour
         {
             fireTrapMachine[i].GetComponent<FireTrapScript>().SetFireTrap();
         }
-
-        translateMachine[0].GetComponent<TranslateMachinceScript>().SetTwoWayTranslateFloor();
-        translateMachine[1].GetComponent<TranslateMachinceScript>().SetTwoWayTranslateFloor();
-        translateMachine[2].GetComponent<TranslateMachinceScript>().SetTwoWayTranslateFloor();
-        translateMachine[3].GetComponent<TranslateMachinceScript>().SetTwoWayTranslateFloor();
-
         if (UIScript.parameter_ChangeEnable)
             SetParameterInRealTime();
+    }
+
+    private void FixedUpdate()
+    {
+        for (int i = 0; i < translateMachineCount; i++)
+        {
+            translateMachine[i].GetComponent<TranslateMachinceScript>().MoveFloorHorizontal();
+        }
     }
     /// <summary>
     /// これはリアルタイムでパラメータを反映させる関数
@@ -79,7 +83,7 @@ public class Stage8Script : MonoBehaviour
         for (int i = 0; i < translateMachineCount; i++)
         {
             translateMachine[i].GetComponent<TranslateMachinceScript>().InitializeParameter
-                (translateVeloc, topPosy, bottomPosy);
+                (translateVeloc, topPos_Y, bottomPos_Y);
         }
 
         for (int i = 0; i < fireTrapCount; i++)

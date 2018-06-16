@@ -90,4 +90,33 @@ public class PlayerLifeControl : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (!invincble)
+        {
+            //tag名が”トラップ”のオブジェと遭遇したら、ライフ数を減らす
+            if (collision.gameObject.tag == "Trap")
+            {
+                lifeCount--;
+                soul.GetComponent<DeadPerformanceScript>().SetCircleParameter(transform.position);
+                transform.gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
+            }
+            if (collision.gameObject.name == "OutArea")
+            {
+                lifeCount--;
+                soul.GetComponent<DeadPerformanceScript>().SetSquareParameter(transform.position);
+                transform.gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
+            }
+            if (collision.gameObject.tag == "Stone")
+            {
+                if (collision.gameObject.GetComponent<Rigidbody>().velocity.magnitude > 1)
+                {
+                    lifeCount--;
+                    soul.GetComponent<DeadPerformanceScript>().SetCircleParameter(transform.position);
+                    transform.gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
+                }
+            }
+        }
+    }
 }

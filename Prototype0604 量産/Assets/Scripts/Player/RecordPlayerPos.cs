@@ -11,6 +11,8 @@ public class RecordPlayerPos : MonoBehaviour
     GhostController ghostController;
     //DollController dollController;
 
+    //Vector3 oldPos;
+
     int playerLife;
     int retryNumOfTime;
     

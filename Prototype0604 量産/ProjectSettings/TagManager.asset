@@ -12,6 +12,7 @@ TagManager:
   - GhostLineLight
   - Fire
   - Bed
+  - MovingFloor
   layers:
   - Default
   - TransparentFX

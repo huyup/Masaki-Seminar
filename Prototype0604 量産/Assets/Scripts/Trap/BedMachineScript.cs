@@ -26,8 +26,11 @@ public class BedMachineScript : MonoBehaviour {
     {
         if(collision.gameObject.name=="Player")
         {
-            player.GetComponent<Rigidbody>().velocity = Vector3.zero; 
-            collision.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * Elasticity,ForceMode.VelocityChange);
+            if (!collision.gameObject.GetComponent<PlayerController>().isGround)
+            {
+                collision.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                collision.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * Elasticity, ForceMode.VelocityChange);
+            }
         }
     }
 }
