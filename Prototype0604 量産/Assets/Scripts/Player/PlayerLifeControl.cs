@@ -10,7 +10,7 @@ public class PlayerLifeControl : MonoBehaviour
 {
 
     public int lifeCount;
-    public bool invincble = false;
+    bool invincble = false;
 
     GameObject Eff_Invincble;
     GameObject soul;
@@ -34,6 +34,7 @@ public class PlayerLifeControl : MonoBehaviour
     private void ResetLife()
     {
         lifeCount = 1;
+        invincble = false;
     }
     // Update is called once per frame
     void Update()
@@ -41,25 +42,6 @@ public class PlayerLifeControl : MonoBehaviour
         if (lifeCount <= 0)
         {
             lifeCount = 0;
-        }
-        if (invincble)
-        {
-            Eff_Invincble.transform.position = transform.position + new Vector3(0, 1, 0);
-
-            if (!Eff_Invincble.transform.Find("parline1_add").GetComponent<ParticleSystem>().isPlaying)
-                Eff_Invincble.transform.Find("parline1_add").GetComponent<ParticleSystem>().Play();
-
-            if (invincbleCount > 0)
-            {
-                invincbleCount--;
-            }
-            else
-            {
-                if (Eff_Invincble.transform.Find("parline1_add").GetComponent<ParticleSystem>().isPlaying)
-                    Eff_Invincble.transform.Find("parline1_add").GetComponent<ParticleSystem>().Stop();
-                invincble = false;
-                invincbleCount = MAXINVINCBLECOUNT;
-            }
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -71,11 +53,13 @@ public class PlayerLifeControl : MonoBehaviour
             {
                 lifeCount--;
                 soul.GetComponent<DeadPerformanceScript>().SetCircleParameter(transform.position);
+                invincble = true;
                 transform.gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
             }
             if (collision.gameObject.name == "OutArea")
             {
                 lifeCount--;
+                invincble = true;
                 soul.GetComponent<DeadPerformanceScript>().SetSquareParameter(transform.position);
                 transform.gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
             }
@@ -83,6 +67,7 @@ public class PlayerLifeControl : MonoBehaviour
             {
                 if (collision.gameObject.GetComponent<Rigidbody>().velocity.magnitude > 1)
                 {
+                    invincble = true;
                     lifeCount--;
                     soul.GetComponent<DeadPerformanceScript>().SetCircleParameter(transform.position);
                     transform.gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
@@ -98,12 +83,14 @@ public class PlayerLifeControl : MonoBehaviour
             //tag名が”トラップ”のオブジェと遭遇したら、ライフ数を減らす
             if (collision.gameObject.tag == "Trap")
             {
+                invincble = true;
                 lifeCount--;
                 soul.GetComponent<DeadPerformanceScript>().SetCircleParameter(transform.position);
                 transform.gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
             }
             if (collision.gameObject.name == "OutArea")
             {
+                invincble = true;
                 lifeCount--;
                 soul.GetComponent<DeadPerformanceScript>().SetSquareParameter(transform.position);
                 transform.gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
@@ -112,6 +99,7 @@ public class PlayerLifeControl : MonoBehaviour
             {
                 if (collision.gameObject.GetComponent<Rigidbody>().velocity.magnitude > 1)
                 {
+                    invincble = true;
                     lifeCount--;
                     soul.GetComponent<DeadPerformanceScript>().SetCircleParameter(transform.position);
                     transform.gameObject.GetComponent<CapsuleCollider>().isTrigger = true;

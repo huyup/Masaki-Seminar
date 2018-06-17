@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
     // ジャンプ
     public bool g_duringJump = false;
     public bool isGround = false;
-
+    int stayCount = 0;
 
     //変更できるコンポーネント
     private Rigidbody rb;
@@ -80,6 +80,8 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         changeRotation = new ChangeRotation();
+        stayCount = 0;
+
         canControlPlayer = true;
         canInput = false;
         playClearAnimation = false;
@@ -136,7 +138,7 @@ public class PlayerController : MonoBehaviour
         CheckisGrounded();
         UpdateAnimator();
 
-        if(!DeadPerformanceScript.moveEnable)
+        if (!DeadPerformanceScript.moveEnable)
         {
             UpdateInput();
         }
@@ -215,7 +217,7 @@ public class PlayerController : MonoBehaviour
         velocity = new Vector3(g_VeclocityX, 0, 0);
         velocity *= Speed;
 
-        if (!changeRotation.P_TurnOverEnable && canInput)
+        if (!changeRotation.P_TurnOverEnable && canInput && stayCount < 3)
         {
             transform.position += velocity * Time.fixedDeltaTime;
         }
@@ -230,7 +232,7 @@ public class PlayerController : MonoBehaviour
                 jumpPower, ForceMode.VelocityChange);
             g_duringJump = false;
         }
-        if(!g_duringJump)
+        if (!g_duringJump)
         {
             rb.velocity += Physics.gravity * Time.deltaTime;
         }
@@ -264,7 +266,7 @@ public class PlayerController : MonoBehaviour
         {
             if (isGround
                 && !airJumpEnable
-                && onBedCount==0
+                && onBedCount == 0
                 && !onBed
                 && !anim.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
             {
@@ -286,7 +288,7 @@ public class PlayerController : MonoBehaviour
                 anim.SetBool("Jump", true);
 
                 rb.AddForce(Vector3.up *
-                jumpPower*1.5f, ForceMode.VelocityChange);
+                jumpPower * 1.5f, ForceMode.VelocityChange);
 
                 airJumpEnable = false;
             }
@@ -346,13 +348,28 @@ public class PlayerController : MonoBehaviour
         {
             onBed = true;
         }
-        if(collision.gameObject.tag=="MovingFloor")
+        if (collision.gameObject.tag == "MovingFloor")
         {
             transform.parent = collision.transform;
         }
     }
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Floor"||
+            collision.gameObject.tag == "MovingFloor")
+        {
+            if (!isGround)
+                stayCount++;
+
+        }
+    }
     private void OnCollisionExit(Collision collision)
     {
+        if (collision.gameObject.tag == "Floor" ||
+            collision.gameObject.tag == "MovingFloor")
+        {
+            stayCount = 0;
+        }
         transform.parent = null;
     }
 }

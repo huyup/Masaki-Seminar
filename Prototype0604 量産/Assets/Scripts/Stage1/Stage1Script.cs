@@ -12,7 +12,7 @@ public class Stage1Script : MonoBehaviour
     GameObject FallenTrap2;
     //パラメータ
     public static string fallenTrapName = "プレス機１";
-    public float fallenSpeed = -0.05f;
+    public float fallenSpeed = -0.02f;
     public float raiseSpeed = 0.1f;
 
     public float distanceToTop = 5.5f;
@@ -23,7 +23,7 @@ public class Stage1Script : MonoBehaviour
     public float raiseSpeed2 = 0.1f;
 
     public float distanceToTop2 = 5.5f;
-    public float distanceToBottom2 = 1;
+    public float distanceToBottom2 = 1f;
 
     // Use this for initialization
     void Start()
