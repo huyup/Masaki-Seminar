@@ -28030,7 +28030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e188d8165d3ed2f42ae1b5f5030c647c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  translateVeloc: 5
+  translateVeloc: 2
   bottomPos_Y: 0.5
   topPos_Y: 9
   fallenVeloc: -0.1

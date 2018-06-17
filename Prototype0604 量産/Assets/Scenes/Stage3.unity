@@ -7851,10 +7851,6 @@ Prefab:
       propertyPath: m_Name
       value: bed1
       objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 1b8331b55104de1418402e96c72d3bae, type: 3}
-      propertyPath: m_TagString
-      value: Bed
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1b8331b55104de1418402e96c72d3bae, type: 3}
   m_IsPrefabParent: 0
@@ -8281,10 +8277,6 @@ Prefab:
       propertyPath: m_Name
       value: bed3
       objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 1b8331b55104de1418402e96c72d3bae, type: 3}
-      propertyPath: m_TagString
-      value: Bed
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1b8331b55104de1418402e96c72d3bae, type: 3}
   m_IsPrefabParent: 0
@@ -8696,10 +8688,6 @@ Prefab:
     - target: {fileID: 100000, guid: 1b8331b55104de1418402e96c72d3bae, type: 3}
       propertyPath: m_Name
       value: bed2
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 1b8331b55104de1418402e96c72d3bae, type: 3}
-      propertyPath: m_TagString
-      value: Bed
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1b8331b55104de1418402e96c72d3bae, type: 3}
