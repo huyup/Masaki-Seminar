@@ -13,6 +13,7 @@ TagManager:
   - Fire
   - Bed
   - MovingFloor
+  - MovingFloor_Vertical
   layers:
   - Default
   - TransparentFX

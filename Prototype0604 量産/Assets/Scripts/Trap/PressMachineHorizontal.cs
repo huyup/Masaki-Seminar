@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// これは罠：プレス機をコントロールするクラス
+/// これは罠：プレス機を左右にコントロールするクラス
 /// 作成者:huyup
 /// </summary>
 public class PressMachineHorizontal : MonoBehaviour

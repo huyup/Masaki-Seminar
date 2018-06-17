@@ -16,6 +16,7 @@ public class DeadPerformanceScript : MonoBehaviour
     /// コンポーネント
     /// </summary>
     ParticleSystem soulEff;
+    Vector3 defaultPos = new Vector3(100, 100, 100);
 
     static public bool moveEnable = false;
     /// <summary>
@@ -101,7 +102,7 @@ public class DeadPerformanceScript : MonoBehaviour
 
         //円
         centerPos = new Vector3((deathPos.x + startTarget.transform.position.x) / 2,
-    (deathPos.y + startTarget.transform.position.y) / 2 + 0.1f, transform.position.z);
+    (deathPos.y + startTarget.transform.position.y) / 2 + 0.1f, startTarget.transform.position.z);
 
         Radius = Mathf.Abs((deathPos.x - startTarget.transform.position.x) / 2);
 
@@ -210,6 +211,9 @@ public class DeadPerformanceScript : MonoBehaviour
                 if (child.GetComponent<Renderer>())
                     child.GetComponent<Renderer>().enabled = true;
             }
+
+            PlayerLifeControl.invincble = false;
+            transform.position = defaultPos;
         }
     }
     private void OnTriggerStay(Collider other)
@@ -233,6 +237,8 @@ public class DeadPerformanceScript : MonoBehaviour
                 if (child.GetComponent<Renderer>())
                     child.GetComponent<Renderer>().enabled = true;
             }
+            PlayerLifeControl.invincble = false;
+            transform.position = defaultPos;
         }
     }
 }

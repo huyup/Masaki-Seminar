@@ -46,7 +46,7 @@ public class ShotScript : MonoBehaviour
 
                 //プレイヤーに無敵と空中ジャンプさせる
                 player.gameObject.GetComponent<PlayerController>().airJumpEnable = true;
-                player.gameObject.GetComponent<PlayerLifeControl>().invincble = true;
+                //player.gameObject.GetComponent<PlayerLifeControl>().invincble = true;
 
 
                 collision.gameObject.GetComponent<Ghost>().canBeTarget = false;

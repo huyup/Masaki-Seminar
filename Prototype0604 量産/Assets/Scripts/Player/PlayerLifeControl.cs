@@ -10,14 +10,10 @@ public class PlayerLifeControl : MonoBehaviour
 {
 
     public int lifeCount;
-    public bool invincble = false;
+    static public bool invincble = false;
 
     GameObject Eff_Invincble;
     GameObject soul;
-    GameObject frontWall;
-
-    public const int MAXINVINCBLECOUNT = 30;
-    int invincbleCount = MAXINVINCBLECOUNT;
     //Use this for initialization
 
     void Start()
@@ -28,38 +24,20 @@ public class PlayerLifeControl : MonoBehaviour
         Eff_Invincble = GameObject.Find("Eff_PowerUp_Fix");
 
         soul = GameObject.Find("Soul");
-
-        frontWall = GameObject.Find("FrontWall");
+        
     }
     private void ResetLife()
     {
         lifeCount = 1;
+        invincble = false;
     }
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("invincble" + invincble);
         if (lifeCount <= 0)
         {
             lifeCount = 0;
-        }
-        if (invincble)
-        {
-            Eff_Invincble.transform.position = transform.position + new Vector3(0, 1, 0);
-
-            if (!Eff_Invincble.transform.Find("parline1_add").GetComponent<ParticleSystem>().isPlaying)
-                Eff_Invincble.transform.Find("parline1_add").GetComponent<ParticleSystem>().Play();
-
-            if (invincbleCount > 0)
-            {
-                invincbleCount--;
-            }
-            else
-            {
-                if (Eff_Invincble.transform.Find("parline1_add").GetComponent<ParticleSystem>().isPlaying)
-                    Eff_Invincble.transform.Find("parline1_add").GetComponent<ParticleSystem>().Stop();
-                invincble = false;
-                invincbleCount = MAXINVINCBLECOUNT;
-            }
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -71,13 +49,13 @@ public class PlayerLifeControl : MonoBehaviour
             {
                 lifeCount--;
                 soul.GetComponent<DeadPerformanceScript>().SetCircleParameter(transform.position);
-                transform.gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
+                invincble = true;
             }
             if (collision.gameObject.name == "OutArea")
             {
                 lifeCount--;
                 soul.GetComponent<DeadPerformanceScript>().SetSquareParameter(transform.position);
-                transform.gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
+                invincble = true;
             }
             if (collision.gameObject.tag == "Stone")
             {
@@ -85,7 +63,7 @@ public class PlayerLifeControl : MonoBehaviour
                 {
                     lifeCount--;
                     soul.GetComponent<DeadPerformanceScript>().SetCircleParameter(transform.position);
-                    transform.gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
+                    invincble = true;
                 }
             }
         }
@@ -100,13 +78,13 @@ public class PlayerLifeControl : MonoBehaviour
             {
                 lifeCount--;
                 soul.GetComponent<DeadPerformanceScript>().SetCircleParameter(transform.position);
-                transform.gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
+                invincble = true;
             }
             if (collision.gameObject.name == "OutArea")
             {
                 lifeCount--;
                 soul.GetComponent<DeadPerformanceScript>().SetSquareParameter(transform.position);
-                transform.gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
+                invincble = true;
             }
             if (collision.gameObject.tag == "Stone")
             {
@@ -114,7 +92,7 @@ public class PlayerLifeControl : MonoBehaviour
                 {
                     lifeCount--;
                     soul.GetComponent<DeadPerformanceScript>().SetCircleParameter(transform.position);
-                    transform.gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
+                    invincble = true;
                 }
             }
         }

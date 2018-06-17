@@ -56,8 +56,8 @@ public class Stage6Script : MonoBehaviour
             mshinIto[i].GetComponent<MshinItoScript>().ResetFallenStone();
         }
 
-        pressMachine.GetComponent<PressMachineTrapScript>().ResetPressMachine();
-        pressMachine2.GetComponent<PressMachineTrapScript>().ResetPressMachine();
+        pressMachine.GetComponent<PressMachineVerticalScript>().ResetPressMachine();
+        pressMachine2.GetComponent<PressMachineVerticalScript>().ResetPressMachine();
 
         switch1.GetComponent<SwitchScript>().ResetSwitch();
         switch2.GetComponent<SwitchScript>().ResetSwitch();
@@ -84,9 +84,9 @@ public class Stage6Script : MonoBehaviour
         mshinIto[4].GetComponent<MshinItoScript>().InitializeParameter(fallenVeloc5, conflictForce5);
 
 
-        pressMachine.GetComponent<PressMachineTrapScript>().InitializeParameter
+        pressMachine.GetComponent<PressMachineVerticalScript>().InitializeParameter
             (distanceToTop, distanceToBottom, fallenSpeed, raiseSpeed);
-        pressMachine2.GetComponent<PressMachineTrapScript>().InitializeParameter
+        pressMachine2.GetComponent<PressMachineVerticalScript>().InitializeParameter
             (distanceToTop2, distanceToBottom2, fallenSpeed2, raiseSpeed2);
     }
 
@@ -107,11 +107,11 @@ public class Stage6Script : MonoBehaviour
             mshinIto[4].GetComponent<MshinItoScript>().SetFallenStone();
         }
 
-        pressMachine.GetComponent<PressMachineTrapScript>().
-            SetTwoWaysTrap();
+        pressMachine.GetComponent<PressMachineVerticalScript>().
+            SetTrapVertical();
 
-        pressMachine2.GetComponent<PressMachineTrapScript>().
-    SetTwoWaysTrap();
+        pressMachine2.GetComponent<PressMachineVerticalScript>().
+    SetTrapVertical();
 
         if (UIScript.parameter_ChangeEnable)
             SetParameterInRealTime();
@@ -127,9 +127,9 @@ public class Stage6Script : MonoBehaviour
         mshinIto[3].GetComponent<MshinItoScript>().InitializeParameter(fallenVeloc4, conflictForce4);
         mshinIto[4].GetComponent<MshinItoScript>().InitializeParameter(fallenVeloc5, conflictForce5);
 
-        pressMachine.GetComponent<PressMachineTrapScript>().InitializeParameter
+        pressMachine.GetComponent<PressMachineVerticalScript>().InitializeParameter
     (distanceToTop, distanceToBottom, fallenSpeed, raiseSpeed);
-        pressMachine2.GetComponent<PressMachineTrapScript>().InitializeParameter
+        pressMachine2.GetComponent<PressMachineVerticalScript>().InitializeParameter
             (distanceToTop2, distanceToBottom2, fallenSpeed2, raiseSpeed2);
     }
 }

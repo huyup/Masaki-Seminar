@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
 {
     #region フィールド
     public const float DistanceToGround = 0.2f;
-
     /// <summary>
     /// プロパティ
     /// </summary>
@@ -226,24 +225,18 @@ public class PlayerController : MonoBehaviour
     {
         if (g_duringJump)
         {
+            rb.drag = 0f;
             rb.AddForce(Vector3.up *
                 jumpPower, ForceMode.VelocityChange);
             g_duringJump = false;
         }
         if(!g_duringJump)
         {
+            //入れ替えの後の空中ジャンプ
+            rb.useGravity = true;
             rb.velocity += Physics.gravity * Time.deltaTime;
         }
-        //if(!g_duringJump||!airJumpEnable)
-        //{
-        //    rb.velocity += Physics.gravity;
-        //}
 
-        //入れ替えの後の空中ジャンプ
-        if (!airJumpEnable)
-            rb.useGravity = true;
-        else
-            rb.useGravity = false;
 
 
     }
@@ -346,7 +339,7 @@ public class PlayerController : MonoBehaviour
         {
             onBed = true;
         }
-        if(collision.gameObject.tag=="MovingFloor")
+        if (collision.gameObject.tag=="MovingFloor")
         {
             transform.parent = collision.transform;
         }

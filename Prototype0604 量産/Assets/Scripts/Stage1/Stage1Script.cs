@@ -12,17 +12,17 @@ public class Stage1Script : MonoBehaviour
     GameObject FallenTrap2;
     //パラメータ
     public static string fallenTrapName = "プレス機１";
-    public float fallenSpeed = -0.05f;
-    public float raiseSpeed = 0.1f;
+    public float fallenSpeed = 2f;
+    public float raiseSpeed = 3f;
 
-    public float distanceToTop = 5.5f;
+    public float distanceToTop = 7f;
     public float distanceToBottom = 1;
 
     public static string fallenTrapName2 = "プレス機2";
-    public float fallenSpeed2 = -0.1f;
-    public float raiseSpeed2 = 0.1f;
+    public float fallenSpeed2 = 4f;
+    public float raiseSpeed2 = 4f;
 
-    public float distanceToTop2 = 5.5f;
+    public float distanceToTop2 = 7f;
     public float distanceToBottom2 = 1;
 
     // Use this for initialization
@@ -30,24 +30,24 @@ public class Stage1Script : MonoBehaviour
     {
         FallenTrap = GameObject.Find("FallenTrapSet");
         FallenTrap2 = GameObject.Find("FallenTrapSet2");
-        FallenTrap.GetComponent<PressMachineTrapScript>().InitializeParameter(distanceToTop, distanceToBottom, fallenSpeed, raiseSpeed);
-        FallenTrap2.GetComponent<PressMachineTrapScript>().InitializeParameter(distanceToTop2, distanceToBottom2, fallenSpeed2, raiseSpeed2);
+        FallenTrap.GetComponent<PressMachineVerticalScript>().InitializeParameter(distanceToTop, distanceToBottom, fallenSpeed, raiseSpeed);
+        FallenTrap2.GetComponent<PressMachineVerticalScript>().InitializeParameter(distanceToTop2, distanceToBottom2, fallenSpeed2, raiseSpeed2);
     }
 
     public void ResetStage()
     {
-        FallenTrap.GetComponent<PressMachineTrapScript>().ResetPressMachine();
-        FallenTrap2.GetComponent<PressMachineTrapScript>().ResetPressMachine();
+        FallenTrap.GetComponent<PressMachineVerticalScript>().ResetPressMachine();
+        FallenTrap2.GetComponent<PressMachineVerticalScript>().ResetPressMachine();
     }
 
     // Update is called once per frame
     void Update()
     {
-        FallenTrap.GetComponent<PressMachineTrapScript>().
-            SetTwoWaysTrap();
+        FallenTrap.GetComponent<PressMachineVerticalScript>().
+            SetTrapVertical();
 
-        FallenTrap2.GetComponent<PressMachineTrapScript>().
-            SetTwoWaysTrap();
+        FallenTrap2.GetComponent<PressMachineVerticalScript>().
+            SetTrapVertical();
         
         if (UIScript.parameter_ChangeEnable)
         {
@@ -62,7 +62,7 @@ public class Stage1Script : MonoBehaviour
     void SetParameterInRealTime()
     {
 
-        FallenTrap.GetComponent<PressMachineTrapScript>().InitializeParameter(distanceToTop, distanceToBottom, fallenSpeed, raiseSpeed);
-        FallenTrap2.GetComponent<PressMachineTrapScript>().InitializeParameter(distanceToTop2, distanceToBottom2, fallenSpeed2, raiseSpeed2);
+        FallenTrap.GetComponent<PressMachineVerticalScript>().InitializeParameter(distanceToTop, distanceToBottom, fallenSpeed, raiseSpeed);
+        FallenTrap2.GetComponent<PressMachineVerticalScript>().InitializeParameter(distanceToTop2, distanceToBottom2, fallenSpeed2, raiseSpeed2);
     }
 }
