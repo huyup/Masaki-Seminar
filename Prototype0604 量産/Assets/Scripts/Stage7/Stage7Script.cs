@@ -55,7 +55,7 @@ public class Stage7Script : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (UIScript.parameter_ChangeEnable)
             SetParameterInRealTime();
