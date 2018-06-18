@@ -2430,7 +2430,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4493014673643970, guid: 0c619d30f48f61b4ebdeb634f74e3b46, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -1.05
+      value: -0.96
       objectReference: {fileID: 0}
     - target: {fileID: 4493014673643970, guid: 0c619d30f48f61b4ebdeb634f74e3b46, type: 2}
       propertyPath: m_LocalRotation.x
@@ -24548,7 +24548,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2088938870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3e37aefbbcfc514e9bf3204469addc1, type: 3}
+  m_Script: {fileID: 11500000, guid: acb9ab288bdb6cf4eb945e9e31606464, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fallenSpeed: -0.02

@@ -9,13 +9,12 @@ public class RecordPlayerPos : MonoBehaviour
     Transform playerPos;
     List<Vector3> playerPosRecord;
     GhostController ghostController;
-    //DollController dollController;
 
-    //Vector3 oldPos;
+    static public bool playStartEnable = false;
 
     int playerLife;
     int retryNumOfTime;
-    
+
     // Use this for initialization
     void Start()
     {
@@ -37,6 +36,8 @@ public class RecordPlayerPos : MonoBehaviour
         {
             if (playerLife <= 0)
             {
+
+
                 retryNumOfTime++;
 
                 //list to vector3[]
@@ -47,13 +48,13 @@ public class RecordPlayerPos : MonoBehaviour
                 //ゴーストを作る+初期化
                 ghostController.InitializeGhost(playerPosTmp, retryNumOfTime);
 
-                
-
                 //人形を残す
                 //dollController.CreateDoll((Vector3)playerPosRecord[playerPosRecord.Count - 1]);
 
                 //次回のプレイのための初期化
                 playerPosRecord.Clear();
+
+                playStartEnable = true;
             }
             else
             {
@@ -61,6 +62,8 @@ public class RecordPlayerPos : MonoBehaviour
                     !player.GetComponent<PlayerController>().isGround ||
                     player.GetComponent<PlayerController>().initCount > 0)
                 {
+                    playStartEnable = false;
+
                     playerPosRecord.Add(playerPos.position);
                 }
             }

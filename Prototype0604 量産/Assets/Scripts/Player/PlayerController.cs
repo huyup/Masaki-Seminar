@@ -95,25 +95,30 @@ public class PlayerController : MonoBehaviour
 
     public void ResetPlayer()
     {
-        this.gameObject.transform.position = playerInitPos;
-        this.gameObject.transform.eulerAngles = new Vector3(0, 90, 0);
-        this.gameObject.GetComponent<CapsuleCollider>().isTrigger = false;
-        this.gameObject.SendMessage("ResetLife");
-
-        changeRotation.ResetRotation();
-        rb.velocity = Vector3.zero;
-        velocity = Vector3.zero;
-
-        g_VeclocityX = 0;
-        rb.isKinematic = false;
-        canInput = false;
+        if (RecordPlayerPos.playStartEnable)
+        {
+            this.gameObject.transform.position = playerInitPos;
+            this.gameObject.transform.eulerAngles = new Vector3(0, 90, 0);
+            this.gameObject.GetComponent<CapsuleCollider>().isTrigger = false;
 
 
-        initCount = MAX_INIT_RECORD_COUNT;
-        airJumpEnableCount = MAX_AIR_JUMP_COUNT;
+            this.gameObject.SendMessage("ResetLife");
 
-        onBed = false;
-        onBedCount = 0;
+            changeRotation.ResetRotation();
+            rb.velocity = Vector3.zero;
+            velocity = Vector3.zero;
+
+            g_VeclocityX = 0;
+            rb.isKinematic = false;
+            canInput = false;
+
+
+            initCount = MAX_INIT_RECORD_COUNT;
+            airJumpEnableCount = MAX_AIR_JUMP_COUNT;
+
+            onBed = false;
+            onBedCount = 0;
+        }
     }
 
     // Update is called once per frame
@@ -274,27 +279,7 @@ public class PlayerController : MonoBehaviour
                 anim.SetBool("Jump", true);
             }
         }
-
-        if (airJumpEnable)
-        {
-            //短時間ジャンプしないと無効になる
-            airJumpEnableCount--;
-            if (airJumpEnableCount < 0)
-            {
-                airJumpEnable = false;
-            }
-            if (Input.GetButtonDown("Jump") && onBedCount == 0)
-            {
-                anim.SetBool("Jump", true);
-
-                rb.AddForce(Vector3.up *
-                jumpPower * 1.5f, ForceMode.VelocityChange);
-
-                airJumpEnable = false;
-            }
-
-        }
-
+        
 
         if (g_VeclocityX > 0 || g_VeclocityX < 0)
             duringRun = true;
@@ -313,17 +298,18 @@ public class PlayerController : MonoBehaviour
     void CheckisGrounded()
     {
         RaycastHit hit;
-        Ray[] ray = new Ray[20];
-        for (int i = 0; i < 20; i++)
+        Ray[] ray = new Ray[10];
+        for (int i = 0; i < 10; i++)
         {
             ray[i] = new Ray(transform.position - new Vector3(0.10f, 0, 0) + new Vector3(0.012f * i, 0, 0), Vector3.down);
         }
         int count = 0;
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 10; i++)
         {
             if (Physics.Raycast(ray[i], out hit, DistanceToGround))
             {
-                if (hit.transform.tag != "Bed")
+
+                if (hit.transform.tag != "Bed"&&hit.transform.name!="StartArea")
                 {
                     isGround = true;
                     break;
@@ -335,7 +321,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        if (count == 20)
+        if (count == 10)
         {
             isGround = false;
         }

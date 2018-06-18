@@ -16,9 +16,6 @@ public class PlayerLifeControl : MonoBehaviour
     GameObject soul;
     GameObject frontWall;
 
-    public const int MAXINVINCBLECOUNT = 30;
-    int invincbleCount = MAXINVINCBLECOUNT;
-    //Use this for initialization
 
     void Start()
     {
