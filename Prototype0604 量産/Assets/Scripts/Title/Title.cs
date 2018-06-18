@@ -16,6 +16,11 @@ public class Title : MonoBehaviour {
     float randY;
     float nowCountTime;
 
+    public float p_IncreaseRgbBg
+    {
+        get { return increaseRgbBg; }
+    }
+
     bool isShown;
 
     const float fadeInterval = 2f;
@@ -47,20 +52,24 @@ public class Title : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         nowCountTime += Time.fixedDeltaTime;
 
         if (increaseRgbLogo >= 1 && RecieveInput())
         {
             pressBtn.sprite = pressAnyClickSprite;
             pressBtn.color = new Color(1, 1, 1, 1);
-            SceneManager.LoadScene("Menu");
+
+            SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+            SceneManager.UnloadSceneAsync("Title");
+            return;
         }
 
         ShowTpu();
         ShowBg();
         Showlogo();
         ShowPressAnyBtn();
+
     }
 
     #region draw func

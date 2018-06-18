@@ -229,6 +229,16 @@ public class Ghost : MonoBehaviour
         if (areaLight.intensity <= 0)
             return;
         areaLight.intensity -= turnOffSpeed;
+
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("GhostLineLight"))
+        {
+            foreach(Light light in obj.GetComponentsInChildren<Light>())
+            {
+                if (light.intensity <= 0)
+                    continue;
+                light.intensity -= turnOffSpeed;
+            }
+        }
     }
 
     void PlayerEffect()

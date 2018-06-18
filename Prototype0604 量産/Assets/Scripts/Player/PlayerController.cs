@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
         canInput = false;
         playClearAnimation = false;
         clearPos = GameObject.Find("ClearTrigger").transform.position;
-        clearPos.y = this.gameObject.transform.position.y;
+        clearPos.y = clearPos.y - GameObject.Find("ClearTrigger").GetComponent<BoxCollider>().bounds.extents.y;
 
         nextStage = GameObject.Find("nextStage").GetComponent<Image>();
         nextStage.enabled = false;
@@ -219,6 +219,8 @@ public class PlayerController : MonoBehaviour
     #region 移動に関連する
     void Move()
     {
+        if (!canControlPlayer)
+            return;
         velocity = new Vector3(g_VeclocityX, 0, 0);
         velocity *= Speed;
 
@@ -259,6 +261,8 @@ public class PlayerController : MonoBehaviour
     #region input animator更新
     void UpdateInput()
     {
+        if (!canControlPlayer)
+            return;
         if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)
             || (int)Input.GetAxis("Horizontal") == 0)
             canInput = true;

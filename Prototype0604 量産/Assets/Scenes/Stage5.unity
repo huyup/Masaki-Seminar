@@ -24639,7 +24639,7 @@ RectTransform:
   - {fileID: 1809844776}
   - {fileID: 1575401388}
   - {fileID: 1695903163}
-  - {fileID: 781007073}
+  - {fileID: 1889623502}
   m_Father: {fileID: 686942711}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

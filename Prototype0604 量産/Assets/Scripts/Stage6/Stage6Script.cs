@@ -91,7 +91,7 @@ public class Stage6Script : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         mshinIto[0].GetComponent<MshinItoScript>().SetFallenStone();
 

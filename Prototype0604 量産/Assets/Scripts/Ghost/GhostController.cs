@@ -16,7 +16,6 @@ public class GhostController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
         ghost = new Ghost[ghostNumMax];
         frameCount = 0;
         goRespawn = GameObject.Find("GhostRespawn");

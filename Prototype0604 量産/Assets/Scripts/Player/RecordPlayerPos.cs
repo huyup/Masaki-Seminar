@@ -58,9 +58,7 @@ public class RecordPlayerPos : MonoBehaviour
             }
             else
             {
-                if (player.GetComponent<PlayerController>().g_VeclocityX != 0 ||
-                    !player.GetComponent<PlayerController>().isGround ||
-                    player.GetComponent<PlayerController>().initCount > 0)
+                if (playerPosRecord.Count == 0 || gameObject.transform.position != playerPosRecord[playerPosRecord.Count-1])
                 {
                     playStartEnable = false;
 

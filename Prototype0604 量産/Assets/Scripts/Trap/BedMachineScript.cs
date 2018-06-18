@@ -18,7 +18,7 @@ public class BedMachineScript : MonoBehaviour {
         Elasticity = _Elasticity;
     }
     // Update is called once per frame
-    void Update () {
+    void FixedUpdate () {
 		
 	}
 

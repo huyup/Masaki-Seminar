@@ -68,7 +68,7 @@ public class Stage4Script : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         pressMachine.GetComponent<PressMachineHorizontal>().SetTrapHorizontal();
         pressMachine2.GetComponent<PressMachineHorizontal>().SetTrapHorizontal();

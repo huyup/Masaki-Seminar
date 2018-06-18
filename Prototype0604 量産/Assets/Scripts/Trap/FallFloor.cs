@@ -40,7 +40,7 @@ public class FallFloor : MonoBehaviour {
         initFallenCount = _CountToFallen;
     }
     // Update is called once per frame
-    void Update () {
+    void FixedUpdate () {
         MoveFallFloor();
 
     }

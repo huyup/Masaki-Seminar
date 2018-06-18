@@ -19,10 +19,6 @@ public class Pauser : MonoBehaviour {
         targets.Add(this);
     }
 
-    public void OnDestory(){
-        targets.Remove(this);
-    }
-
     #region ポーズされたとき
     void OnPause()
     {
@@ -79,6 +75,7 @@ public class Pauser : MonoBehaviour {
             obj.OnPause();
         if (!SceneManager.GetSceneByName("Pause").isLoaded)
             SceneManager.LoadScene("Pause", LoadSceneMode.Additive);
+        SoundManager.PauseBgm();
     }
 
     public static void Resume()
@@ -87,6 +84,11 @@ public class Pauser : MonoBehaviour {
             obj.OnResume();
         if (SceneManager.GetSceneByName("Pause").isLoaded)
             SceneManager.UnloadSceneAsync("Pause");
+        SoundManager.UnPauseBgm();
+    }
+
+    public static void DestoryTarget(){
+        targets.Clear();
     }
 
     public void OnCollisionEnter(Collision collision)

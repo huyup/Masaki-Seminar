@@ -28,7 +28,7 @@ public class FireTrapScript : MonoBehaviour
         EruptionCount = _EruptionCount;
     }
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
     }
     public void SetFireTrap()
