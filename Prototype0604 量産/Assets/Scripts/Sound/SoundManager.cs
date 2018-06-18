@@ -44,7 +44,17 @@ public class SoundManager {
         poolBgm.Add("stageBgm", new AudioClipInfo("stageBgm", "Sound/bgm/StageBgm"));
 
         poolSe.Add("jumpSe", new AudioClipInfo("jumpSe", "Sound/se/Character/jump3"));
-        poolSe.Add("walkSe", new AudioClipInfo("walkSe", "Sound/se/Character/walk3"));
+        poolSe.Add("walkSe", new AudioClipInfo("walkSe", "Sound/se/Character/walk4"));
+
+        poolSe.Add("clearSe", new AudioClipInfo("walkSe", "Sound/se/Effect/Clear"));
+        poolSe.Add("doorSe", new AudioClipInfo("walkSe", "Sound/se/Effect/Door"));
+        poolSe.Add("ghostSe", new AudioClipInfo("walkSe", "Sound/se/Effect/GhostSpawn"));
+
+        poolSe.Add("bedSe", new AudioClipInfo("walkSe", "Sound/se/Gimmick/BedJump"));
+        poolSe.Add("pendulumSe", new AudioClipInfo("walkSe", "Sound/se/Gimmick/Pendulum"));
+        poolSe.Add("pierceSe", new AudioClipInfo("walkSe", "Sound/se/Gimmick/Pierce"));
+        poolSe.Add("pressSe", new AudioClipInfo("walkSe", "Sound/se/Gimmick/PressingMachine"));
+        poolSe.Add("rockSe", new AudioClipInfo("walkSe", "Sound/se/Gimmick/RollingRock"));
     }
 
     #region bgm
@@ -62,8 +72,8 @@ public class SoundManager {
         {
             soundPlayer = new GameObject("SoundPlayer");
             GameObject.DontDestroyOnLoad(soundPlayer);
+            audioSourceBgm = soundPlayer.AddComponent<AudioSource>();
         }
-        audioSourceBgm = soundPlayer.AddComponent<AudioSource>();
 
         audioSourceBgm.loop = true;
         audioSourceBgm.clip = info.audioClip;
@@ -93,6 +103,26 @@ public class SoundManager {
             return audioSourceBgm.isPlaying;
         return false;
     }
+
+    public static bool PauseBgm()
+    {
+        return GetInstance()._PauseBgm();
+    }
+    bool _PauseBgm()
+    {
+        audioSourceBgm.Pause();
+        return true;
+    }
+
+    public static bool UnPauseBgm()
+    {
+        return GetInstance()._UnPauseBgm();
+    }
+    bool _UnPauseBgm()
+    {
+        audioSourceBgm.UnPause();
+        return true;
+    }
     #endregion
 
     #region se
@@ -102,7 +132,7 @@ public class SoundManager {
     }
     bool _PlaySe(string seName)
     {
-        if (!poolBgm.ContainsKey(seName))
+        if (!poolSe.ContainsKey(seName))
             return false;
 
         AudioClipInfo info = poolSe[seName];
@@ -110,13 +140,49 @@ public class SoundManager {
         {
             soundPlayer = new GameObject("SoundPlayer");
             GameObject.DontDestroyOnLoad(soundPlayer);
+            audioSourceSe = soundPlayer.AddComponent<AudioSource>();
+            audioSourceSe.clip = info.audioClip;
         }
-        audioSourceSe = soundPlayer.AddComponent<AudioSource>();
+        if (!HasExitSound(info))
+        {
+            audioSourceSe = soundPlayer.AddComponent<AudioSource>();
+            audioSourceSe.clip = info.audioClip;
+        }
 
-        audioSourceSe.clip = info.audioClip;
-        audioSourceSe.Play();
+        audioSourceSe.PlayOneShot(info.audioClip);
 
         return true;
+    }
+    private bool HasExitSound(AudioClipInfo info)
+    {
+        foreach (AudioSource source in soundPlayer.GetComponents<AudioSource>())
+        {
+            if (info.audioClip == source.clip)
+                return true;
+        }
+
+        return false;
+    }
+    public static bool StopSe(string se)
+    {
+        return GetInstance()._StopSe(se);
+    }
+
+    bool _StopSe(string seName)
+    {
+        if (audioSourceSe == null)
+            return false;
+
+        AudioClipInfo info = poolSe[seName];
+        foreach (AudioSource source in soundPlayer.GetComponents<AudioSource>())
+        {
+            if (info.audioClip == source.clip)
+            {
+                source.Stop();
+                return true;
+            }
+        }
+        return false;
     }
 
     public static bool IsPlayingSe()
@@ -128,6 +194,7 @@ public class SoundManager {
     {
         if (audioSourceSe != null)
             return audioSourceSe.isPlaying;
+
         return false;
     }
     #endregion

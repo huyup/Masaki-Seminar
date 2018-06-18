@@ -63,6 +63,8 @@ public class StageSelect : MonoBehaviour {
         oldh = 0;
         nowh = 0;
         Pauser.DestoryTarget();
+        if (!SoundManager.IsPlayingBgm())
+            SoundManager.PlayBGM("titleBgm");
     }
 
     void InitializeImage()
@@ -260,10 +262,14 @@ public class StageSelect : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.JoystickButton1))
         {
+            if (SoundManager.IsPlayingBgm())
+                SoundManager.StopBGM();
             SceneManager.LoadScene("Menu");
         }
         if (Input.GetKeyDown(KeyCode.JoystickButton0)||Input.GetKeyDown(KeyCode.Space))
         {
+            if (SoundManager.IsPlayingBgm())
+                SoundManager.StopBGM();
             SceneManager.LoadScene("Loading");
         }
     }
