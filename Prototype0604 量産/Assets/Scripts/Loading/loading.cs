@@ -38,35 +38,35 @@ public class Loading : MonoBehaviour
                 break;
             case StageSelect.StageNum.Stage3:
                 UnLoadStage();
-                SceneManager.LoadScene("Stage3");
+                SceneManager.LoadScene("Stage3", LoadSceneMode.Single);
                 break;
             case StageSelect.StageNum.Stage4:
                 UnLoadStage();
-                SceneManager.LoadScene("Stage4");
+                SceneManager.LoadScene("Stage4", LoadSceneMode.Single);
                 break;
             case StageSelect.StageNum.Stage5:
                 UnLoadStage();
-                SceneManager.LoadScene("Stage5");
+                SceneManager.LoadScene("Stage5", LoadSceneMode.Single);
                 break;
             case StageSelect.StageNum.Stage6:
                 UnLoadStage();
-                SceneManager.LoadScene("Stage6");
+                SceneManager.LoadScene("Stage6", LoadSceneMode.Single);
                 break;
             case StageSelect.StageNum.Stage7:
                 UnLoadStage();
-                SceneManager.LoadScene("Stage7");
+                SceneManager.LoadScene("Stage7", LoadSceneMode.Single);
                 break;
             case StageSelect.StageNum.Stage8:
                 UnLoadStage();
-                SceneManager.LoadScene("Stage8");
+                SceneManager.LoadScene("Stage8", LoadSceneMode.Single);
                 break;
             case StageSelect.StageNum.Stage9:
                 UnLoadStage();
-                SceneManager.LoadScene("Stage9");
+                SceneManager.LoadScene("Stage9", LoadSceneMode.Single);
                 break;
             case StageSelect.StageNum.Stage10:
                 UnLoadStage();
-                SceneManager.LoadScene("Stage10");
+                SceneManager.LoadScene("Stage10", LoadSceneMode.Single);
                 break;
         }
     }

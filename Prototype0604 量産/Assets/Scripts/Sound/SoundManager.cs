@@ -46,9 +46,9 @@ public class SoundManager {
         poolSe.Add("jumpSe", new AudioClipInfo("jumpSe", "Sound/se/Character/jump3"));
         poolSe.Add("walkSe", new AudioClipInfo("walkSe", "Sound/se/Character/walk4"));
 
-        poolSe.Add("clearSe", new AudioClipInfo("walkSe", "Sound/se/Effect/Clear"));
-        poolSe.Add("doorSe", new AudioClipInfo("walkSe", "Sound/se/Effect/Door"));
-        poolSe.Add("ghostSe", new AudioClipInfo("walkSe", "Sound/se/Effect/GhostSpawn"));
+        poolSe.Add("clearSe", new AudioClipInfo("clearSe", "Sound/se/Effect/Clear2"));
+        poolSe.Add("doorSe", new AudioClipInfo("doorSe", "Sound/se/Effect/Door2"));
+        poolSe.Add("ghostSe", new AudioClipInfo("ghostSe", "Sound/se/Effect/GhostSpawn2"));
 
         poolSe.Add("bedSe", new AudioClipInfo("walkSe", "Sound/se/Gimmick/BedJump"));
         poolSe.Add("pendulumSe", new AudioClipInfo("walkSe", "Sound/se/Gimmick/Pendulum"));
@@ -149,7 +149,7 @@ public class SoundManager {
             audioSourceSe.clip = info.audioClip;
         }
 
-        audioSourceSe.PlayOneShot(info.audioClip);
+        audioSourceSe.PlayOneShot(info.audioClip, 0.5f);
 
         return true;
     }
@@ -163,26 +163,34 @@ public class SoundManager {
 
         return false;
     }
-    public static bool StopSe(string se)
+    public static bool StopSe()
     {
-        return GetInstance()._StopSe(se);
+        return GetInstance()._StopSe();
     }
 
-    bool _StopSe(string seName)
+    //bool _StopSe(string seName)
+    //{
+    //    if (audioSourceSe == null)
+    //        return false;
+
+    //    AudioClipInfo info = poolSe[seName];
+    //    foreach (AudioSource source in soundPlayer.GetComponents<AudioSource>())
+    //    {
+    //        if (info.audioClip == source.clip)
+    //        {
+    //            source.Stop();
+    //            return true;
+    //        }
+    //    }
+    //    return false;
+    //}
+
+    bool _StopSe()
     {
         if (audioSourceSe == null)
             return false;
-
-        AudioClipInfo info = poolSe[seName];
-        foreach (AudioSource source in soundPlayer.GetComponents<AudioSource>())
-        {
-            if (info.audioClip == source.clip)
-            {
-                source.Stop();
-                return true;
-            }
-        }
-        return false;
+        audioSourceSe.Stop();
+        return true;
     }
 
     public static bool IsPlayingSe()

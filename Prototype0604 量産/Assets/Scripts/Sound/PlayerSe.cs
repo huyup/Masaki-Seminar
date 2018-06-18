@@ -16,15 +16,12 @@ public class PlayerSe : MonoBehaviour {
 
     void ChangePlayerSe()
     {
-        //if (SoundManager.IsPlayingSe())
-         //   SoundManager.StopSe("walkSe");
-
         if (playerController.g_duringJump)
         {
-            SoundManager.StopSe("walkSe");
+            SoundManager.StopSe();
             SoundManager.PlaySe("jumpSe");
         }
-        else if (playerController.g_VeclocityX != 0 && !SoundManager.IsPlayingSe())
+        else if (playerController.P_CanControlPlayer && playerController.g_VeclocityX != 0 && !SoundManager.IsPlayingSe())
         {
             SoundManager.PlaySe("walkSe");
         }

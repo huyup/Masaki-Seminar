@@ -1424,7 +1424,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1324808262945216
 GameObject:
   m_ObjectHideFlags: 1
@@ -3955,7 +3955,7 @@ GameObject:
   - component: {fileID: 114961132172981136}
   - component: {fileID: 114885524329850032}
   - component: {fileID: 114397378431765236}
-  - component: {fileID: 114460204045290112}
+  - component: {fileID: 114689478009834406}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -5776,8 +5776,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1880873921664742}
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -1.7600002, y: -0.25499988, z: 0}
+  m_LocalRotation: {x: 0.000000044703487, y: 0.7071068, z: -0.00000005960465, w: 0.7071068}
+  m_LocalPosition: {x: -1.76, y: -0.25499988, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4558047350445506}
@@ -6792,8 +6792,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1322975667258542}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0.95, z: 0.83}
+  m_LocalRotation: {x: 0.7071069, y: -0, z: 0.000000007450581, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: 2.31, z: -0.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4320164694816842}
@@ -8701,11 +8701,11 @@ Light:
   m_GameObject: {fileID: 1322975667258542}
   m_Enabled: 1
   serializedVersion: 8
-  m_Type: 2
+  m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 3
-  m_Range: 2
-  m_SpotAngle: 30
+  m_Intensity: 9.22
+  m_Range: 5
+  m_SpotAngle: 40.9
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -8718,10 +8718,10 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294958335
+    m_Bits: 4294705352
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -8741,7 +8741,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeCount: 0
-  invincble: 0
 --- !u!114 &114397378431765236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8753,7 +8752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6924953fc9c10414585f508276fbc62a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114460204045290112
+--- !u!114 &114689478009834406
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

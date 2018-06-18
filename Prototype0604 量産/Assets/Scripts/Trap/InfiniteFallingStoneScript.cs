@@ -9,22 +9,17 @@ using UnityEngine.SceneManagement;
 public class InfiniteFallingStoneScript : MonoBehaviour
 {
     float FallenVeloc { get; set; }
+    Vector3 stoneInitPos;
 
     // Use this for initialization
     void Start()
     {
-
+        stoneInitPos = transform.position;
     }
 
     public void ResetInfiniteFallingStone()
     {
-        if(gameObject.activeSelf)
-            Destroy(gameObject);
-    }
-
-    public void InitializeParameter(float _FallenVeloc)
-    {
-        FallenVeloc = _FallenVeloc;
+        transform.position = stoneInitPos;
     }
 
     // Update is called once per frame
@@ -35,10 +30,9 @@ public class InfiniteFallingStoneScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.name=="OutArea")
+        if (collision.gameObject.name == "OutArea")
         {
-            Destroy(gameObject);
-            //GetComponent<Pauser>().OnDestory();
+            transform.position = stoneInitPos;
         }
     }
 }

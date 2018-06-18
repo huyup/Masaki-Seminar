@@ -51,6 +51,11 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
 
     bool playClearAnimation;
+
+    public bool P_playClearAnimation
+    {
+        get { return playClearAnimation; }
+    }
     Image nextStage;
 
     /// <summary>
@@ -302,13 +307,13 @@ public class PlayerController : MonoBehaviour
     void CheckisGrounded()
     {
         RaycastHit hit;
-        Ray[] ray = new Ray[10];
-        for (int i = 0; i < 10; i++)
+        Ray[] ray = new Ray[20];
+        for (int i = 0; i < 20; i++)
         {
             ray[i] = new Ray(transform.position - new Vector3(0.10f, 0, 0) + new Vector3(0.012f * i, 0, 0), Vector3.down);
         }
         int count = 0;
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 20; i++)
         {
             if (Physics.Raycast(ray[i], out hit, DistanceToGround))
             {
@@ -325,7 +330,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        if (count == 10)
+        if (count == 20)
         {
             isGround = false;
         }

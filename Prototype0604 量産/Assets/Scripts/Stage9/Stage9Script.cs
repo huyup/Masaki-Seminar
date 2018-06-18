@@ -7,7 +7,6 @@ using UnityEngine;
 /// </summary>
 public class Stage9Script : MonoBehaviour
 {
-
     //参照
     GameObject watchMachine;
     GameObject watchMachine2;
